@@ -244,8 +244,8 @@
                     var content="";
 
 
-                        content += " <a href='javascript:updateUp(&quot;"+row.refundId+"&quot;)'>同意</a>";
-                        content +="<a href='javascript:updateDown(&quot;"+row.refundId+"&quot;)'>拒绝</a>"
+                        content += " <a href='javascript:updateUp(&quot;"+row.refundId+"&quot;)'>拒绝</a>";
+                        content +="<a href='javascript:updateDown(&quot;"+row.refundId+"&quot;)'>同意</a>"
                         return content;
 
                     }
@@ -274,10 +274,13 @@
 
     }
     function updateUp (refundId){
+
+
+
         $.ajax({
             url:"../deal/updateUp?id="+refundId,
             success:function(){
-                alert("修改成功");
+
                 location.href=location;
             }
 
@@ -289,7 +292,7 @@
         $.ajax({
             url:"../deal/updateDown?id="+refundId,
             success:function(){
-                alert("修改成功");
+
                 location.href=location;
             }
 
@@ -304,9 +307,6 @@
 
             location.href="../deal/exportExcel";
         });
-
-
-        /*    var firstdirectory = $("#form").find("input[name='category']").val();*/
 
     }
 
