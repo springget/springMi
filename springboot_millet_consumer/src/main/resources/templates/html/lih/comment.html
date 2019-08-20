@@ -108,6 +108,7 @@
             },
             columns: [
                 {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'commentId', title: '评论id', width: 300},
                 {field: 'commentDj', title: '评价', width: 300,    formatter:function(value,row,index){
                         if(value=='1'){
                             return "好评";
@@ -120,6 +121,7 @@
                         }
                     },
                 },
+                {field: 'reply', title: '回复内容', width: 300},
                 {field: 'commentInfo', title: '评论内容', width: 300},
                 {field: 'commentTime', title: '评论时间', width: 300},
                 {field: 'userName', title: '评论人', width: 300},
@@ -129,7 +131,7 @@
                         var content="";
 
 
-                        content += " <a href='javascript:updateUp(&quot;"+row.commentId+"&quot;)'>回复</a>";
+                        content += " <a href='javascript:findComment(&quot;"+row.commentId+"&quot;)'>回复</a>";
 
                         return content;
 
@@ -142,8 +144,76 @@
         });
     }
 
+   /* function findComment(){
+        $.ajaxSettings.async=false;//取消异步
+        $.getJSON("${ctx}/servlet/UserServlet?fun=findCommentList",{trendsid:trendsid},function(data){
+            data=data[0];
+            //console.log(data);
+            if(data.length>0){
+                $("#commentbox").empty();//清空html内容
+            }
+            $.each(data,function(i){
+                //循环获取到每一条数据，使用append()方法将数据拼接到指定的html中
+                $("#commentbox").append('<div class="comment" id="comment'+ data[i].commentId +'">'
+                    +'<span class="commentdate">'+data[i].commentTime+'</span>'
+                    +'<span class="user">'+data[i].userName+'</span><span class="commenttext" οnclick="replyThis('+data[i].commentId+')">'+data[i].commentInfo+'</span></div>');
+            });
+        })*/
 
+    var res;
 
+    function createAddContent(url) {
+
+        $.ajax({
+            url: url,
+            async: false,
+            success: function (data) {
+                res = data;
+            }
+        });
+        return res;
+    }
+
+    function findComment (commentId){
+        alert(commentId)
+        //打开新增弹框
+        bootbox.dialog({
+           /* title: '回复',*/
+            message: createAddContent("../page/updateComment?id="+commentId),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 确定",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+                        $.ajax({
+                            url: "../deal/addComment",
+                            type: 'post',
+                            data: $("#formId").serialize(),
+                            success: function () {
+
+                                //$('#dataGrid').bootstrapTable("refresh");
+                                location.href=location;
+                                //刷新表格
+                            }, error: function () {
+
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+
+        });
+
+    }
 
 </script>
 </html>

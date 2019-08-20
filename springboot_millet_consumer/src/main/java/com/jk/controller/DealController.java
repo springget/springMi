@@ -11,10 +11,7 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jk.model.Logistics;
-import com.jk.model.Order;
-import com.jk.model.Refund;
-import com.jk.model.User;
+import com.jk.model.*;
 import com.jk.service.DealService;
 import com.jk.util.DataGridResult;
 import com.jk.util.ExportExcel;
@@ -115,6 +112,11 @@ public class DealController {
         result.setTotal(pageUtil.getSumSize());
         return result;
     }
+
+
+
+
+
 
     //导出
 
@@ -261,5 +263,12 @@ public class DealController {
         result.setRows(pageUtil.getList());
         result.setTotal(pageUtil.getSumSize());
         return result;
+    }
+
+    //addComment
+    @RequestMapping("addComment")
+    @ResponseBody
+    public void addComment(Comment comment) {
+        DealService.addComment(comment);
     }
 }

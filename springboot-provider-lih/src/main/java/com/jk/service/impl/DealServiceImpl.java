@@ -18,9 +18,15 @@ import com.jk.model.*;
 import com.jk.service.DealService;
 import com.jk.util.PageUtil;
 import com.jk.util.ParameUtil;
+import org.apache.poi.ss.formula.functions.Rows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -36,7 +42,8 @@ public class DealServiceImpl implements DealService {
     @Autowired
     private DealMapper dealMapper;
 
-
+    @Autowired
+    private MongoTemplate mongoTemplate;
     @Override
     public PageUtil queryUser(ParameUtil param,Integer id) {
         PageHelper.startPage(param.getPageNumber(), param.getPageSize());
@@ -94,13 +101,34 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public PageUtil queryComment(ParameUtil param) {
-        PageHelper.startPage(param.getPageNumber(), param.getPageSize());
+       /* PageHelper.startPage(param.getPageNumber(), param.getPageSize());
         List<Comment> list = dealMapper.queryComment(param);
         PageInfo<Comment> pageInfo = new PageInfo<>(list);
 
         PageUtil pageUtil = new PageUtil((int) pageInfo.getTotal(), param.getPageNumber(), param.getPageSize());
         pageUtil.setList(list);
+        return pageUtil;*/
+
+        Criteria criteria = new Criteria();
+        Query query = new Query();
+
+        query.addCriteria(criteria);
+
+        Integer count=(int) mongoTemplate.count(query, Comment.class,"Comment");
+        System.out.println(count);
+
+        PageUtil pageUtil = new  PageUtil(count, param.getPageNumber(), param.getPageSize());
+        Integer skip = pageUtil.getFirstResultCount();
+
+        query.skip(skip);
+        query.limit(param.getPageSize());
+
+
+        List<Comment> list=mongoTemplate.find(query,Comment.class, "Comment");
+        pageUtil.setList(list);
+
         return pageUtil;
+
     }
 
     @Override
@@ -185,50 +213,35 @@ public class DealServiceImpl implements DealService {
         return pageUtil;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*@Override
-    public List<User> queryUser(HashMap map) {
-        return dealMapper.queryUser(map);
-    }
-
-
-
     @Override
-    public Integer queryUserCount() {
-        return dealMapper.queryUserCount();
+    public Refund findRefundByid(Integer id) {
+        return dealMapper.findRefundByid(id);
     }
 
     @Override
-    public Integer queryOrderCount(HashMap map) {
-        return dealMapper.queryOrderCount(map);
+    public Comment findCommentByid(Integer id) {
+        Criteria criteria = new Criteria();
+        criteria.is(id);
+        Query query = new Query();
+        query.addCriteria(criteria);
+        Comment comment=  mongoTemplate.findOne(query, Comment.class,"Comment");
+  /*      System.out.println(id);
+
+        System.out.println(comment.getCommentId());*/
+        return comment;
     }
 
     @Override
-    public List<Order> queryOrder(HashMap map) {
-        return dealMapper.queryOrder(map);
+    public void addComment(Comment comment) {
+        Update update=new Update();
+        update.set("reply",comment.getReply());
+        Query query = new 	Query();
+        Criteria c = new Criteria();
+        c.and("commentId").is(comment.getCommentId());
+        query.addCriteria(c);
+
+        mongoTemplate.updateFirst(query, update,"Comment");
     }
 
-    @Override
-    public List<Logistics> queryLogistics(HashMap map) {
-        return dealMapper.queryLogistics(map);
-    }
 
-    @Override
-    public Integer queryLogisticsCount(HashMap map) {
-        return dealMapper.queryLogisticsCount(map);
-    }*/
 }

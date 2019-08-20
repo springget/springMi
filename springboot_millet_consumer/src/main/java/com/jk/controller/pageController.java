@@ -2,9 +2,12 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.jk.model.Comment;
 import com.jk.model.Goods;
+import com.jk.model.Refund;
 import com.jk.service.GoodsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +17,9 @@ public class pageController {
 
     @Reference
     private GoodsService goodsService;
+
+    @Reference
+    private com.jk.service.DealService DealService;
 
     //財務管理
     @RequestMapping("tofinance")
@@ -157,9 +163,6 @@ public class pageController {
         return "html/lih/deal";
     }
 
-
-
-
     //店铺管理
     @RequestMapping("toaddshop")
     public String toAddShop(){
@@ -172,5 +175,36 @@ public class pageController {
     }
 
 
+//退款审核
+@RequestMapping("toUpdate")
+public ModelAndView toUpdate(Integer id){
+    Refund refund = DealService.findRefundByid(id);
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("html/lih/check");
+    mv.addObject("refund",refund);
+    return mv;
+}
+
+//updateComment 回复
+@RequestMapping("updateComment")
+public ModelAndView updateComment(Integer id){
+    System.out.println(id);
+   Comment comment = DealService.findCommentByid(id);
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("/html/lih/reply");
+    mv.addObject("comment",comment);
+
+    return mv;
+}
+    //轮播图
+    @RequestMapping("sss")
+    public String sss() {
+        return "html/lih/sss";
+    }
+    //轮播图
+    @RequestMapping("aaa")
+    public String aaa() {
+        return "html/lih/aaa";
+    }
 
 }
