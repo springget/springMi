@@ -14,6 +14,28 @@
 
   </select>
 
+  <select id="getTreeAll" resultType="com.jk.model.Tree">
+        SELECT sp.* from t_user s ,user_role ur ,l_role sr,role_permission rp,tree sp
+		where s.userid = ur.userid
+		and ur.roleid = sr.id
+		and sr.id = rp.roleid
+		and rp.perid = sp.id
+		and s.userid = #{userId} GROUP BY sp.text
+
+  </select>
+
+
+
+  <select id="queryOrgAll3" resultType="com.jk.model.Tree" >
+    select * from tree where pid = #{pid}
+  </select>
+
+  <select id="queryOrgAll2" resultType="com.jk.model.Tree" >
+    select
+      *
+    from tree t,role_permission rt
+    where t.id= rt.perid and rt.roleid=#{id} and t.pid=#{pid}
+  </select>
 
 
   <sql id="cha">

@@ -65,7 +65,7 @@ public class ClientController {
 
     }
 
-//登陆
+    //登陆
     @RequestMapping("loginUser")
 	@ResponseBody
 	public String login(User user,String code,HttpServletRequest request){

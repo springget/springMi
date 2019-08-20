@@ -48,7 +48,7 @@
     <div class="form-group">
 
         <br>
-        <input type="text" class="form-control" name = "gname" id="gname" placeholder="用户名字">
+        <input type="text" class="form-control" name = "name" id="name" placeholder="用户名字">
     </div>
 
     <button type="button" class="btn btn-success" onclick="queryData()">搜索</button>
@@ -70,6 +70,7 @@
             </div>
             <!-- 中部   form内容设置  -->
             <div  id="jiaose">
+
             </div>
             <!-- 尾部 （按扭）-->
             <div class="modal-footer">
@@ -147,7 +148,7 @@
                 {field: 'cz', title: '操作', width: 300,
                     formatter:function(value,row,index){
                         var a = "<a href='javaScript:xiangqing(\""+row.id+"\")'>详情</a>";
-                        a += "   <a href='javaScript:upd(\""+row.id+"\")'>权限</a>";
+                        a += "   <a href='javaScript:editqx(\""+row.id+"\")'>权限</a>";
                         return a;
                     }
                 }
@@ -166,13 +167,13 @@
 
     }
     
-    function xiangqing(gid) {
+    function xiangqing(id) {
 /*    alert(gid)*/
    /*     location.href = "../dhy/showXiangQing?id="+gid;*/
         //打开新增弹框
         bootbox.dialog({
             title: '新增用户',
-            message: createAddContent("../dhy/showXiangQing?id="+gid),
+            message: createAddContent("../dhy/showXiangQing?id="+id),
             closeButton: true,//是否显示关闭按钮
             buttons: {
              /*   "success": {
@@ -222,21 +223,24 @@
 
     //权限
     var roles;
-    function upd(id){
- /*       alert(id)*/
+    function edittree(id){
+
         roles=id;
         $.ajax({
             url: "../dhy/queryPer?id="+id,
             type: "post",
             //  dataType: "json",
             success: function (data) {
+
                 $("#myModal2").modal("show");
                 //查询成功回调，tree展示
                 $("#jiaose").treeview({
                     //data属性 树节点信息 json数组
                     data: data,
+
                     //是否显示复选框
                     showCheckbox : true,
+                    checkedIcon:"glyphicon glyphicon-check",
                 })
             },
             error:function(){
@@ -247,7 +251,7 @@
 
     function  tijiao(){
         var ids=caidanid();
-        alert(ids)
+
         $.ajax({
             url:"../dhy/updatePer",
             type:"post",
@@ -260,6 +264,7 @@
 
     //获取选中id
     function caidanid(){
+
         var id=  $("#jiaose").treeview("getChecked") //获取所选中的id
         var ids="";
         for (var i = 0; i < id.length; i++) {
@@ -310,6 +315,49 @@
 
 
     }
+
+
+
+    function editqx(rid){
+
+        bootbox.dialog({
+            title: '绑定权限',
+            message: createAddContent("../dhy/dhytree?roleid="+rid),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+                        var a=$('#edittree').treeview('getChecked');
+                        var ids=""
+                        for(var i=0;i<a.length;i++){
+                            ids+=","+a[i].id
+                        }
+                        ids=ids.substring(1)
+
+                        $.ajax({
+                            url:"../dhy/updatetree",
+                            type:"post",
+                            data:{"roleid":$("#rid").val(),"ids":ids},
+                            success:function(){
+                                $('#myModal2').modal('hide'); //成功后关闭弹框
+                                $('#dataGrid').bootstrapTable("refresh");
+                            }
+                        })
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+                    }
+                }
+            }
+        });
+    }
+
+
 
 </script>
 
