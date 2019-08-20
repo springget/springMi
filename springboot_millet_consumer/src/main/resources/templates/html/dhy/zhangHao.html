@@ -50,20 +50,21 @@
 
 
 <form id="pro_from" class="form-inline">
-<!--    <div class="form-group">
-        角色：&lt;!&ndash;<input type="checkbox" id="checked">全选&ndash;&gt;
-        <input type="checkbox" name="danxuan" value="1">系统管理员
-        &nbsp
-        <input type="checkbox" name="danxuan" value="2">客服
-        &nbsp
-        <input type="checkbox" name="danxuan" value="3">运营
-        &nbsp
-        <input type="checkbox" name="danxuan" value="4">售后
-        &nbsp
-        <input type="checkbox" name="danxuan" value="5">编辑
-        <br>
-        <input type="text" class="form-control" name = "gname" id="gname" placeholder="用户名字或邮箱">
-    </div>-->
+    <div class="form-group">
+        <!--   角色：&lt;!&ndash;<input type="checkbox" id="checked">全选&ndash;&gt;
+           <input type="checkbox" name="danxuan" value="1">系统管理员
+           &nbsp
+           <input type="checkbox" name="danxuan" value="2">客服
+           &nbsp
+           <input type="checkbox" name="danxuan" value="3">运营
+           &nbsp
+           <input type="checkbox" name="danxuan" value="4">售后
+           &nbsp
+           <input type="checkbox" name="danxuan" value="5">编辑
+           <br>
+           -->
+        <input type="text" class="form-control" name = "name" id="name" placeholder="用户名字或邮箱">
+    </div>
 
         <button type="button" class="btn btn-success" onclick="queryData()">搜索</button>
 
@@ -150,7 +151,7 @@
                     pageSize: params.pageSize,
                     sortName: params.sortName,
                     sortOrder: params.sortOrder,
-                    gname: $("#gname").val()
+                    name: $("#name").val()
                 };
                 return param;
             },
@@ -175,7 +176,7 @@
                 {field: 'cz', title: '操作', width: 300,
                     formatter:function(value,row,index){
                         var a = "<a href='javaScript:xiangqing(\""+row.id+"\")'>详情</a>";
-                        a += "   <a href='javaScript:upd(\""+row.id+"\")'>角色</a>";
+                        a += "   <a href='javaScript:editqx(\""+row.id+"\")'>角色</a>";
                         if(row.status=='0'){
                             a += "   <a href='javaScript:down(\""+row.id+"\")'>禁用</a>";
                         }else{
@@ -196,7 +197,7 @@
         $("#dataGrid").bootstrapTable("refresh", {
             "query": {
 
-                "gname": $("#gname").val()
+                "name": $("#name").val()
             }
         });
 
@@ -251,6 +252,8 @@
                     data: data,
                     //是否显示复选框
                     showCheckbox : true,
+
+                    checked:true,
                 })
             },
             error:function(){
@@ -291,7 +294,7 @@
     
     function xiangqing(id) {
 
-        alert(id)
+
         /*     location.href = "../dhy/showXiangQing?id="+gid;*/
         //打开新增弹框
         bootbox.dialog({
@@ -331,7 +334,7 @@
 
     function bianji(id) {
 
-        alert(id)
+   /*     alert(id)*/
         //打开新增弹框
         bootbox.dialog({
             title: '新增用户',
@@ -426,6 +429,78 @@
 
 
     }
+
+//绑定角色
+    function editqx(id){
+        bootbox.dialog({
+            title: '绑定角色',
+            message: createAddContent("../dhy/queryRoleById?id="+id),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+                        var ids=$("[name='role']:checked").val()
+                        $.ajax({
+                            url:"../dhy/updateRole2",
+                            type:"post",
+                            data:{"id":$("#uid").val(),"ids":ids},
+                            success:function(){
+                                $('#myModal3').modal('hide'); //成功后关闭弹框
+                                $('#dataGrid').bootstrapTable("refresh");
+                            }
+                        })
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+    //绑定角色
+    function add(id){
+        //打开新增弹框
+        bootbox.dialog({
+            title: '用户详细信息',
+            message: createAddContent("../dhy/queryPerById?id="+id),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 修改",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+                        $.ajax({
+                            url: '../dhy/UpdateUser',
+                            type: 'post',
+                            data: $("#addFormId").serialize(),
+                            success: function (flag) {
+                                alert("修改成功");
+                                $('#dataGrid3').bootstrapTable("refresh");
+                            }, error: function () {
+                                alert("修改失败");
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+                    }
+                }
+            }
+        });
+    }
+
 
 </script>
 

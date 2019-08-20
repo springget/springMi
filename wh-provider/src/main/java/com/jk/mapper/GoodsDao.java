@@ -1,5 +1,6 @@
 package com.jk.mapper;
 
+import com.jk.model.Allocation;
 import com.jk.model.Goods;
 import com.jk.model.Tree;
 import com.jk.model.Type;
@@ -28,4 +29,12 @@ public interface GoodsDao {
     List<Type> queryTypeTwo(ParameUtil param);
 
     void deleByIdTwo(String id);
+
+    void putawayOne(Integer id);
+
+    void ishot(Integer id);
+
+    void nohot(String id);
+
+    List<Allocation> TypeOne();
 }

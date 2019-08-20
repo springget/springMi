@@ -42,13 +42,16 @@ public class Goods implements Serializable {
     private Integer sales;  //总销量
     private Integer status;  //商品状态 1.出售中 0.仓库中
     private String typeName; //  (type表)类型名称
-
     private String userName;//用户姓名
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date orderTime;//订单时间
     private Integer stateId;//状态id
     private  String stateName;//状态名字
+    private String ishot; //是否热卖  1 热卖 0不
+    private String isseckill; //是否秒杀  1 秒杀 0 不
+    private Integer allId;  //配置表
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date  daozhangTime;
@@ -57,6 +60,112 @@ public class Goods implements Serializable {
     private Date discountTime;
     private String bankName;
     private String bankcard;
+    //配置表
+    private String ram;  //运行内存
+    private String network;   //网络
+    private String cpu;   //cpu
+    private String battery;  //电池
+    private String screen;  //屏幕
+    private String camera;   //相机
+    private String fingerprint;   //指纹
+    private String location;   //定位
+    private String system;   //系统
+
+    public String getRam() {
+        return ram;
+    }
+
+    public void setRam(String ram) {
+        this.ram = ram;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public String getCpu() {
+        return cpu;
+    }
+
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
+    }
+
+    public String getBattery() {
+        return battery;
+    }
+
+    public void setBattery(String battery) {
+        this.battery = battery;
+    }
+
+    public String getScreen() {
+        return screen;
+    }
+
+    public void setScreen(String screen) {
+        this.screen = screen;
+    }
+
+    public String getCamera() {
+        return camera;
+    }
+
+    public void setCamera(String camera) {
+        this.camera = camera;
+    }
+
+    public String getFingerprint() {
+        return fingerprint;
+    }
+
+    public void setFingerprint(String fingerprint) {
+        this.fingerprint = fingerprint;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getSystem() {
+        return system;
+    }
+
+    public void setSystem(String system) {
+        this.system = system;
+    }
+
+    public String getIshot() {
+        return ishot;
+    }
+
+    public void setIshot(String ishot) {
+        this.ishot = ishot;
+    }
+
+    public String getIsseckill() {
+        return isseckill;
+    }
+
+    public void setIsseckill(String isseckill) {
+        this.isseckill = isseckill;
+    }
+
+    public Integer getAllId() {
+        return allId;
+    }
+
+    public void setAllId(Integer allId) {
+        this.allId = allId;
+    }
 
     public String getUserName() {
         return userName;

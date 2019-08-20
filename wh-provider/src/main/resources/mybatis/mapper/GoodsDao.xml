@@ -9,9 +9,9 @@
     </select>
     <!--查询 商品管理 商品列表-->
     <select id="queryGoods" parameterType="com.jk.util.ParameUtil" resultType="com.jk.model.Goods">
-        SELECT * FROM t_goods a,t_type b
+        SELECT * FROM t_goods a,t_type b,t_allocation c
         <where>
-            a.typeId = b.typeId
+            a.typeId = b.typeId and a.allId = c.id
             <if test="goodsName!=null and goodsName !=''">
                 and a.goodsName like '%${goodsName}%'
             </if>
@@ -33,8 +33,8 @@
         delete from t_goods where goodsId = #{id}
     </delete>
     <insert id="addgoods" parameterType="com.jk.model.Goods">
-        insert into t_goods (goodsName,goodsNumber,typeId,goodsTime,goodsInfo,goodsPrice,sales,status)
-        values(#{goodsName},#{goodsNumber},#{typeId},now(),#{goodsInfo},#{goodsPrice},0,0)
+        insert into t_goods (goodsName,goodsNumber,goodsImg,typeId,goodsTime,goodsInfo,goodsPrice,sales,status,ishot,isseckill,allId)
+        values(#{goodsName},#{goodsNumber},#{goodsImg},#{typeId},now(),#{goodsInfo},#{goodsPrice},0,0,0,0,#{allId})
     </insert>
     <select id="findGoodsByid" resultType="com.jk.model.Goods" parameterType="integer">
         select * from t_goods where goodsId =#{id}
@@ -55,4 +55,16 @@
     <delete id="deleByIdTwo" parameterType="String">
         delete from t_type aa where aa.typeID =#{id}
     </delete>
+    <update id="putawayOne" parameterType="integer">
+        update t_goods a set a.status=1 where goodsId = #{id}
+    </update>
+    <update id="ishot" parameterType="integer">
+        update t_goods a set a.ishot=1 where goodsId = #{id}
+    </update>
+    <update id="nohot" parameterType="string">
+        update t_goods a set a.ishot=0 where goodsId = #{id}
+    </update>
+    <select id="TypeOne" resultType="com.jk.model.Allocation">
+        select * from t_allocation
+    </select>
 </mapper>
