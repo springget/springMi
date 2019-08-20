@@ -3,7 +3,6 @@ package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jk.model.Goods;
-import com.jk.model.User;
 import com.jk.service.ClientService;
 import com.jk.service.GoodsService;
 import org.springframework.stereotype.Controller;
