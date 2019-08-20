@@ -240,14 +240,29 @@
 
 
                 {field: 'XXX', title: '操作', width: 300,
-                    formatter: function (value,row,index){
-                    var content="";
+                    formatter: function (value,row,index) {
+                       // var content = "";
 
+                   if (row.refundrecord==3){
+                       /* content += " <a href='javascript:updateUp(&quot;" + row.refundId + "&quot;)'>拒绝</a>";
+                        content += "<a href='javascript:updateDown(&quot;" + row.refundId + "&quot;)'>同意</a>"*/
 
-                        content += " <a href='javascript:updateUp(&quot;"+row.refundId+"&quot;)'>同意</a>";
-                        content +="<a href='javascript:updateDown(&quot;"+row.refundId+"&quot;)'>拒绝</a>"
-                        return content;
+              var  st = '<button type="button" class="btn btn-warning" onclick="updateDown('+row.refundId+')" >同意</button> &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-warning" onclick="updateUp('+row.refundId+')" >拒绝</button>';
+                                return  st;
+                   }
+                     if(row.refundrecord==6){
+                            return  "已拒绝";
+                        }else if(row.refundrecord==5){
+                            return  "已同意";
 
+                        }else if(row.refundrecord==1){
+                            return  "已同意";
+                        }
+                        else if(row.refundrecord==4){
+                            return  "已收货";
+                        }else if(row.refundrecord==2){
+                            return  "已拒绝";
+                        }
                     }
 
 
@@ -273,27 +288,96 @@
         });
 
     }
-    function updateUp (refundId){
+    var res;
+
+    function createAddContent(url) {
+
         $.ajax({
-            url:"../deal/updateUp?id="+refundId,
-            success:function(){
-                alert("修改成功");
-                location.href=location;
+            url: url,
+            async: false,
+            success: function (data) {
+                res = data;
             }
-
-        })
-
+        });
+        return res;
     }
 
-    function updateDown (refundId){
-        $.ajax({
-            url:"../deal/updateDown?id="+refundId,
-            success:function(){
-                alert("修改成功");
-                location.href=location;
+    function updateUp (refundId){
+       // alert(refundId)
+        //打开新增弹框
+        bootbox.dialog({
+            title: '审核',
+            message: createAddContent("../page/toUpdate?id="+refundId),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 确定拒绝",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+                        $.ajax({
+                            url: "../deal/updateUp?id="+refundId,
+                            type: 'post',
+                            data: $("#formId").serialize(),
+                            success: function () {
+
+                                //$('#dataGrid').bootstrapTable("refresh");
+                                location.href=location;
+                                //刷新表格
+                            }, error: function () {
+
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
             }
 
-        })
+        });
+
+    }
+    function updateDown (refundId){
+        bootbox.dialog({
+            title: '审核',
+            message: createAddContent("../page/toUpdate?id="+refundId),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 确定同意",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+                        $.ajax({
+                            url: "../deal/updateDown?id="+refundId,
+                            type: 'post',
+                            data: $("#formId").serialize(),
+                            success: function () {
+
+                                //$('#dataGrid').bootstrapTable("refresh");
+                                location.href=location;
+                                //刷新表格
+                            }, error: function () {
+
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+
+        });
 
     }
     function exportExcel(){
@@ -304,9 +388,6 @@
 
             location.href="../deal/exportExcel";
         });
-
-
-        /*    var firstdirectory = $("#form").find("input[name='category']").val();*/
 
     }
 

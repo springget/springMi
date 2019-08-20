@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 
+import ch.qos.logback.core.util.FileUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jk.model.User;
 import com.jk.service.ClientService;
@@ -8,13 +9,17 @@ import com.jk.util.CheckImgUtil;
 import com.jk.util.DataGridResult;
 import com.jk.util.PageUtil;
 import com.jk.util.ParameUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/client")
@@ -100,6 +105,23 @@ public class ClientController {
     }
 
 
+
+	@RequestMapping("addCoupon")
+    @ResponseBody
+    public void addCoupon(Coupon coupon){
+        clientService.addCoupon(coupon);
+    }
+
+    @RequestMapping("queryCoupon")
+    @ResponseBody
+    public DataGridResult queryCoupon(@RequestBody ParameUtil params) {
+
+        DataGridResult result = new DataGridResult();
+        PageUtil pageUtil = clientService.queryCoupon(params);
+        result.setRows(pageUtil.getList());
+        result.setTotal(pageUtil.getSumSize());
+        return result;
+    }
 
 
 }

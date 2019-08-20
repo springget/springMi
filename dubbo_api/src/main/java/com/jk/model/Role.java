@@ -5,20 +5,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Role implements Serializable {
 
     private Integer id;
 
-
     private String name;
-
 
     private String description;
 
-
     private String text;
-
 
     private String checked;
 
@@ -32,7 +30,6 @@ public class Role implements Serializable {
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
@@ -69,7 +66,7 @@ public class Role implements Serializable {
     }
 
     public void setChecked(String checked) {
-        this.checked = checked == null ? null : checked.trim();
+        this.checked = checked;
     }
 
     public Date getCreateTime() {

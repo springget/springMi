@@ -1,6 +1,5 @@
 package com.jk.service;
 
-import com.jk.model.Gangwei;
 import com.jk.model.Role;
 import com.jk.model.Tree;
 import com.jk.model.Zhanghao;
@@ -18,7 +17,7 @@ public interface DhyService {
     PageUtil queryZhanghao(ParameUtil parameUtil);
 
 
-    Gangwei showXiangQing(Integer id);
+    Role showXiangQing(Integer id);
 
     Zhanghao showXiangQing2(Integer id);
 
@@ -26,7 +25,7 @@ public interface DhyService {
 
     void updateStatus2(Integer id);
 
-    List<Tree> getTreeAll();
+    List<Tree> getTreeAll(Integer userId);
 
     List<Role> getPerById(Integer id);
 
@@ -34,5 +33,17 @@ public interface DhyService {
 
     List<Tree> queryPerById(Integer id);
 
-    void updatePer(Integer[] ids, Integer roleid);
+/*    void updatePer(Integer[] ids, Integer roleid);*/
+
+    void UpdateTree(Integer[] ids, Integer roleid);
+
+    List<Tree> querytreebyrid(Integer id, int pid);
+
+    List<Role> editrole(Integer id);
+
+    List<String> queryRoleById(Integer id);
+
+    void updateRoleCount(int i, Integer ids);
+
+    void updateRole2(Integer ids, Integer id);
 }

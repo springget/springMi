@@ -3,7 +3,6 @@ package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jk.model.Goods;
-import com.jk.service.ClientService;
 import com.jk.service.GoodsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +15,9 @@ public class pageController {
     @Reference
     private GoodsService goodsService;
 
-
     @Reference
-    private ClientService clientService;
+    private com.jk.service.DealService DealService;
+
     //財務管理
     @RequestMapping("tofinance")
     public String touserlist() {
@@ -133,7 +132,7 @@ public class pageController {
 
 
 
-    //增送会员
+
     @RequestMapping("updPresented")
     public ModelAndView updPresented(String id){
         System.out.println(id);
@@ -174,6 +173,7 @@ public class pageController {
     public String addlongShop(){
         return "html/hgj/addlongShop";
     }
+
 
 
 }

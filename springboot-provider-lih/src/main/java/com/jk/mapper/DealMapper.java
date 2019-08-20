@@ -58,20 +58,7 @@ public interface DealMapper {
     List<Order> queryDd6(ParameUtil param);
 
     List<Order> queryDd7(ParameUtil param);
-  /* // @Select("select count(1) from t_user ")
-    List<User> queryUser();
- //   @Select("select * from t_user limit #{start},#{end}")
-   // Integer queryUserCount(Map map);
 
+    Refund findRefundByid(Integer id);
 
-    //@Select("select count(1) from t_order o ,t_goods g ,t_logistics  l  where o.orderId=g.goodId  l.logisticId=o.logisticId")
-   // Integer queryOrderCount(Map map);
-    @Select("select * from t_order o ,t_goods g ,t_logistics  l  where o.orderId=g.goodId  l.logisticId=o.logisticId  limit #{start},#{end}")
-    List<Order> queryOrder(Map map);
-   // @Select("select * from t_logistics  limit #{start},#{end}")
-    List<Logistics> queryLogistics(HashMap map);
-    @Select("select count(1) from t_logistics   ")
-    Integer queryLogisticsCount(HashMap map);
-
-   Integer queryUserCount();*/
 }
