@@ -1,0 +1,92 @@
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../djs/jquery.min.js"></script>
+
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../djs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../djs/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../djs/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../djs/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../djs/fileinput/css/fileinput.min.css" />
+
+
+
+
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../djs/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../djs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../djs/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../djs/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../djs/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../djs/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../djs/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../djs/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../djs/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../djs/fileinput/themes/fa/theme.js"></script>
+</head>
+<body>
+
+<form role="form" id="formId">
+
+    <table>
+        <tr>
+            <td>手机号</td>
+            <td>
+                <input type="text" class="form-control" th:value="${list.phone}"  name = "gname">
+            </td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>
+                <input type="text" class="form-control" th:value="${list.name}"  name = "gname">
+            </td>
+        </tr>
+
+        <tr>
+            <td>邮箱</td>
+            <td>
+                <input type="text" class="form-control" th:value="${list.email}"  name = "gname">
+            </td>
+        </tr>
+
+        <tr>
+            <td>选择角色</td>
+            <td>
+                <input type="text" class="form-control" th:value="${list.role}"  name = "gname">
+                <select class="form-control">
+                    <option value="1">超级管理员</option>
+                    <option value="2">客服</option>
+                </select>
+            </td>
+        </tr>
+
+    </table>
+
+
+</form>
+
+
+
+</body>
+<script>
+
+
+
+</script>
+</html>

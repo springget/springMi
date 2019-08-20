@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <div th:fragment="header">
+        <meta charset="utf-8">
+
+        <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" th:href="@{../icons/favicon.ico}">
+        <link rel="stylesheet" type="text/css" href="../../static/font/iconfont/iconfont.css" th:href="@{../icons/favicon.ico}">
+        <link rel="stylesheet" href="../css/normalize.css" th:href="@{../css/normalize.css}">
+        <link rel="stylesheet" href="../css/reset.css" th:href="@{../css/reset.css}">
+        <link rel='stylesheet' href="../css/common.css" th:href="@{../css/common.css}">
+        <link rel="stylesheet" href="../css/index.css" th:href="@{../css/index.css}">
+        <link rel="stylesheet" href="../css/wrapper.css" th:href="@{../css/wrapper.css}">
+        <link rel="stylesheet" href="../css/is-visible.css" th:href="@{../css/is-visible.css}">
+        <link rel="stylesheet" href="../css/tv.css" th:href="@{../css/tv.css}">
+
+
+        <script type="text/javascript" src="../js/jquery-1.12.3.js"></script>
+        <script type="text/javascript" src='../js/tv.js'></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/common/font-awesome.min.css" th:href="@{../css/common/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" href="../css/yemian/shoppingCart.css" th:href="@{../css/yemian/shoppingCart.css}">
+        <script type="text/javascript" src="../js/common/jquery-3.1.1.min.js"   th:href="@{../js/common/jquery-3.1.1.min.js}"></script>
+        <title></title>
+    </div>
+</head>
+<body>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../css/common/head.css" th:href="@{../css/common/head.css}">
+<div id="footToTop" class="shortcut">
+    <div class="shortcut-menu">
+        <ul class="floatL">
+            <li class="location menu-list posR">
+                <div class="menu-link"><i class="icon-map-marker addr-icon"></i><a class="head-addr-select">北京</a></div>
+                <div class="dropdown addr-choose">
+                    <div class="addr-item"><a class="addr-city addr-selected">北京</a></div>
+                    <div class="addr-item"><a class="addr-city">上海</a></div>
+                    <div class="addr-item"><a class="addr-city">广州</a></div>
+                    <div class="addr-item"><a class="addr-city">福建</a></div>
+                    <div class="addr-item"><a class="addr-city">四川</a></div>
+                    <div class="addr-item"><a class="addr-city">安徽</a></div>
+                    <div class="addr-item"><a class="addr-city">西安</a></div>
+                    <div class="addr-item"><a class="addr-city">西藏</a></div>
+                    <div class="addr-item"><a class="addr-city">啦啦</a></div>
+                    <div class="addr-item"><a class="addr-city">啦啦啦</a></div>
+                </div>
+            </li>
+        </ul>
+        <ul class="floatR">
+            <li><!--/*@thymesVar id="name" type=""*/-->
+            <a href="#" th:text="${session.name}"></a><a href="../page/qtzhuce" class="highlight">免费注册</a></li>
+            <li class="spacer"></li>
+            <li><a href="../page/forder">我的订单</a></li>
+            <li class="spacer"></li>
+            <li class="menu-list posR">
+                <div class="menu-link"><a href="../page/querydingdan">我的商城</a><i class="icon-angle-down"></i></div>
+                <div class="dropdown myhome">
+                    <div class="userinfo">
+                        <div class="user-pic"><a href="#" class="icon-user user-icon"></a></div>
+                        <div class="user-name"><a href="#"  th:text="${session.name}"></a></div>
+                        <div class="user-extra"><a href="#">优惠券</a><span class="spacer"></span><a href="#">消息</a></div>
+                    </div>
+                    <div class="otherlist">
+                        <div class="fore"><p class="item"><a href="#">待处理订单</a></p>
+                            <p class="item"><a href="#">我的问答</a></p>
+                            <p class="item"><a href="#">降价商品</a></p>
+                            <p class="item"><a href="#">返修退换货</a></p></div>
+                        <div class="fore"><p class="item"><a href="#">我的关注</a></p>
+                            <p class="item"><a href="#">我的飞豆</a></p>
+                            <p class="item"><a href="#">我的理财</a></p>
+                            <p class="item"><a href="#">雄飞白嫖</a></p></div>
+                    </div>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li><a href="#">xx会员</a></li>
+            <li class="spacer"></li>
+            <li><a href="#">企业采购</a></li>
+            <li class="spacer"></li>
+            <li class="menu-list posR">
+                <div class="menu-link"><a href="#">客户服务</a><i class="icon-angle-down"></i></div>
+                <div class="dropdown clientserv">
+                    <div class="client-title">客户</div>
+                    <div class="client-item"><a href="#">帮助中心</a></div>
+                    <div class="client-item"><a href="#">售后服务</a></div>
+                    <div class="client-item"><a href="#">在线客服</a></div>
+                    <div class="client-item"><a href="#">意见反馈</a></div>
+                    <div class="client-item"><a href="#">电话客服</a></div>
+                    <div class="client-item"><a href="#">客服邮箱</a></div>
+                    <div class="client-item"><a href="#">金融咨询</a></div>
+                    <div class="client-title">商户</div>
+                    <div class="client-item"><a href="#">xx商学院</a></div>
+                    <div class="client-item"><a href="#">商家入驻</a></div>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="menu-list posR">
+                <div class="menu-link"><a href="#">网站导航</a><i class="icon-angle-down"></i></div>
+                <div class="dropdown sitebar">
+                    <div class="client-title">客户</div>
+                    <div class="client-item"><a href="#">帮助中心</a></div>
+                    <div class="client-item"><a href="#">售后服务</a></div>
+                    <div class="client-item"><a href="#">在线客服</a></div>
+                    <div class="client-item"><a href="#">意见反馈</a></div>
+                    <div class="client-item"><a href="#">电话客服</a></div>
+                    <div class="client-item"><a href="#">客服邮箱</a></div>
+                    <div class="client-item"><a href="#">金融咨询</a></div>
+                    <div class="client-title">商户</div>
+                    <div class="client-item"><a href="#">xx商学院</a></div>
+                    <div class="client-item"><a href="#">商家入驻</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">$(' .addr-city').on('click', function () {
+    $(this).addClass('addr-selected').parent()
+        .siblings('.addr-item').children('.addr-city')
+        .removeClass('addr-selected');
+    $('.head-addr-select').text($(this).text());
+});</script>
+<header>
+    <div class="header">
+        <div class="logo"><a href="../page/findshouyee"><img src="../img/logo.v2.png" alt="logo"></a><a href="#"
+                                                                              class="shoppingcartLink"><b>购物车</b></a>
+        </div>
+        <div class="cart-search"><input placeholder="自营" class="searchBox"><a class="searchBtn">搜索</a></div>
+    </div>
+</header>
+<div class="container">
+    <div class="cart-empty hide">
+        <div class="conWidth">
+            <div class="cart-message"><i class="icon-shopping-cart"></i>
+                <ul>
+                    <li class="mess-txt">购物车空空的哦~，去看看心仪的商品吧~</li>
+                    <li><a href="#" class="cart-toshopping">去购物></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <div class="conWidth">
+            <div class="cart-main">
+                <div class="cart-main-head">
+                    <div class="h-checkbox"><span class="h-check"><input type="checkbox" class="allCheck"></span><span>全选</span>
+                    </div>
+                    <div class="h-goods">商品</div>
+                    <div class="h-props"></div>
+                    <div class="h-price">单价</div>
+                    <div class="h-quantity">数量</div>
+                    <div class="h-sum">小计</div>
+                    <div class="h-action">操作</div>
+                </div>
+
+
+                </div>
+                <div id="huoAll"></div>
+
+            <div class="cart-footer">
+                <div class="options-box clear">
+                    <div class="selectAll">
+                        <div class="cart-checkbox"><input type="checkbox" class="allCheck"><span>全选</span></div>
+                    </div>
+                    <div class="operation"><a class="deleteMoreGood">删除选中的商品</a><a class="removeMoreGood">移到我的关注</a><a
+                            class="clearOverdueGood">清除下柜商品</a></div>
+                    <div class="toolbar-right">
+                        <div class="btnArea floatR"><a href="../page/forder">去结算</a></div>
+                        <div class="price-sum">
+                            <div><span class="sum-txt" >总价：</span><span class="sum-price"><em>¥8364.00</em></span><br><span
+                                    class="txt">将节省:</span><span class="price">- ¥297.00</span></div>
+                        </div>
+                        <div class="amount-sum"><span>已选择</span><em id="amount-val">3</em><span>件商品</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-removed mt20 hide">
+                <div class="r-title">已删除商品，您可以重新购买或加关注：</div>
+            </div>
+        </div>
+    </div>
+
+
+
+<link rel="stylesheet" type="text/css" href="../css/common/footer.css" th:href="@{../css/common/footer.css}">
+<footer class = 'mi-footer'>
+
+
+    <div class = 'w1226'>
+        <!--服务导航区域-->
+
+        <div class="footer-service">
+            <ul class="footer-s-list">
+
+                <li class="footer-s-item">
+                    <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">维修服务</span></div>
+                </li>
+                <li class="footer-s-item">
+                    <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">7天无理由退货</span></div>
+                </li>
+                <li class="footer-s-item">
+                    <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">15天免费换货</span></div>
+                </li>
+                <li class="footer-s-item">
+                    <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">520余家售后网点</span></div>
+                </li>
+            </ul>
+        </div>
+
+        <!--底部链接区域-->
+        <div class="footer-help">
+            <div class="footer-h-list">
+
+                <div class="footer-h-nav"><h5 class="footer-h-nav-tit">      </h5>
+                    <ul class="footer-h-nav-con">
+                        <li><a href="#">      </a></li>
+                        <li><a href="#">      </a></li>
+                        <li><a href="#">      </a></li>
+                        <li><a href="#">      </a></li>
+                        <li><a href="#">      </a></li>
+                        <li><a href="#">      </a></li>
+                    </ul>
+                </div>
+
+
+
+                <div class="footer-h-nav"><h5 class="footer-h-nav-tit">帮助中心</h5>
+                    <ul class="footer-h-nav-con">
+                        <li><a href="#"> 账户管理 </a></li>
+                        <li><a href="#"> 购物指南 </a></li>
+                        <li><a href="#"> 订单操作 </a></li>
+                    </ul>
+                </div>
+                <div class="footer-h-nav"><h5 class="footer-h-nav-tit">服务支持</h5>
+                    <ul class="footer-h-nav-con">
+                        <li><a href="#"> 售后政策 </a></li>
+                        <li><a href="#"> 自助服务 </a></li>
+                        <li><a href="#"> 相关下载 </a></li>
+                    </ul>
+                </div>
+                <div class="footer-h-nav"><h5 class="footer-h-nav-tit">线下门店</h5>
+                    <ul class="footer-h-nav-con">
+                        <li><a href="#"> 小米之家 </a></li>
+                        <li><a href="#"> 服务网点 </a></li>
+                        <li><a href="#"> 授权体验店 </a></li>
+                    </ul>
+                </div>
+                <div class="footer-h-nav"><h5 class="footer-h-nav-tit">关于我们</h5>
+                    <ul class="footer-h-nav-con">
+                        <li><a href="#"> 新浪微博 </a></li>
+                        <li><a href="#"> 官方微信 </a></li>
+                        <li><a href="#"> 官方微信 </a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-h-nav"><h5 class="footer-h-nav-tit">特色服务</h5>
+                    <ul class="footer-h-nav-con">
+                        <li><a href="#"> F码通道 </a></li>
+                        <li><a href="#"> 礼物码 </a></li>
+                        <li><a href="#"> 防伪查询 </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    <div class = 'footer-page'>
+        <div class = 'w1226 clearfix'>
+            <div class = "f-logo"></div>
+            <div class = "ft">
+                <p class = "t1">小米商城</a><span>|</span>
+                    <a href = "#">MIUI</a><span>|</span>
+                    <a href = "#">米家</a><span>|</span>
+                    <a href = "#">米聊</a><span>|</span>
+                    <a href = "#">多看</a><span>|</span>
+                    <a href = "#">游戏</a><span>|</span>
+                    <a href = "#">路由器</a><span>|</span>
+                    <a href = "#">米粉卡</a><span>|</span>
+                    <a href = "#">政企服务</a><span>|</span>
+                    <a href = "#">小米天猫店</a><span>|</span>
+                    <a href = "#">隐私政策</a><span>|</span>
+                    <a href = "#">问题反馈</a><span>|</span>
+                    <a href = "#">廉正举报</a><span>|</span>
+                    <a href = "#">Select Region</a>
+                </p>
+                <p class = "t2">©mi.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2017]1530-131号 </p>
+                <p class = "t2">违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</p>
+            </div>
+            <div class = 'integrity fr'>
+                <a href = "#"><img style = 'width: 85px;height:28px' src = "../icons/s1.png" alt = ""></a>
+                <a href = "#"><img src = "../icons/s2.png" alt = ""></a>
+                <a href = "#"><img src = "../icons/s3.png" alt = ""></a>
+                <a href = "#"><img src = "../icons/s4.png" alt = ""></a>
+                <a href = "#"><img src = "../icons/s5.png" alt = ""></a>
+            </div>
+            <div class = "ft-bg"></div>
+        </div>
+    </div>
+
+</footer>
+
+
+
+</body>
+
+<script type="text/javascript" src="../js/common/common.min.js"  th:href="@{../js/common/common.min.js}"></script>
+<script type="text/javascript" src="../js/yemian/shoppingCart.min.js"  th:href="@{../js/yemian/shoppingCart.min.js}"></script>
+<script>
+    $(function () {
+        querAllHuo();
+    })
+    //循环表格
+    function querAllHuo() {
+        var strAllss = "";
+        $.ajax({
+            url: "../order/findOrderListAll",
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    strAllss += '<div class="cart-main-list">'+
+                        '<div class="cart-main-shop">'+
+                        ' <div class="cart-checkbox"><input type="checkbox" class="listCheck"></div>'+
+                        '  <span class="s-text"><a class="shop-name">'+data[i].supplier_name+'</a></span>'+
+                        ' <div class="shop-extra">'+
+                        '  <div class="extra-info-main"><span class="info-main-flag">满¥99免运费(10kg内)'+
+                        '	<b  class="icon-angle-down"></b><div class="lineshade"></div><div class="info-main-box">'+
+                        '<span class="info-main-tit">小计：¥33916.00</span>'+
+                        '<span class="info-main-tit">总重：'+data[i].weight+'kg</span><div class="box-detail ml20"><ul>'+
+                        '<li   class="curr"><span>满¥99</span><span class="lightGreen ml5">已免运费</span>'+
+                        '<span class="floatR">10kg内免运费</span></li><li><span>满¥199</span>'+
+                        '<span class="floatR">20kg内免运费</span></li><li><span>满¥299</span>'+
+                        '<span class="floatR">30kg内免运费</span></li><li><span>满¥399</span>'+
+                        '<span class="floatR">40kg内免运费</span></li><li><span>超过50kg运费以结算页为准</span>'+
+                        '<span class="floatR">'+
+                        '<a href="#"   class="lightBlue">详情 ></a></span></li></ul></div></div></span>'+
+                        ' </div>'+
+                        ' <span>已免运费</span></div>'+
+                        ' </div>'+
+                        ' <div class="goods-list">'+
+                        ' <div class="goods-item-con">'+
+                        ' <div class="goods-head">'+
+                        '<div class="goods-head-txt"><a href="#" class="goods-head-link">活动商品已购满¥100.00'+
+                        ' ，可加价换购商品12件 ></a><a class="goods-head-btn ml20">换购商品</a><a class="ml10 toBuy">去凑单'+
+                        ' ></a></div>'+
+                        ' <div class="goods-head-price"></div>'+
+                        '</div>'+
+                        '  <div class="goods-item">'+
+                        '  <div class="goods-item-form clear">'+
+                        '   <div class="cell f-checkbox">'+
+                        '   <div class="cart-checkbox"><input type="checkbox" class="itemCheck"></div>'+
+                        '</div>'+
+                        '  <div class="cell f-goods">'+
+                        '  <div class="f-goods-item">'+
+                        '    <div class="f-item-img"><a href="#"><img src="img/ad.png" alt=""></a></div>'+
+                        '   <div class="f-item-msg">'+
+                        '     <div class="msg-name"><a href="#">'+data[i].shop_name+'</a></div>'+
+                        '    <div class="msg-extend"><span><i class="icon-gift"></i><a '+
+                        '          title="购买礼品服务">购买礼品服务</a></span><span><i'+
+                        '        class="icon-wrench"></i><a title="购买增值保障">购买增值保障</a></span>'+
+                        '    </div>'+
+                        '  </div>'+
+                        '  </div>'+
+                        '  </div>'+
+                        '  <div class="cell f-props">'+
+                        '  <div class="f-props-txt">颜色：白色</div>'+
+                        ' </div>'+
+                        ' <div class="cell f-price"><strong>¥   '+data[i].order_price+'</strong>'+
+                        '  <div><a class="sales-promotion"><span>更多促销</span><span '+
+                        '   class="icon-angle-down ml5"></span></a>'+
+                        ' <div class="sales-main">'+
+                        ' <ul>'+
+                        '  <li><input type="radio" checked="checked" title="满100.00得赠品，赠完即止" '+
+                        '            name="promotion2"><span>满3000.00得赠品，赠完即止</span></li>'+
+                        ' <li><input type="radio" title="满100.00得赠品，赠完即止" '+
+                        '         name="promotion2"><span>满3000.00得赠品，赠完即止</span></li>'+
+                        ' <li><input type="radio" title="满100.00得赠品，赠完即止" '+
+                        '             name="promotion2"><span>满3000.00得赠品，赠完即止</span></li>'+
+                        ' </ul>'+
+                        '   <div class="sale-btn mt20 textCenter"><a class="sale-yes">确定</a><a '+
+                        '           class="sale-no ml20">取消</a></div> '+
+                        ' </div>'+
+                        ' </div>'+
+                        ' <a title="商品比加入购物车降价250.00" '+
+                        '   class="lightGreen floatR cutPrice">降价<span>¥250.00</span></a></div>'+
+                        '  <div class="cell f-quantity">'+
+                        ' <div class="quantity-form"><a class="quantityDown mount-down">-</a><input'+
+                        '  value="1" class="quantityNum mount-input"><a'+
+                        '    class="quantityUp mount-up">+</a></div>'+
+                        '<div>有货</div>'+
+                        ' </div>'+
+                        ' <div class="cell f-sum"><strong>¥2788.00</strong><span class="weight">0.96kg</span>'+
+                        '</div>'+
+                        ' <div class="cell f-ops"><a class="deleteGood">删除</a><a class="removeGood">移到我的关注</a>'+
+                        ' </div>'+
+                        ' </div>'+
+                        ' </div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        ' </div>';
+                }
+                $("#huoAll").html(strAllss);
+            }
+        })
+
+
+    }
+</script>
+</html>

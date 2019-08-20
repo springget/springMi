@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<style type="text/css">
+    *{padding: 0;margin: 0;box-sizing: border-box}
+    div{width: 100%;margin: 50px auto;}
+    ul{
+        list-style: none;overflow: hidden;
+    }
+    #nav{
+        width: 400px;height:40px;text-align: center;line-height:10px;
+        background: #c5c5c5;
+    }
+    #nav li{
+        width: 25%;height:5px;float: left;border:5px solid #c5c5c5;
+        border-bottom: none;
+    }
+    #nav li.active{
+        background: #fff;
+    }
+    #content{
+        width: 1500px;height: 600px;position: relative;border:3px solid #c5c5c5;border-top: none;
+    }
+    #content li{width: 100%;height: 100%;position: absolute;padding: 10px;display: none}
+</style>
+<body>
+<form>
+
+    <table>
+        <tr>
+
+            <td>
+                <div>
+                    <span>累计收入</span><span>（截止今日0点）</span><br>
+                    <span >￥</span><span>509.98</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                     <button type="button" onclick="queryHero()">收支明细</button>
+              </div>
+            </td>
+            &nbsp;  &nbsp;  &nbsp; &nbsp;
+            <td>
+            <span>昨日收入</span><span>（截止今日0点）</span><br>
+            <span >￥</span><span>9.98</span>
+        </td>
+            &nbsp;  &nbsp;  &nbsp; &nbsp;
+            <td>
+                <span>七天收入</span><span>（截止今日0点）</span><br>
+                <span >￥</span><span>99.98</span>
+            </td>
+
+            <td>
+                <div>
+                    <span>待结算总额</span><span>（截止今日0点）</span><br>
+                    <span >￥</span><span>359.08</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <button type="button" onclick="queryHero()">结算记录</button>
+                </div>
+            </td>
+            &nbsp;  &nbsp;  &nbsp; &nbsp;
+
+            <td>
+                <div>
+                    <span>可用余额</span><br>
+                    <span >￥</span><span>359.08</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" onclick="tiixan()">提现</button>
+                    <button type="button" onclick="tiixan()">提现记录</button>
+                </div>
+            </td>
+
+        </tr>
+
+
+    </table>
+</form>
+
+
+<div>
+    <ul id="nav">
+        <li class="active">账户明细</li>
+        <li>结算记录</li>
+    </ul>
+    <ul id="content">
+        <li style="display: block"><table id="bootTab"></table></li>
+        <li><table id="jiesuan"></table></li>
+    </ul>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    $(function(){
+        queryHero();
+        queryaccount();
+    })
+    queryHero=function() {
+        $("#bootTab").bootstrapTable({
+            url: '../account/findBootstrapaccount',	//获取数据地址
+            toolbar: '#toolbar', //条查的工具栏
+
+            pagination: true, //是否展示分页
+            pageList: [3,4,6,8],//分页组件
+            method: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            pageNumber: 1,
+            pageSize: 4,//默认每页条数
+            sidePagination: 'server',//分页方式：client客户端分页，server服务端分页（*
+            striped: true,//是否显示斑马线
+            queryParams: function () {
+                return {
+                    page: this.pageNumber,
+                    rows: this.pageSize
+                };
+
+            },
+            columns: [
+                {field: 'goodsName', title: '商品名称', width: 100},      //  列    field   代表是 后台  传过来的值
+                {field: 'orderTime', title: '支付时间', width: 100},
+                {field: 'userId', title: '订单号', width: 100},
+                {field: 'userName', title: '客户昵称', width: 100},
+
+                {field: 'goodsPrice', title: '金额', width: 100},
+                {field: 'stateName', title: '状态', width: 100},
+                {
+                    field: 'crud', title: '操作', width: 100,
+                    formatter: function (value, row, index) {
+                        return  "<a href='javascript:queryDetails(&quot;" + row.goodsId + "&quot;)'>詳情</a>";
+                    }
+                }
+
+
+            ]
+
+        })
+    }
+
+    queryaccount=function() {
+        $("#jiesuan").bootstrapTable({
+            url: '../account/findBootstrapincome',	//获取数据地址
+            toolbar: '#toolbar', //条查的工具栏
+
+            pagination: true, //是否展示分页
+            pageList: [3,4,6,8],//分页组件
+            method: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            pageNumber: 1,
+            pageSize: 4,//默认每页条数
+            sidePagination: 'server',//分页方式：client客户端分页，server服务端分页（*
+            striped: true,//是否显示斑马线
+            queryParams: function () {
+                return {
+                    page: this.pageNumber,
+                    rows: this.pageSize
+                };
+
+            },
+            columns: [
+                {field: 'goodsName', title: '商品名称', width: 100},      //  列    field   代表是 后台  传过来的值
+                {field: 'orderTime', title: '支付时间', width: 100},
+                {field: 'userId', title: '订单号', width: 100},
+                {field: 'userName', title: '客户昵称', width: 100},
+
+                {field: 'goodsPrice', title: '金额', width: 100},
+                {
+                    field: 'crud', title: '操作', width: 100,
+                    formatter: function (value, row, index) {
+                        return  "<a href='javascript:update(&quot;" + row.orderId + "&quot;)'>詳情</a>";
+                    }
+                }
+
+
+            ]
+
+        })
+    }
+    function tiixan(){
+        location.href="../account/findcarry";
+    }
+
+    function queryDetails(goodsId){
+        location.href="../account/queryDetails?goodsId="+goodsId;
+    }
+
+    function queryDetails(orderId){
+        location.href="../page/dealXq?id="+orderId;
+    }
+</script>
+
+<script type="text/javascript">
+    var nav =document.getElementById("nav");
+    var navlist = nav.children;
+    var con = document.getElementById("content");
+    var conlist = con.children;
+    for (var i= 0;i<navlist.length;i++){
+        navlist[i].index = i;
+        navlist[i].onclick = function (){
+            for (var m = 0;m< conlist.length;m++){
+                navlist[m].className = "";
+                conlist[m].style.display ="none";
+            }
+            this.className = "active";
+            conlist[this.index].style.display = "block";
+        }
+    }
+</script>
+</html>

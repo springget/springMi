@@ -1,0 +1,229 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body onload="setSheng()">
+<form role="form" id="formId">
+    <div style="height:30px;background: #8c8c8c">
+        店铺信息
+    </div>
+    <p></p>
+    店铺名称&nbsp;&nbsp;<input type="text"  id="shopname" name="shopName" size="28"   onblur="toname()" onfocus="javascript:if(this.value=='请输入店铺名称')this.value='';"  ><span id="msg"></span><span id="msg"></span><br/>
+
+    <p></p>
+
+    <p></p>
+    联系方式&nbsp;&nbsp;<input type="text" name="shopPhone" size="28"  value="请输入客户可查看的联系方式" onfocus="javascript:if(this.value=='请输入客户可查看的联系方式')this.value='';" ><br/>
+    <p></p>
+    经营地址&nbsp;&nbsp;<select id="sheng" onchange="setshi(this.value)"></select>
+
+    -<select id="shi" onchange="setxian(this.value)" ></select>
+
+    -<select id="xian" name="shopUrl"></select>
+
+
+    <p></p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" name="shopThearea" size="28"  value="请输入详细地址" onfocus="javascript:if(this.value=='请输入详细地址')this.value='';"><br/>
+    <p></p>
+    店铺简介&nbsp;&nbsp;<textarea name="shopIntro" rows="4" cols="40"></textarea><br>
+    <p></p>
+    <div style="height: 100px;width: 400px;margin-left: 70px">
+        我声明，此页面所填写内容均真实有效，
+        特别是经营地址为店铺最新可联系到的地
+        址，同时可以作为行政机关和司法机关送
+        达法律文件的地址。如果上述地址信息有
+        误，愿意承担由此带来的平台处罚（处罚
+        细则）、行政监管和司法诉讼风险。
+    </div>
+    <div style="height: 300px;width: 400px;margin-left: 70px;margin-top:20px">
+        <input type="button" onclick="addShop()" value="保存">
+    </div>
+</form>
+</body>
+<script>
+
+    function toname() {
+        var name= document.getElementById("shopname").value;
+        $.ajax({
+            url: '../shop/queryShop?name='+name,
+            success:function(data){
+            if(data=="2"){
+                $("#msg").html("未认证<input type='button' onclick='longShop()'style='color: red' value='立即认证'>");
+                }else if(data=="1"){
+                $("#msg").html("√");
+            }
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+
+    }
+
+    function createAddContent(url) {
+
+        $.ajax({
+            url: url,
+            async: false,
+            success: function (data) {
+                res = data;
+            }
+        });
+        return res;
+    }
+    //新增longShop
+    function longShop(){
+        //打开新增弹框
+        bootbox.dialog({
+            title: '新增',
+            message: createAddContent("../page/addlongShop"),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i>保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+                        $.ajax({
+                            url: '../shop/addlongShop',
+                            type: 'post',
+                            data: $("#formId").serialize(),
+                            success: function () {
+                                alert("新增成功");
+                                location.href=location;
+                                //刷新表格
+                            }, error: function () {
+                                alert("新增失败");
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+
+        });
+    }
+
+
+    //三级联动
+    //省
+    function setSheng(){
+        var a =0;
+        $.ajax({
+            url: '../shop/queryArea?id='+a,
+            success:function(data){
+                var thtml='<option value="-1">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    thtml+='<option value="'+data[i].areaId+'">'+data[i].areaName+'</option>';
+                }
+                $("#sheng").html(thtml);
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+    }
+    //市
+    function setshi(id){
+
+        $.ajax({
+            url: '../shop/queryArea?id='+id,
+            success:function(data){
+                var thtml='<option value="-1">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    thtml+='<option value="'+data[i].areaId+'">'+data[i].areaName+'</option>';
+                }
+                $("#shi").html(thtml);
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+    }
+    //市
+    function setxian(id){
+
+        $.ajax({
+            url: '../shop/queryArea?id='+id,
+            success:function(data){
+                var thtml='<option value="-1">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    thtml+='<option value="'+data[i].areaId+'">'+data[i].areaName+'</option>';
+                }
+                $("#xian").html(thtml);
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+    }
+
+//新增店铺shop
+    function addShop(){
+        $.ajax({
+
+            url: '../shop/addShop',
+            type: 'post',
+            data: $("#formId").serialize(),
+            success: function () {
+                alert("新增成功");
+                location.href=location;
+                //刷新表格
+            }, error: function () {
+                alert("新增失败");
+            }
+        })
+    }
+
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <base href="<%=basePath%>">
+    <title>标题</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+
+
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+
+
+</head>
+<body>
+<form role="form" id="upForm">
+    <input name="memberId" th:value="${order}" type="hidden" id="type">
+    <table>
+        <tr>
+            <td>赠送时长</td>
+            <td>
+                <input type="text" id="shichang"/>
+                <select id="types" onchange="jinebd(this.value)">
+                    <option value="0">请选择</option>
+                    <option value="1">年</option>
+                    <option value="2">月</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="button" value="保存" onclick="baocun()">
+</form>
+
+</body>
+
+<script>
+    var a = 0;
+    function jinebd(timeTwo){
+        var shichang = $("#shichang").val();
+        if(timeTwo==1){
+            a = shichang*365;
+        }else if(timeTwo==2){
+            a = shichang*30;
+        }
+    }
+    function baocun(){
+        var id= $("#type").val();
+        var aa=a;
+        $.ajax({
+            url:"../client/updateClient",
+            data:{aa:aa,id:id},
+            success:function(){
+                $("#dataGrid").bootstrapTable("refresh");
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ClientDao" >
+
+
+    <select id="queryUserList" resultType="com.jk.model.User" parameterType="com.jk.util.ParameUtil">
+        select * from t_user u, t_member m
+        <where>
+            u.memberId=m.memberId
+            <if test="keshou != null and keshou != 0 and keshou == 1">
+                and u.userName like '%${shouhu}%'
+            </if>
+            <if test="keshou != null and keshou != 0 and keshou == 2">
+                and u.userPhone like '%${shouhu}%'
+            </if>
+            <if test="startDate != null and startDate != ''">
+                and u.longinTime >= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and u.longinTime &lt;= #{endDate}
+            </if>
+            <if test="startIntegral != null and startIntegral != ''">
+                and u.integral >= #{startIntegral}
+            </if>
+            <if test="endIntegral != null and endIntegral != ''">
+                and u.integral &lt;= #{endIntegral}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryMemberList" resultType="com.jk.model.Member" parameterType="com.jk.util.ParameUtil">
+        select * from  t_member m ,t_user u
+           <where>
+             u.memberId=m.memberId
+                 <if test="keshou != null and keshou != 0 and keshou == 1">
+                     and u.userName like '%${shouhu}%'
+                </if>
+               <if test="keshou != null and keshou != 0 and keshou == 2">
+                   and u.userPhone like '%${shouhu}%'
+               </if>
+            </where>
+    </select>
+    <update id="updateClient" parameterType="java.util.Map">
+        update t_member m set m.memberTime=date_add(m.memberTime, interval aa day) where m.memberId = #{id}
+    </update>
+
+    <select id="queryUserName" resultType="com.jk.model.User" parameterType="String">
+        select * from t_user where userAccount =#{userAccount}
+    </select>
+
+
+</mapper>

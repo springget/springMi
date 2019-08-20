@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.GoodsDao">
+    <!--树-->
+    <select id="getTreeAll" resultType="com.jk.model.Tree">
+        select * from 0815tree
+    </select>
+    <!--查询 商品管理 商品列表-->
+    <select id="queryGoods" parameterType="com.jk.util.ParameUtil" resultType="com.jk.model.Goods">
+        SELECT * FROM t_goods a,t_type b
+        <where>
+            a.typeId = b.typeId
+            <if test="goodsName!=null and goodsName !=''">
+                and a.goodsName like '%${goodsName}%'
+            </if>
+            <if test="typeId!=null and typeId !=0">
+                and a.typeId = #{typeId}
+            </if>
+            <if test="status !=null">
+                and a.status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="queryType" resultType="com.jk.model.Type">
+        select * from t_type
+    </select>
+    <update id="soldOut" parameterType="java.lang.String">
+        update t_goods a set a.status=0 where goodsId = #{id}
+    </update>
+    <delete id="deleById" parameterType="string">
+        delete from t_goods where goodsId = #{id}
+    </delete>
+    <insert id="addgoods" parameterType="com.jk.model.Goods">
+        insert into t_goods (goodsName,goodsNumber,typeId,goodsTime,goodsInfo,goodsPrice,sales,status)
+        values(#{goodsName},#{goodsNumber},#{typeId},now(),#{goodsInfo},#{goodsPrice},0,0)
+    </insert>
+    <select id="findGoodsByid" resultType="com.jk.model.Goods" parameterType="integer">
+        select * from t_goods where goodsId =#{id}
+    </select>
+    <update id="updGoods" parameterType="com.jk.model.Goods">
+        update t_goods set goodsName=#{goodsName},goodsNumber=#{goodsNumber},typeId=#{typeId},goodsInfo=#{goodsInfo},goodsPrice=#{goodsPrice}
+        where goodsId =#{goodsId}
+    </update>
+    <select id="queryTypeTwo" resultType="com.jk.model.Type" parameterType="com.jk.util.ParameUtil">
+        SELECT * FROM t_goods c,t_type d
+        <where>
+            c.typeId = d.typeId
+            <if test="typeName!=null and typeName!=''">
+                and typeName like '%${typeName}%'
+            </if>
+        </where>
+    </select>
+    <delete id="deleByIdTwo" parameterType="String">
+        delete from t_type aa where aa.typeID =#{id}
+    </delete>
+</mapper>

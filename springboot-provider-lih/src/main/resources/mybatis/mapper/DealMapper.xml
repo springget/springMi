@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.DealMapper" >
+
+
+  <!--delete id="deleteMusic">
+
+    delete from t_music
+     <where>
+       <foreach collection="id" item="id" open=" and id in (" close=")" separator=",">
+         #{id}
+       </foreach>
+     </where>
+
+  </delete>-->
+
+    <select id="queryUser"  resultType="com.jk.model.User">
+        select * from t_user u,t_order o where o.userId=u.userId and o.orderId=#{id}
+    </select>
+
+
+
+    <select id="queryOrder"  resultType="com.jk.model.Order">
+      select
+      g.goodsImg as goodsImg,g.goodsName as goodsName,g.goodsPrice as goodsPrice,
+        o.orderNumber as orderNumber,l.fastMoney as fastMoney,o.orderMoney as orderMoney,
+        o.preferentialMoney as preferentialMoney,realityMoney as realityMoney
+        from t_order o ,t_goods g ,t_logistics l
+        where o.goodsId=g.goodsId  and l.logisticId=o.logisticId and o.orderId=#{id}
+    </select>
+
+
+    <select id="queryLogistics"  resultType="com.jk.model.Logistics">
+
+select
+t.consignee as consignee ,t.address as address,l.distribution as distribution,
+l.LogisticCompany as logisticCompany ,l.sendTime as sendTime,l.arrivalTime as arrivalTime,l.logisticId as logisticId
+from  t_logistics l ,t_user t , t_order o  where l.logisticId=t.logisticId and o.logisticId=l.logisticId and o.orderId=#{id}
+    </select>
+
+
+  <select id="queryRefund"  resultType="com.jk.model.Refund">
+select * from  t_refund r,t_goods g,t_order o where r.goodsId=g.goodsId and r.orderId=o.orderId
+<include refid="cha"></include>
+    </select>
+
+
+  <select id="queryRefund2"  resultType="com.jk.model.Refund">
+    select * from  t_refund r,t_goods g,t_order o where r.goodsId=g.goodsId and r.orderId=o.orderId
+  </select>
+
+  <sql id="cha">
+    <if test="refundStatus !=null and refundStatus!=0">and refundStatus=#{refundStatus}</if>
+    <if test="sendStatus !=null and sendStatus!=0">and sendStatus=#{sendStatus}</if>
+    <if test="refundrecord !=null and refundrecord!=0">and refundrecord=#{refundrecord}</if>
+    <if test="refundInfo !=null and refundInfo!=0">and refundInfo=#{refundInfo}</if>
+    <if test="startdate !=null and startdate!=''">and refundTime &lt;=#{startdate}</if>
+    <if test="enddate !=null and enddate!=''">and refundTime &gt;=#{enddate}</if>
+  </sql>
+
+  <update id="updateUp" >
+    update t_refund r  set refundrecord=2 where  refundId=#{id}
+  </update>
+
+
+  <update id="updateDown" >
+    update t_refund r  set refundrecord=1 where  refundId=#{id}
+  </update>
+
+
+  <select id="queryComment"  resultType="com.jk.model.Comment">
+    select * from  t_comment c,t_user u,t_goods g where c.goodsId=g.goodsId and c.userId=u.userId
+    <include refid="cha"></include>
+  </select>
+
+  <select id="queryDd" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId
+  </select>
+
+
+
+  <select id="queryDd2" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=1
+  </select>
+
+  <select id="queryDd3" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=2
+  </select>
+
+
+  <select id="queryDd4" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=3
+  </select>
+
+
+  <select id="queryDd5" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=4
+  </select>
+
+
+  <select id="queryDd6" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=5
+  </select>
+
+
+  <select id="queryDd7" resultType="com.jk.model.Order">
+         select * from t_order o ,t_goods g ,t_user u
+        where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=6
+  </select>
+</mapper>

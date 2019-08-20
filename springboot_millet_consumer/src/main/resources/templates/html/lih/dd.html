@@ -1,0 +1,682 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+
+
+</head>
+<body>
+<div class='container-fluid'>
+    <h2 class='page-header'>Bootstrap 选项卡</h2>
+    <!--
+        选项卡：通过BS的类来控制选项卡的样式
+    -->
+    <ul class='nav nav-tabs'>
+        <li class='active'><a href='#tab1' data-toggle='tab'>全部</a></li>
+        <li><a href='#tab2' data-toggle='tab'>待付款</a></li>
+        <li><a href='#tab3' data-toggle='tab'>代发货</a></li>
+        <li><a href='#tab4' data-toggle='tab'>已发货</a></li>
+        <li><a href='#tab5' data-toggle='tab'>已完成</a></li>
+        <li><a href='#tab6' data-toggle='tab'>已关闭</a></li>
+        <li><a href='#tab7' data-toggle='tab'>退款中</a></li>
+    </ul>
+
+    <!--
+        选项卡的内容定义
+    -->
+    <div class='tab-content'>
+        <div class='tab-pane active' id='tab1'><p><table id="dataGrid1"></table></p></div>
+        <div class='tab-pane' id='tab2'><p><table id="dataGrid2">2</table></p></div>
+        <div class='tab-pane' id='tab3'><p><table id="dataGrid3">3</table></p></div>
+        <div class='tab-pane' id='tab4'><p><table id="dataGrid4">4</table></p></div>
+        <div class='tab-pane' id='tab5'><p><table id="dataGrid5">5</table></p></div>
+        <div class='tab-pane' id='tab6'><p><table id="dataGrid6">6</table></p></div>
+        <div class='tab-pane' id='tab7'><p><table id="dataGrid7">7</table></p></div>
+    </div>
+
+</div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+
+    $(function(){
+
+        queryDd1();
+        queryDd2();
+        queryDd3();
+        queryDd4();
+        queryDd5();
+        queryDd6();
+        queryDd7();
+    })
+
+
+    queryDd1 = function(){
+
+        $("#dataGrid1").bootstrapTable({
+            url:"../deal/queryDd",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300,
+                    //0 全部  1 待付款 2 代发货 3 已发货 4已完成 5已关闭 6退款中
+                    formatter:function(value,row,index){
+                        if(value=='1'){
+                            return "待付款";
+                        }
+                        if(value=='2'){
+                            return "代发货";
+                        }
+                        if(value=='3'){
+                            return "已发货";
+                        }
+                        if(value=='4'){
+                            return "已完成";
+                        }
+                        if(value=='5'){
+                            return "已关闭";
+                        }
+                        if(value=='6'){
+                            return "退款中";
+                        }
+                    },
+                },
+
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+    queryDd2 = function(){
+
+        $("#dataGrid2").bootstrapTable({
+            url:"../deal/queryDd2",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300},
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+
+    queryDd3 = function(){
+
+        $("#dataGrid3").bootstrapTable({
+            url:"../deal/queryDd3",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300},
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+
+    queryDd4 = function(){
+
+        $("#dataGrid4").bootstrapTable({
+            url:"../deal/queryDd4",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300},
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+    queryDd5 = function(){
+
+        $("#dataGrid5").bootstrapTable({
+            url:"../deal/queryDd5",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300},
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+    queryDd6 = function(){
+
+        $("#dataGrid6").bootstrapTable({
+            url:"../deal/queryDd6",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300},
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+    queryDd7 = function(){
+
+        $("#dataGrid7").bootstrapTable({
+            url:"../deal/queryDd7",
+
+            method: 'post',
+            striped: true,  	// 斑马线效果     默认false
+            //只允许选中一行
+            singleSelect: false,
+            //选中行是不选中复选框或者单选按钮
+            clickToSelect: true,
+            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            uniqueId: "id",                 //每一行的唯一标识，一般为主键列
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,     //  最少留两列
+            detailView: false,                  //是否显示父子表
+            toolbar: '#tabToolBar',   //  工具定义位置
+            sidePagination: 'server',
+            toolbar: '#toolbar',
+            pagination: true, //是否展示分页
+            pageList: [2, 4, 8, 10],//分页组件
+            pageNumber: 1,
+            pageSize: 2,//默认每页条数
+            //启动回车键做搜索功能
+            searchOnEnterKey: true,
+            //设置为false 将禁止所有列的排序。
+            sortable: true,
+            //设置默认排序为 name,直接对应数据库的字段
+            sortName: 'id',
+            //定义排序方式，'asc' 或者 'desc'。
+            sortOrder: "desc",
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            // 设置为limit可以获取limit, offset, search, sort, order
+            queryParamsType: 'undefined',
+            // 请求服务器数据
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    sortName: params.sortName,
+                    sortOrder: params.sortOrder,
+                    name: $("#name").val()
+
+
+                };
+                return param;
+            },
+            columns: [
+                {field: 'checkbox', checkbox: true},  //开启复选框
+                {field: 'orderId', title: '订单号', width: 300},
+                {field: 'goodsImg', title: '图片', width: 300},
+                {field: 'goodsName', title: '商品', width: 300},
+                {field: 'goodsPrice', title: '单价', width: 300},
+                {field: 'orderNumber', title: '数量', width: 300},
+                {field: 'orderTime', title: '下单时间', width: 300},
+                {field: 'userName', title: '买家', width: 300},
+                {field: 'orderStatus', title: '交易状态', width: 300},
+                {field: 'realityMoney', title: '实付', width: 300},
+                {field: 'XXX', title: '操作', width: 300,
+                    formatter: function (value,row,index){
+                        var content="";
+
+
+                        content += " <a href='javascript:dealXq(&quot;"+row.orderId+"&quot;)'>详情</a>";
+
+                        return content;
+
+                    }
+
+
+                }
+
+            ]
+        });
+    }
+
+
+   function dealXq(orderId){
+       location.href="../page/dealXq?id="+orderId;
+    /*    $.ajax({
+            url:"../page/queryOrderXQ?id="+orderId,
+            success:function(){
+
+            }
+
+
+        })*/
+
+    }
+
+
+
+</script>
+</html>

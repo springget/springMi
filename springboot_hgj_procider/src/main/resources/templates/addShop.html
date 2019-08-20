@@ -1,0 +1,118 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body>
+<form role="form" id="formId">
+    <input name="ShopId" type="hidden">
+    <div class="form-group">
+         店铺名称:
+        <input type="text" class="form-control" name="shopName" placeholder="店铺名称"/>
+
+    </div>
+    <div class="form-group">
+        店铺logo:
+        <input type="hidden" name="shopLogo" id="shopLogo" />
+        <input type="file" id="imgFileBTN" />
+        <div id="showImgDiv" style="width: 150px;height: 200px;border-style:solid;border-width:1px; border-color:black;">
+            <img src="" id="showImg" style="width: 80px">
+        </div>
+        <div id="showBars" ></div>
+    </div><br>
+    <div class="form-group">
+        联系方式:
+        <input type="text" class="form-control" name="shopPhone" placeholder="联系方式"/>
+    </div>
+    <div class="form-group">
+        经营地址:
+        <input type="text" class="form-control"name="shopUrl" placeholder="客户级别"/>
+    </div>
+    <div class="form-group">
+        店铺简介:
+        <input type="file"  name="shopIntro" placeholder="店铺简介"/><br>
+        我声明，此页面所填写内容均真实有效，特别是经营地址为店铺最新可联系到的地址，
+        同时可以作为行政机关和司法机关送达法律文件的地址。如果上述地址信息有误，
+        愿意承担由此带来的平台处罚（处罚细则）、行政监管和司法诉讼风险。
+    </div>
+
+</form>
+</body>
+<script>
+    $(function(){
+        //文件域的id
+        $("#imgFileBTN").uploadify({
+            //前台请求后台的url 不可忽略的参数
+            'uploader' :"../shop/uploadNewsImg",
+            //插件自带 不可忽略的参数
+            'swf' : '../js/uploadify/uploadify.swf',
+            //撤销按钮的图片路径""
+            'cancelImg' : '../js/uploadify/uploadify-cancel.png',
+            //如果为true 为自动上传 在文件后 为false 那么它就要我们自己手动点上传按钮
+            'auto' : true,
+            //可以同时选择多个文件 默认为true 不可忽略
+            'multi' : false,
+            //给上传按钮设置文字
+            'buttonText' : '<font color="blue">上传logo</font>',
+            //上传后队列是否消失
+            'removeCompleted' : true,
+            'removeTimeout' : 1,
+            //上传文件的个数
+            'uploadLimit' : 2,
+            'fileTypeExts' : '*.jpg;*.jpge;*.gif;*.png',
+            'fileSizeLimit' : '2MB',
+            //给div的进度条加背景 不可忽略
+            'queueID' : 'showBars',
+            // controller层方法中接收文件的参数名, 参数名为自定义
+            'fileObjName' : 'shopLogo',
+            //      上传成功后的回调函数
+            'onUploadSuccess' : function(file, data, response) {
+                alert(data);
+                data = data.replace("\"","").replace("\"","");
+                $("#showImg").attr("src","../upload/"+data);
+                $("#shopLogo").val(data);
+            }
+
+        });
+    });
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,183 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body>
+<form role="form" id="formId">
+    <div style="height:30px;background: #8c8c8c">
+        店铺认证
+    </div>
+    <p></p>
+    企业全称&nbsp;&nbsp;<input type="text" name="name" size="28"   onblur="toname()" onfocus="javascript:if(this.value=='请输入企业全称')this.value='';"  ><br/>
+
+    <p></p>
+    <p></p>
+    社会信用代码   &nbsp;&nbsp;<input type="text" name="credit" size="28"   onblur="toname()" onfocus="javascript:if(this.value=='请输入社会信用代码')this.value='';" ><br/>
+
+    <p></p>
+    <p></p>
+    联系方式&nbsp;&nbsp;<input type="text" name="phone" size="28"  value="请输入客户可查看的联系方式" onfocus="javascript:if(this.value=='请输入客户可查看的联系方式')this.value='';" ><br/>
+
+    <div style="margin-left: 20px;margin-top: 30px">
+        <h4>提现信息</h4>
+        <div>
+            <div style="width: 150px;float: left;margin-left: 70px">
+                <div>提现方式</div>
+                <p></p>
+                <div style="height:50px">提示</div>
+                <p></p>
+                <div>选择银行</div>
+                <p></p>
+                <div>开户城市</div>
+                <p></p>
+                <div>开户支行名称</div>
+                <p></p>
+                <div>银行卡号</div>
+                <p></p>
+            </div>
+            <div >
+                <!-- 提现方式-->
+                <div><input type="radio" value="1" name="deposit">银行卡</div><br/>
+                <div style="width: 800px"> 1、6~8工作日到账，适合较大金额提现<br/>2、手续费0.6%，微信商户收取，平台不收取任何费用</div>
+                <p></p>
+                <div> <select name="bank">
+                    <option value="">中国工商银行</option>
+                    <option value="">中国建设银行</option>
+                    <option value="">中国银行</option>
+                    <option value="">交通银行</option>
+                    <option value="">中国农业银行</option>
+                    <option value="">招商银行</option>
+                    <option value="">中国邮政储蓄银行</option>
+                    <option value="">中国光大银行</option>
+                    <option value="">中国民生银行</option>
+                    <option value="">平安银行</option>
+                    <option value="">浦发银行</option>
+                    <option value="">中信银行</option>
+                    <option value="">兴业银行</option>
+                    <option value="">华夏银行</option>
+                    <option value="">广发银行</option>
+                </select></div>
+                <p></p>
+                <select id="shengs" onchange="setshi(this.value)"></select>
+
+                -<select id="shis" onchange="setxian(this.value)" ></select>
+
+                -<select id="xians" name="url"></select>
+
+
+                <p></p>
+                <!--开户支行名称-->
+                <div><input type="text" name="bankname"></div>
+                <p></p>
+                <!--银行账号-->
+                <div><input type="text" name="ic"></div>
+                <p></p>
+                <br/>
+                <p></p>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</form>
+</body>
+<script>
+    $(function(){
+        setSheng();
+    })
+
+    //三级联动
+    //省
+    function setSheng(){
+        var a =0;
+        $.ajax({
+            url: '../shop/queryArea?id='+a,
+            success:function(data){
+                var thtml='<option value="-1">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    thtml+='<option value="'+data[i].areaId+'">'+data[i].areaName+'</option>';
+                }
+                $("#shengs").html(thtml);
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+    }
+    //市
+    function setshi(id){
+
+        $.ajax({
+            url: '../shop/queryArea?id='+id,
+            success:function(data){
+                var thtml='<option value="-1">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    thtml+='<option value="'+data[i].areaId+'">'+data[i].areaName+'</option>';
+                }
+                $("#shis").html(thtml);
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+    }
+    //县
+    function setxian(id){
+
+        $.ajax({
+            url: '../shop/queryArea?id='+id,
+            success:function(data){
+                var thtml='<option value="-1">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    thtml+='<option value="'+data[i].areaId+'">'+data[i].areaName+'</option>';
+                }
+                $("#xians").html(thtml);
+            },
+            error:function(){
+                alert("后台错误，请使用debug调试");
+            }
+
+        })
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<form id="mongoForm">
+    <input th:type="hidden"   name="id"  th:value="${goods.goodsId}">
+    <div class="form-group">
+        <label>状态</label>
+        <input th:type="text" class="form-control" th:value="${goods.stateName}"  name="stateName">
+    </div>
+    <div class="form-group">
+        <label>提现金额</label>
+        <input th:type="number" class="form-control" th:value="${goods.goodsPrice}"  name="goodsPrice">
+    </div>
+    <div class="form-group">
+        <label>提现账号</label>
+        <input th:type="text" class="form-control" th:value="${goods.bankName}"  name="bankName">
+        <input th:type="text" class="form-control" th:value="${goods.bankcard}"  name="bankcard">
+    </div>
+    <div class="form-group">
+        <label>提现时间</label>
+        <input th:type="date" class="form-control" th:value="${#dates.format(goods.discountTime,'yyyy-MM-dd')}" name="discountTime">
+    </div>
+
+    <div class="form-group">
+        <label>操作人</label>
+        <input th:type="text" class="form-control" th:value="${goods.userName}"  name="userName">
+    </div>
+</form>
