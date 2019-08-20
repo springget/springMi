@@ -42,8 +42,18 @@ public class User   implements Serializable {
     private String petName;//昵称
     private Integer integral;//积分
     private Integer logisticId;//物流id
-
+    private String img;//头像
     private Integer memberName;  //关联member 查询会员表
+
+
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public Integer getMemberName() {
         return memberName;

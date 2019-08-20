@@ -32,6 +32,7 @@
         select * from  t_member m ,t_user u
            <where>
              u.memberId=m.memberId
+                 and m.memberName !=0
                  <if test="keshou != null and keshou != 0 and keshou == 1">
                      and u.userName like '%${shouhu}%'
                 </if>
@@ -41,12 +42,18 @@
             </where>
     </select>
     <update id="updateClient" parameterType="java.util.Map">
-        update t_member m set m.memberTime=date_add(m.memberTime, interval aa day) where m.memberId = #{id}
+        update t_member m set m.memberTime=date_add(m.memberTime, interval #{aa} day) where m.memberId = #{id}
     </update>
 
     <select id="queryUserName" resultType="com.jk.model.User" parameterType="String">
         select * from t_user where userAccount =#{userAccount}
     </select>
+
+    <update id="updateCancel" >
+    update t_member m  set memberName=0 where  memberId=#{id}
+    </update>
+
+
 
 
 </mapper>

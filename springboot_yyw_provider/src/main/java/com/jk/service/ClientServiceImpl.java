@@ -55,5 +55,16 @@ public class ClientServiceImpl implements ClientService{
         return clientDao.queryUserName(userAccount);
     }
 
+    @Override
+    public void updateCancel(Integer id) {
+        clientDao.updateCancel(id);
+    }
+
+    @Override
+    public User queryCoupon(Integer id) {
+        return clientDao.queryCoupon(id);
+    }
+
+
 
 }
