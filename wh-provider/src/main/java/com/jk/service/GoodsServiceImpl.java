@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.mapper.GoodsDao;
+import com.jk.model.Allocation;
 import com.jk.model.Goods;
 import com.jk.model.Tree;
 import com.jk.model.Type;
@@ -52,7 +53,7 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public void addgoods(Goods goods) {
-        if(goods.getGoodsId().equals(null)){
+        if(goods.getGoodsId()==null){
             goodsDao.addgoods(goods);
         }else{
             goodsDao.updGoods(goods);
@@ -78,5 +79,25 @@ public class GoodsServiceImpl implements GoodsService{
     @Override
     public void deleByIdTwo(String id) {
         goodsDao.deleByIdTwo(id);
+    }
+
+    @Override
+    public void putawayOne(Integer id) {
+        goodsDao.putawayOne(id);
+    }
+
+    @Override
+    public void ishot(Integer id) {
+        goodsDao.ishot(id);
+    }
+
+    @Override
+    public void nohot(String id) {
+        goodsDao.nohot(id);
+    }
+
+    @Override
+    public List<Allocation> TypeOne() {
+        return goodsDao.TypeOne();
     }
 }
