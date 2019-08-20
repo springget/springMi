@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.dao.ClientDao;
+import com.jk.model.Coupon;
 import com.jk.model.Member;
 import com.jk.model.User;
 import com.jk.util.PageUtil;
