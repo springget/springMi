@@ -48,5 +48,13 @@
         select * from t_user where userAccount =#{userAccount}
     </select>
 
+    <insert id="addCoupon" parameterType="com.jk.model.Coupon">
+        insert into t_coupon (couponName,couponDate,couponTime,quantity)
+        values(#{couponName},#{couponDate},#{couponTime},#{quantity})
+    </insert>
+
+    <select id="queryCoupon" resultType="com.jk.model.Coupon" parameterType="com.jk.util.ParameUtil">
+        select * from  t_coupon
+    </select>
 
 </mapper>

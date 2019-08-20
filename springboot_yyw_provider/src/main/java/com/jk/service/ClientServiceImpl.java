@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.dao.ClientDao;
+import com.jk.model.Coupon;
 import com.jk.model.Member;
 import com.jk.model.User;
 import com.jk.util.PageUtil;
@@ -53,6 +54,22 @@ public class ClientServiceImpl implements ClientService{
     @Override
     public User queryUserName(String userAccount) {
         return clientDao.queryUserName(userAccount);
+    }
+
+    @Override
+    public void addCoupon(Coupon coupon) {
+        clientDao.addCoupon(coupon);
+    }
+
+    @Override
+    public PageUtil queryCoupon(ParameUtil params) {
+        PageHelper.startPage(params.getPageNumber(), params.getPageSize());
+        List<Coupon> list =  clientDao.queryCoupon(params);
+        PageInfo<Coupon> pageInfo = new PageInfo<>(list);
+        PageUtil pageUtil = new PageUtil((int) pageInfo.getTotal(), params.getPageNumber(), params.getPageSize());
+        pageUtil.setList(list);
+
+        return pageUtil;
     }
 
 

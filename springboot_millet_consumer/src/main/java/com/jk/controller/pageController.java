@@ -172,5 +172,16 @@ public class pageController {
     }
 
 
+    //查询优惠券
+    @RequestMapping("addCoupon")
+    public String addCoupon(){
+        return "html/yyw/addCoupon";
+    }
+
+    //新增优惠卷
+    @RequestMapping("queryCoupon")
+    public String queryCoupon(){
+        return "html/yyw/queryCoupon";
+    }
 
 }

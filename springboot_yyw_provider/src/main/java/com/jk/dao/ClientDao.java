@@ -1,5 +1,6 @@
 package com.jk.dao;
 
+import com.jk.model.Coupon;
 import com.jk.model.Member;
 import com.jk.model.User;
 import com.jk.util.PageUtil;
@@ -20,5 +21,9 @@ public interface ClientDao {
     void updateClient(Map map);
 
     User queryUserName(String userAccount);
+
+    void addCoupon(Coupon coupon);
+
+    List<Coupon> queryCoupon(ParameUtil params);
 }
 

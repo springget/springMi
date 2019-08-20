@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface RolePerMapper {
+
+
+
     int insert(RolePer record);
 
     int insertSelective(RolePer record);
