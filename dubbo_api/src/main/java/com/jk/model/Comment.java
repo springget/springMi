@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.lang.annotation.Documented;
+import java.util.Collection;
 import java.util.Date;
-
+/*@Documented(Collection="Comment")*/
 public class Comment   implements Serializable {
 
     private Integer commentId;     //评论ID
     private String commentInfo;    //评论内容
-
+    private String reply;//回复内容
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -18,6 +20,7 @@ public class Comment   implements Serializable {
     private Integer userId;//用户Id
     private Integer goodsId;//商品Id
     private Integer commentDj;//商品等级 1 好评  2 中评  3 差评
+
     //临时
     private String goodsName; //商品名称
     private String userName;//用户姓名
@@ -84,5 +87,13 @@ public class Comment   implements Serializable {
 
     public void setCommentInfo(String commentInfo) {
         this.commentInfo = commentInfo;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
     }
 }

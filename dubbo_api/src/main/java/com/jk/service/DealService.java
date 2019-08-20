@@ -10,6 +10,7 @@
  */
 package com.jk.service;
 
+import com.jk.model.Comment;
 import com.jk.model.Refund;
 import com.jk.util.PageUtil;
 import com.jk.util.ParameUtil;
@@ -56,4 +57,10 @@ public interface DealService {
     PageUtil queryDd6(ParameUtil param);
 
     PageUtil queryDd7(ParameUtil param);
+
+    Refund findRefundByid(Integer id);
+
+    Comment findCommentByid(Integer id);
+
+    void addComment(Comment comment);
 }
