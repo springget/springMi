@@ -1,5 +1,8 @@
 package com.jk.model;
 
+
+import com.alibaba.fastjson.JSON;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -17,16 +20,25 @@ public class Tree implements Serializable{
 
     private String url;
 
-    //private String state;
+    private JSON state ;
 
     private String description;
 
-   private String  checked;
-    
+   private Boolean checked;
+
     private Map<String, Object> attributes = new HashMap<String, Object>(); // 添加到节点的自定义属性
-   
+
     private List<Tree> nodes; //子节点数据
-    
+
+
+    public JSON getState() {
+        return state;
+    }
+
+    public void setState(JSON state) {
+        this.state = state;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -67,11 +79,11 @@ public class Tree implements Serializable{
         this.url = url == null ? null : url.trim();
     }
 
-    public String getChecked() {
+    public Boolean getChecked() {
         return checked;
     }
 
-    public void setChecked(String checked) {
+    public void setChecked(Boolean checked) {
         this.checked = checked;
     }
 

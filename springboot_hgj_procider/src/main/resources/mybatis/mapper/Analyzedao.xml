@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.AnalyzeDao" >
+<!--  查询所有  -->
+<select id="queryAnaList" resultType="com.jk.model.Goods">
+select g.goodsName as goodsName,o.orderId as orderId,
+ g.goodsPrice as goodsPrice, g.goodsNumber as goodsNumber,
+ g.sales as sales, o.orderTime as orderTime,g.goodsPrice*g.sales as sumPrice
+ from t_goods g,t_order o where g.orderId=o.orderId
+</select>
+<!-- 查询每日 -->
+<select id="queryTodayAnaList" resultType="com.jk.model.Goods">
+SELECT g.goodsName as goodsName,o.orderId as orderId,
+g.goodsPrice as goodsPrice, g.goodsNumber as goodsNumber,
+g.sales as sales, o.orderTime as orderTime,g.goodsPrice*g.sales as sumPrice,
+day(orderTime)
+FROM t_order o,t_goods g where  g.orderId=o.orderId
+GROUP BY(orderTime)
+</select>
+    <!-- 查询每月 -->
+    <select id="queryThirtyAnaList" resultType="com.jk.model.Goods">
+SELECT g.goodsName as goodsName,o.orderId as orderId,
+g.goodsPrice as goodsPrice, g.goodsNumber as goodsNumber,
+g.sales as sales, o.orderTime as orderTime,g.goodsPrice*g.sales as sumPrice,
+month(orderTime)
+FROM t_order o,t_goods g where  g.orderId=o.orderId
+GROUP BY month(orderTime)
+</select>
+
+    <!-- 查询每年 -->
+ <select id="queryYearAnaList" resultType="com.jk.model.Goods">
+SELECT g.goodsName as goodsName,o.orderId as orderId,
+g.goodsPrice as goodsPrice, g.goodsNumber as goodsNumber,
+g.sales as sales, o.orderTime as orderTime,g.goodsPrice*g.sales as sumPrice,
+year(orderTime)
+FROM t_order o,t_goods g where  g.orderId=o.orderId
+GROUP BY year(orderTime)
+</select>
+
+  <!--查询每年的数量  饼状图-->
+    <select id="queryGoodsByYear" resultType="java.util.LinkedHashMap">
+     select count(*) y,date_format(orderTime,'%Y') name from t_goods g, t_order o where g.orderId=o.orderId group by date_format(orderTime,'%Y')
+  </select>
+
+
+    <select id="queryBookByMonth" resultType="java.util.LinkedHashMap">
+      select count(*) count,date_format(orderTime,'%m') month from t_goods g, t_order o where g.orderId=o.orderId group by date_format(orderTime,'%m')
+  </select>
+</mapper>

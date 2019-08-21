@@ -48,13 +48,13 @@
         <tr>
             <td>用户名</td>
             <td>
-                <input type="text" class="form-control" th:value="${list.gname}"  name = "gname">
+                <input type="text" class="form-control" th:value="${list.name}" disabled>
             </td>
         </tr>
         <tr>
             <td>描述</td>
             <td>
-                <textarea class="form-control" th:${list.description}>  </textarea>
+                <input type="text" class="form-control" th:value="${list.description}" disabled>
             </td>
         </tr>
     </table>

@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.jk.dao")
-public class
-SpringbootYywProviderApplication {
+public class SpringbootYywProviderApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootYywProviderApplication.class, args);
