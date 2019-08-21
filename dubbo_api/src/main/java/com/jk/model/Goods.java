@@ -43,6 +43,10 @@ public class Goods implements Serializable {
     private Integer status;  //商品状态 1.出售中 0.仓库中
     private String typeName; //  (type表)类型名称
 
+
+
+    private Double  sumPrice;//总额度
+
     private String userName;//用户姓名
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -57,6 +61,14 @@ public class Goods implements Serializable {
     private Date discountTime;
     private String bankName;
     private String bankcard;
+
+    public Double getSumPrice() {
+        return sumPrice;
+    }
+
+    public void setSumPrice(Double sumPrice) {
+        this.sumPrice = sumPrice;
+    }
 
     public String getUserName() {
         return userName;

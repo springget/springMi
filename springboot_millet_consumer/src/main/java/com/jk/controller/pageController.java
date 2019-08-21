@@ -171,6 +171,10 @@ public class pageController {
         return "html/hgj/addlongShop";
     }
 
-
+    //订单分析
+    @RequestMapping("toAnalyze")
+    public String toAnalyze(){
+        return "html/hgj/toAnalyze";
+    }
 
 }
