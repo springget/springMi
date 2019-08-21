@@ -22,8 +22,7 @@ public interface ClientDao {
     User queryUserName(String userAccount);
 
     void updateCancel(Integer id);
-    @Select(" select * from t_user where userId =#{value} ")
-    User queryCoupon(Integer id);
+
 
     void addCoupon(Coupon coupon);
 
