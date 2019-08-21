@@ -51,6 +51,15 @@ public class Goods implements Serializable {
     private String ishot; //是否热卖  1 热卖 0不
     private String isseckill; //是否秒杀  1 秒杀 0 不
     private Integer allId;  //配置表
+    private Integer audit;  //审核状态   1 审核通过 0 审核中 2 审核失败
+
+    public Integer getAudit() {
+        return audit;
+    }
+
+    public void setAudit(Integer audit) {
+        this.audit = audit;
+    }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -33,8 +33,8 @@
         delete from t_goods where goodsId = #{id}
     </delete>
     <insert id="addgoods" parameterType="com.jk.model.Goods">
-        insert into t_goods (goodsName,goodsNumber,goodsImg,typeId,goodsTime,goodsInfo,goodsPrice,sales,status,ishot,isseckill,allId)
-        values(#{goodsName},#{goodsNumber},#{goodsImg},#{typeId},now(),#{goodsInfo},#{goodsPrice},0,0,0,0,#{allId})
+        insert into t_goods (goodsName,goodsNumber,goodsImg,typeId,goodsTime,goodsInfo,goodsPrice,sales,status,ishot,isseckill,allId,audit)
+        values(#{goodsName},#{goodsNumber},#{goodsImg},#{typeId},now(),#{goodsInfo},#{goodsPrice},0,0,0,0,#{allId},0)
     </insert>
     <select id="findGoodsByid" resultType="com.jk.model.Goods" parameterType="integer">
         select * from t_goods where goodsId =#{id}
@@ -67,4 +67,10 @@
     <select id="TypeOne" resultType="com.jk.model.Allocation">
         select * from t_allocation
     </select>
+    <update id="refuse" parameterType="integer">
+        update t_goods a set a.audit=2 where goodsId = #{id}
+    </update>
+    <update id="pass" parameterType="integer">
+        update t_goods a set a.audit=1 where goodsId = #{id}
+    </update>
 </mapper>

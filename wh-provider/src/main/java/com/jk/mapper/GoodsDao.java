@@ -37,4 +37,8 @@ public interface GoodsDao {
     void nohot(String id);
 
     List<Allocation> TypeOne();
+
+    void refuse(Integer id);
+
+    void pass(Integer id);
 }
