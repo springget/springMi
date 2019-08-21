@@ -1,10 +1,7 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jk.model.Gangwei;
-import com.jk.model.Role;
-import com.jk.model.Tree;
-import com.jk.model.Zhanghao;
+import com.jk.model.*;
 import com.jk.service.DhyService;
 import com.jk.util.DataGridResult;
 import com.jk.util.PageUtil;
@@ -13,6 +10,7 @@ import com.jk.util.TreeNoteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,8 +48,8 @@ public class DhyController {
     @RequestMapping("showXiangQing")
 
     public ModelAndView showXiangQing(Integer id, ModelAndView model){
-        System.err.println(id);
-        Gangwei list = dhyService.showXiangQing(id);
+   /*     System.err.println(id);*/
+        Role list = dhyService.showXiangQing(id);
 
         model.setViewName("html/dhy/showXiangQing");
         model.addObject("list",list);
@@ -62,7 +60,7 @@ public class DhyController {
     @RequestMapping("showXiangQing2")
 
     public ModelAndView showXiangQing2(Integer id, ModelAndView model){
-        System.err.println(id);
+       /* System.err.println(id);*/
         Zhanghao list = dhyService.showXiangQing2(id);
 
         model.setViewName("html/dhy/role");
@@ -100,14 +98,44 @@ public class DhyController {
         dhyService.updateStatus2(id);
     }
 
-    //tree
+   /* //tree
+    @RequestMapping("getAllTree")
+    @ResponseBody
+    public List<Tree> getTreeAll(HttpServletRequest request){
+        List<Tree> list = new ArrayList<>();
+      User user = (User) request.getSession().getAttribute("user");
+        //定义缓存key
+        String key = "tree"+user.getUserId();
+        //判断缓存是否存在
+        if(redisTemplate.hasKey(key)){
+            System.out.println("=====走缓存=======");
+            list = (List<Tree>) redisTemplate.opsForValue().get(key);
+        }else{
+            System.out.println("====走数据库===");
+       *//*     list = dhyService.getTreeAll();*//*
+            list = dhyService.getTreeAll(user.getUserId());
+            //自己调自己
+            list = TreeNoteUtil.getFatherNode(list);
+            redisTemplate.opsForValue().set(key, list);
+            //设置过期时间
+            redisTemplate.expire(key, 10, TimeUnit.MINUTES);
+        }
+        return list;
+
+    }
+*/
     @RequestMapping("getAllTree")
     @ResponseBody
     public List<Tree> getTreeAll(HttpServletRequest request){
 
-        return dhyService.getTreeAll();
+        User user = (User) request.getSession().getAttribute("user");
+
+        List<Tree> list = dhyService.getTreeAll(user.getUserId());
+
+        return list;
 
     }
+
 
 
     @RequestMapping("getPerById")
@@ -136,10 +164,66 @@ public class DhyController {
         return list;
     }
 
+/*
     @RequestMapping("updatePer")
     @ResponseBody
     public void updatePer(Integer[] ids,Integer roleid){
         dhyService.updatePer(ids,roleid);
+    }
+*/
+
+
+
+    //根据 角色id跳转到回显页面
+    @RequestMapping("dhytree")
+    public String  dhytree(Integer roleid, Model model){
+        model.addAttribute("id",roleid);
+        return "html/dhy/dhytree";
+    }
+
+    //根据 角色id查询对应权限
+    @RequestMapping("cxbyridtree")
+    @ResponseBody
+    public List<Tree> cxbyridtree(Integer id){
+        System.out.println(id);
+        return dhyService.querytreebyrid(id,0);
+    }
+
+    //绑定权限
+    @RequestMapping("updatetree")
+    @ResponseBody
+    public void updatetree(Integer[] ids,Integer roleid){
+        dhyService.UpdateTree(ids,roleid);
+    }
+
+    //角色权限
+    @RequestMapping("queryRoleById")
+    public String  queryRoleById(Integer id, Model model,HttpServletRequest request){
+        List<Role> list = dhyService.editrole(id);
+        List<String> list1 = dhyService.queryRoleById(id);
+        System.err.println(list1.get(0));
+        request.getSession().setAttribute("id",list1.get(0));
+        model.addAttribute("id",id);
+        model.addAttribute("list",list);
+        return "html/dhy/dhyrole";
+    }
+
+    @RequestMapping("updateRole2")
+    @ResponseBody
+    public void updateRole(Integer ids,Integer id,HttpServletRequest request) {
+        String roleid = (String)request.getSession().getAttribute("id");
+        int i = Integer.parseInt(roleid);
+        dhyService.updateRoleCount(i,ids);
+        dhyService.updateRole2(ids,id);
+    }
+
+
+
+    @RequestMapping("queryPerById")
+    public String queryPerById(Integer id,Model model){
+        User user= (User) dhyService.queryPerById(id);
+        model.addAttribute("user",user);
+        return "html/dhy/upduser";
     }
 
 

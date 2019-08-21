@@ -1,15 +1,11 @@
 package com.jk.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
-import java.util.Date;
 
 public class Member implements Serializable {
 
     private Integer memberId;  //会员
-    private Integer memberName; //会员  1 初级 2 中级 3 高级
+    private Integer memberName; //会员  0 普通 1 初级 2 中级 3 高级
 /*    @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")*/
     private String memberDate;   //购买时间
@@ -20,8 +16,15 @@ public class Member implements Serializable {
 
     private String userName;//用户姓名    关联User表字段
     private String userPhone;//用户手机号   关联User表字段
+    private String img;//头像 关联User表字段
 
+    public String getImg() {
+        return img;
+    }
 
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getUserName() {
         return userName;

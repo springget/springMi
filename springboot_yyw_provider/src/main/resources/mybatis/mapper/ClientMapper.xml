@@ -41,12 +41,26 @@
             </where>
     </select>
     <update id="updateClient" parameterType="java.util.Map">
-        update t_member m set m.memberTime=date_add(m.memberTime, interval aa day) where m.memberId = #{id}
+        update t_member m set m.memberTime=date_add(m.memberTime, interval #{aa} day) where m.memberId = #{id}
     </update>
 
     <select id="queryUserName" resultType="com.jk.model.User" parameterType="String">
         select * from t_user where userAccount =#{userAccount}
     </select>
 
+    <update id="updateCancel" >
+    update t_member m  set memberName=0 where  memberId=#{id}
+    </update>
+
+
+
+    <insert id="addCoupon" parameterType="com.jk.model.Coupon">
+        insert into t_coupon (couponName,couponDate,couponTime,quantity)
+        values(#{couponName},#{couponDate},#{couponTime},#{quantity})
+    </insert>
+
+    <select id="queryCoupon" resultType="com.jk.model.Coupon" parameterType="com.jk.util.ParameUtil">
+        select * from  t_coupon
+    </select>
 
 </mapper>

@@ -15,6 +15,9 @@ public class pageController {
     @Reference
     private GoodsService goodsService;
 
+    @Reference
+    private com.jk.service.DealService DealService;
+
     //財務管理
     @RequestMapping("tofinance")
     public String touserlist() {

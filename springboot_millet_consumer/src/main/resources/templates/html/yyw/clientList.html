@@ -129,7 +129,13 @@
             },
             columns: [
                 {field: 'checkbox', checkbox: true},  //开启复选框
-                {field: 'userName', title: '客户', width: 300},      //  列    field   代表是 后台  传过来的值
+                {field: 'xxx', title: '客户', width: 300,
+                    formatter:function(value,row,index){
+                        var a="<img src='../js/upload/"+row.img+"' width='40' height='40'>";
+                        a+="<a href='javascript:xiangqing()'>"+row.userName+"</a>";
+                        return a;
+                    }
+                },      //  列    field   代表是 后台  传过来的值
                 {field: 'userPhone', title: '手机号', width: 300},
                 {field: 'memberName', title: '会员', width: 300,
                     formatter:function(value,row,index){
@@ -139,6 +145,8 @@
                             return "中级";
                         }else if (row.memberName==3) {
                             return "高级";
+                        }else if (row.memberName==0) {
+                            return "普通";
                         }
                     }
                 },
@@ -163,6 +171,61 @@
 
     }
 
+
+
+
+    var res;
+    function createAddContent(url) {
+        alert(url);
+        $.ajax({
+            url: url,
+            async: false,
+            success: function (data) {
+                res = data;
+            }
+        });
+        return res;
+    }
+    //新增
+    function addCoupon (id){
+        alert(id)
+        //打开新增弹框
+        bootbox.dialog({
+            title: '兑换优惠券',
+            message: createAddContent("../page/queryCoupon?id="+id),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i>保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+
+                        $.ajax({
+                            url: '../client/addCoupon',
+                            type: 'post',
+                            data: $("#formId").serialize(),
+                            success: function () {
+                                alert("兑换成功");
+                                location.href=location;
+                                //刷新表格
+                            }, error: function () {
+                                alert("积分不足");
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+
+        });
+    }
 </script>
 </body>
 

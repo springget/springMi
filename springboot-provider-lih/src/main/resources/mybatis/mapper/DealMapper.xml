@@ -113,4 +113,9 @@ select * from  t_refund r,t_goods g,t_order o where r.goodsId=g.goodsId and r.or
          select * from t_order o ,t_goods g ,t_user u
         where o.goodsId=g.goodsId  and o.userId=u.userId  and orderStatus=6
   </select>
+
+    <select id="findRefundByid"  resultType="com.jk.model.Refund">
+    select * from  t_refund r,t_goods g,t_order o where r.goodsId=g.goodsId and r.orderId=o.orderId and r.orderId=#{id}
+  </select>
+
 </mapper>
