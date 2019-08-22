@@ -18,7 +18,7 @@ public interface ClientService {
 
     void updateCancel(Integer id);
 
-    User queryCoupon(Integer id);
+
 
 
     void addCoupon(Coupon coupon);

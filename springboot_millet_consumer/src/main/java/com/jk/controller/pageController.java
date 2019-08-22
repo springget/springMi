@@ -3,7 +3,9 @@ package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jk.model.Goods;
+import com.jk.model.Ress;
 import com.jk.service.GoodsService;
+import com.jk.service.RessService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +16,10 @@ public class pageController {
 
     @Reference
     private GoodsService goodsService;
+
+
+    @Reference
+    private RessService ressService;
 
     @Reference
     private com.jk.service.DealService DealService;
@@ -180,4 +186,26 @@ public class pageController {
         return "html/hgj/toAnalyze";
     }
 
+    //订单支付
+    @RequestMapping("toOrderPay")
+    public String toOrderPay(){
+        return "html/hgj/toOrderPay";
+    }
+
+
+    //新增订单地址弹框
+    @RequestMapping("addOrderUrl")
+    public String addOrderUrl(){
+        return "html/hgj/addOrderUrl";
+    }
+
+   //修改地址回显
+    @RequestMapping("addOrderUrls")
+    public ModelAndView addOrderUrls(Integer id){
+        Ress ress = ressService.findRessByid(id);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("html/hgj/updateOrderUrl");
+        mv.addObject("ress",ress);
+        return mv;
+    }
 }
