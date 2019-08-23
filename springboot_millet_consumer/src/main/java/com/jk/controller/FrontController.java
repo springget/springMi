@@ -41,25 +41,8 @@ public class FrontController {
         return "html/qiantai/forget";
     }
 
-    //查询手机
-    @RequestMapping("queryshouji1")
-    @ResponseBody
-    public List<Goods> queryshouji1(Model model){
-        List<Goods> list = new ArrayList<>();
-        String key = "ds1";
-@RequestMapping("front")
-public class FrontController {
 
-    @Reference
-    private FrontService frontService;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
-    @RequestMapping("pxiangQing")
-    public String mi8(Integer id){
-        return "html/qiantai/pxiangQing";
-    }
 
     @RequestMapping("tvVersion")
     @ResponseBody
@@ -80,6 +63,24 @@ public class FrontController {
         return "html/qiantai/txiangQing";
     }
 
+    //查询手机
+    @RequestMapping("queryshouji1")
+    @ResponseBody
+    public List<Goods> queryshouji1(Model model) {
+        List<Goods> list = new ArrayList<>();
+        String key = "ds1";
+        if (redisTemplate.hasKey(key)){
+            list = (List<Goods>) redisTemplate.opsForValue().get(key);
+        }else {
+            list = frontService.queryshouji1();
+            redisTemplate.opsForValue().set(key,list);
+            redisTemplate.expire(key, 10, TimeUnit.MINUTES);
+        }
+
+        return list;
+    }
+
+
     @RequestMapping("queryPhone1")
     @ResponseBody
     public List<Goods> queryPhone1(Model model){
@@ -91,7 +92,6 @@ public class FrontController {
             list = (List<Goods>) redisTemplate.opsForValue().get(key);
 
         }else {
-            list = frontService.queryshouji1();
             list = frontService.queryPhone1();
             redisTemplate.opsForValue().set(key,list);
             redisTemplate.expire(key, 10, TimeUnit.MINUTES);
@@ -111,6 +111,11 @@ public class FrontController {
 
         }else {
             list = frontService.dianshi();
+            redisTemplate.opsForValue().set(key,list);
+            redisTemplate.expire(key, 10, TimeUnit.MINUTES);
+        }
+        return list;
+    }
     @RequestMapping("queryPhone2")
     @ResponseBody
     public List<Goods> queryPhone2(Model model){
@@ -155,23 +160,24 @@ public class FrontController {
     @ResponseBody
     public String loginLuser(Luser luser, HttpServletRequest request){
 
-        //验证账号
-        Luser loginLuser = frontService.loginLuser(luser.getUsername());
+                //验证账号
+                Luser loginLuser = frontService.loginLuser(luser.getUsername());
 
-        if(loginLuser == null){
+                if (loginLuser == null) {
 
-            return "userError";
-        }
-        System.out.println(loginLuser.getPassword());
-        //验证密码
-        if(!loginLuser.getPassword().equals(luser.getPassword())){
+                    return "userError";
+                }
+                System.out.println(loginLuser.getPassword());
+                //验证密码
+                if (!loginLuser.getPassword().equals(luser.getPassword())) {
 
-            return "pwError";
-        }
-        //登录成功
+                    return "pwError";
+                }
+                //登录成功
 
-        request.getSession().setAttribute("luser", loginLuser);
-        return "success";
+                request.getSession().setAttribute("luser", loginLuser);
+                return "success";
+            }
     @RequestMapping("queryPhone3")
     @ResponseBody
     public List<Goods> queryPhone3(Model model){
@@ -245,11 +251,11 @@ public class FrontController {
     }
 
 
-    @RequestMapping("addTv")
+  /*  @RequestMapping("addTv")
     @ResponseBody
     public void addTv(){
 
-    }
+    }*/
 
 
 }

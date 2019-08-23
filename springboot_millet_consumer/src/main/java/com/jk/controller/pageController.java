@@ -2,7 +2,9 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.jk.model.Comment;
 import com.jk.model.Goods;
+import com.jk.model.Refund;
 import com.jk.service.GoodsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -182,8 +184,10 @@ public class pageController {
 
     //查询优惠券
     @RequestMapping("addCoupon")
-    public String addCoupon(){
+    public String addCoupon() {
         return "html/yyw/addCoupon";
+
+    }
     //订单分析
     @RequestMapping("toAnalyze")
     public String toAnalyze(){
@@ -250,4 +254,6 @@ public class pageController {
     public String highcharts(){
         return "html/wh/highcharts";
     }
+
+
 }

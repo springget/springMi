@@ -43,6 +43,7 @@ public class FrontServiceImpl implements FrontService{
     @Override
     public Luser loginLuser(String username) {
         return frontMapper.loginLuser(username);
+    }
     @Override
     public List<Goods> queryPhone1() {
 
