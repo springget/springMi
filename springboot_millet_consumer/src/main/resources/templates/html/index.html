@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>-->
-<html lang = "en">
+<html lang = "en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=1226">
@@ -17,7 +17,284 @@
     <link rel = "stylesheet" href = "../css/index.css">
     <link rel = "stylesheet" href = "../css/wrap.css">
     <link rel = "stylesheet" href = "../css/wrapper.css">
+
+
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../djs/jquery.min.js"></script>
+
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../djs/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../djs/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../djs/treeview/bootstrap-treeview.min.js"></script>
+
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../djs/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../djs/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../djs/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../djs/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../djs/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../djs/fileinput/themes/fa/theme.js"></script>
+
+
 </head>
+<script>
+
+    $(function(){
+
+        xiaomi();
+        redmi();
+        phone1();
+        phone2();
+        phone3();
+        tv1();
+        tv2();
+        tv3();
+    })
+
+
+    function phone1() {
+
+   $.ajax({
+
+            url:"../front/queryPhone1",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = \"../picture/xm8-80.png\"\n" +
+                        "alt = \"\">"+data[i].goodsName+"</a></li>";
+                }
+
+                $("#phone").html(aa);
+
+            }
+
+        })
+    }
+
+
+
+    function phone2() {
+
+        $.ajax({
+
+            url:"../front/queryPhone2",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href = \"../front/mi8\"><img src = \"../picture/xm8-80.png\"\n" +
+                        "alt = \"\">"+data[i].goodsName+"</a></li>";
+                }
+
+                $("#phone2").html(aa);
+
+            }
+
+        })
+    }
+
+    function phone3() {
+
+        $.ajax({
+
+            url:"../front/queryPhone3",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href = \"../front/mi8\"><img src = \"../picture/xm8-80.png\"\n" +
+                        "alt = \"\">"+data[i].goodsName+"</a></li>";
+                }
+
+                $("#phone3").html(aa);
+
+            }
+
+        })
+    }
+
+
+    function tv1() {
+
+        $.ajax({
+
+            url:"../front/queryTv1",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+            /*        alert(data[i].televId)*/
+                    aa += "<li><a href = \"../front/txiangQing?tid="+data[i].televId+"\"><img src = \"../picture/t1.jpg\"\n" +
+                        "alt = \"\">"+data[i].televName+"</a></li>";
+                }
+
+                $("#tv1").html(aa);
+
+            }
+
+        })
+    }
+
+    function tv2() {
+
+        $.ajax({
+
+            url:"../front/queryTv2",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href = \"../front/txiangQing\"><img src = \"../picture/t2.jpg\"\n" +
+                        "alt = \"\">"+data[i].televName+"</a></li>";
+                }
+
+                $("#tv2").html(aa);
+
+            }
+
+        })
+    }
+
+    function tv3() {
+
+        $.ajax({
+
+            url:"../front/queryTv3",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href = \"../front/txiangQing\"><img src = \"../picture/t3.jpg\"\n" +
+                        "alt = \"\">"+data[i].televName+"</a></li>";
+                }
+
+                $("#tv3").html(aa);
+
+            }
+
+        })
+    }
+
+
+    function xiaomi() {
+        $.ajax({
+
+            url:"../front/queryPhone1",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href=''><img src=\"../picture/h1.png\"></a>" +
+                    "      <div class='item-tit'>\n" +
+                    "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
+                    "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                    "    </div>" +
+                    "    </li>";
+                }
+
+                $("#xiaomi").html(aa);
+
+            }
+
+        })
+    }
+
+
+    function redmi() {
+        $.ajax({
+
+            url:"../front/queryPhone2",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
+                        "      <div class='item-tit'>\n" +
+                        "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
+                        "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                        "    </div>" +
+                        "    </li>";
+                }
+
+                $("#redmi").html(aa);
+
+            }
+
+        })
+    }
+
+    function redmi() {
+        $.ajax({
+
+            url:"../front/queryPhone2",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
+                        "      <div class='item-tit'>\n" +
+                        "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
+                        "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                        "    </div>" +
+                        "    </li>";
+                }
+
+                $("#redmi").html(aa);
+
+            }
+
+        })
+    }
+
+/*
+//家电
+    function queryJiadian() {
+        $.ajax({
+            url:"../front/queryJiadian",
+            success:function(data){
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li> <div>\n" +
+                        "        <a href = \"#\"><img src = \"../images/product-1.jpg\" alt = \"\"></a>\n" +
+                        "            </div><h3><a href = \"#\">"+data[i].goodsName+"</a></h3>\n" +
+                        "                    <p class = 'p1'>"+data[i].goodsInfo+"</p>\n" +
+                        "                    <p class = 'p2'>"+data[i].goodsPrice+"</p></li>";
+                }
+                $("#shouji1").html(aa);
+            }
+
+        })
+    }
+*/
+
+
+
+</script>
 <body>
 
 <!--头部广告部分-->
@@ -80,48 +357,16 @@
                         <ul class = 'site-nav-list'>
                             <li><a href = "#">手机 电话卡<i class = 'iconfont icon-fangxiang'></i></a>
                                 <div class = 'children clearfix children-col-4'>
-                                    <ul class = 'children-list-col children-list-col-1 fl'>
+                                    <ul class = 'children-list-col children-list-col-1 fl' id = "phone">
 
-                                        <li><a href = "#"><img src = "../picture/xm8-80.png"
-                                                               alt = ""><span>小米8</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f5.jpg"
-                                                               alt = ""><span>小米8 SE</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f6.jpg"
-                                                               alt = ""><span>小米MIX 2S</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f7.jpg"
-                                                               alt = ""><span>小米Max 3</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f10.jpg"
-                                                               alt = ""><span>小米6X</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f9.jpg"
-                                                               alt = ""><span>黑鲨游戏手机</span></a></li>
+
                                     </ul>
-                                    <ul class = 'children-list-col children-list-col-2 fl'>
-                                        <li><a href = "#"><img src = "../picture/f2.jpg"
-                                                               alt = ""><span>小米MIX 2</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f11.jpg"
-                                                               alt = ""><span>小米Max 2</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f16.jpg"
-                                                               alt = ""><span>红米6pro</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f13.jpg"
-                                                               alt = ""><span>红米6</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f14.jpg"
-                                                               alt = ""><span>红米6A</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f15.jpg"
-                                                               alt = ""><span>红米Note 5</span></a></li>
+                                    <ul class = 'children-list-col children-list-col-2 fl' id = "phone2">
+
+
                                     </ul>
-                                    <ul class = 'children-list-col children-list-col-3 fl'>
-                                        <li><a href = "#"><img src = "../picture/f3.jpg"
-                                                               alt = ""><span>红米S2</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f17.jpg"
-                                                               alt = ""><span>红米5 Plus</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f18.jpg"
-                                                               alt = ""><span>移动4G+专区</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f19.jpg"
-                                                               alt = ""><span>对比手机</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f4.jpg"
-                                                               alt = ""><span>米粉卡 日租卡</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/f8.jpg"
-                                                               alt = ""><span>小米移动 电话卡</span></a></li>
+                                    <ul class = 'children-list-col children-list-col-3 fl' id = "phone3">
+
                                     </ul>
                                     <ul class = 'children-list-col children-list-col-4 fl'>
                                         <li><a href = "#"><img src = "../picture/f12.jpg"
@@ -129,61 +374,27 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href = "#">电视 盒子<i class = 'iconfont icon-fangxiang'></i></a>
+                            <li><a href = "#" >电视 盒子<i class = 'iconfont icon-fangxiang'></i></a>
                                 <div class = 'children clearfix children-col-4 '>
-                                    <ul class = 'children-list-col children-list-col-1 fl'>
-                                        <li><a href = "#"><img src = "../picture/t1.jpg"
-                                                               alt = ""><span>米家激光投影电视</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t2.jpg"
-                                                               alt = ""><span>小米电视4 75英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t3.jpg"
-                                                               alt = ""><span>小米电视4A 32英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t4.jpg"
-                                                               alt = ""><span>小米电视4A 40英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t5.jpg"
-                                                               alt = ""><span>小米电视4A 43英寸青春版</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t6.jpg"
-                                                               alt = ""><span>小米电视4A 49英寸</span></a></li>
+                                    <ul class = 'children-list-col children-list-col-1 fl' id = "tv1">
+                    <!--                    <li><a href = "#"><img src = "../picture/t1.jpg"
+                                                               alt = ""><span>米家激光投影电视</span></a></li>-->
+
                                     </ul>
-                                    <ul class = 'children-list-col children-list-col-2 fl'>
-                                        <li><a href = "#"><img src = "../picture/t7.jpg"
-                                                               alt = ""><span>小米电视4A 50英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t8.jpg"
-                                                               alt = ""><span>小米电视4A 55英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t9.jpg"
-                                                               alt = ""><span>小米电视4A 65英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t10.jpg"
-                                                               alt = ""><span>小米电视4X 55英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t11.jpg"
-                                                               alt = ""><span>小米电视4C 32英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t12.jpg"
-                                                               alt = ""><span>小米电视4C 43英寸</span></a></li>
+                                    <ul class = 'children-list-col children-list-col-2 fl' id = "tv2">
+                                 <!--       <li><a href = "#"><img src = "../picture/t7.jpg"
+                                                               alt = ""><span>小米电视4A 50英寸</span></a></li>-->
+
                                     </ul>
-                                    <ul class = 'children-list-col children-list-col-3 fl'>
-                                        <li><a href = "#"><img src = "../picture/t13.jpg"
-                                                               alt = ""><span>小米电视4C 50英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t14.jpg"
-                                                               alt = ""><span>小米电视4C 55英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t15.jpg"
-                                                               alt = ""><span>小米电视 体育版</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t16.jpg"
-                                                               alt = ""><span>小米电视4 49英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t17.jpg"
-                                                               alt = ""><span>小米电视4 55英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t18.jpg"
-                                                               alt = ""><span>小米电视4 65英寸</span></a></li>
+                                    <ul class = 'children-list-col children-list-col-3 fl' id = "tv3">
+                              <!--          <li><a href = "#"><img src = "../picture/t13.jpg"
+                                                               alt = ""><span>小米电视4C 50英寸</span></a></li>-->
+
                                     </ul>
                                     <ul class = 'children-list-col children-list-col-4 fl'>
-                                        <li><a href = "#"><img src = "../picture/t19.jpg"
-                                                               alt = ""><span>小米电视4S 55英寸曲面</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t20.jpg"
-                                                               alt = ""><span>小米电视4S 55英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t21.jpg"
-                                                               alt = ""><span>小米电视4S 50英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t22.jpg"
-                                                               alt = ""><span>小米电视4S 43英寸</span></a></li>
-                                        <li><a href = "#"><img src = "../picture/t23.jpg"
-                                                               alt = ""><span>小米盒子</span></a></li>
+                        <!--                <li><a href = "#"><img src = "../picture/t19.jpg"
+                                                               alt = ""><span>小米电视4S 55英寸曲面</span></a></li>-->
+
                                     </ul>
                                 </div>
                             </li>
@@ -484,85 +695,15 @@
 
                 <li class='nav-item'><a href="#">小米手机</a>
                     <div class='item-children w1226 item1 no-show'>
-                        <ul class='children-list'>
-                            <li><a href="#"><img src="../picture/h1.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/h2.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/h3.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/h4.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/h5.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#" class='no-after'><img src="../picture/h5.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
+                        <ul class='children-list' id = "xiaomi">
+
                         </ul>
                     </div>
                 </li>
                 <li class='nav-item'><a href="#">红米</a>
                     <div class='item-children item2 w1226 no-show'>
-                        <ul class='children-list'>
-                            <li><a href="#"><img src="../picture/hm1.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/hm2.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/hm3.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/hm4.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/hm5.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#" class='no-after'><img src="../picture/hm6.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米8</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
+                        <ul class='children-list' id = "redmi">
+
                         </ul>
                     </div>
                 </li>

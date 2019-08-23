@@ -203,7 +203,7 @@ public class DhyController {
     public String  queryRoleById(Integer id, Model model,HttpServletRequest request){
         List<Role> list = dhyService.editrole(id);
         List<String> list1 = dhyService.queryRoleById(id);
-        System.err.println(list1.get(0));
+    //    System.err.println(list1.get(0));
         request.getSession().setAttribute("id",list1.get(0));
         model.addAttribute("id",id);
         model.addAttribute("list",list);
