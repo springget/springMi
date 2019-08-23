@@ -132,6 +132,8 @@ public class DhyController {
 
         List<Tree> list = dhyService.getTreeAll(user.getUserId());
 
+        list = TreeNoteUtil.getFatherNode(list);
+
         return list;
 
     }

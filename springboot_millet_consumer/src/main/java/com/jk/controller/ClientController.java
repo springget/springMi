@@ -59,20 +59,20 @@ public class ClientController {
         clientService.updateClient(aa,id);
     }
 
-    //获取图片验证码
+   /* //获取图片验证码
     @RequestMapping("getCode")
     public void getCode(HttpServletRequest request, HttpServletResponse response){
 
         CheckImgUtil.buildCheckImg(request, response);
 
     }
-
+*/
     //登陆
     @RequestMapping("loginUser")
 	@ResponseBody
-	public String login(User user,String code,HttpServletRequest request){
+	public String login(User user,HttpServletRequest request){
 
-		//验证验证码
+		/*//验证验证码
 		//从session中取出验证码
         System.out.println(user.getUserAccount());
 		String realCode = request.getSession().getAttribute("checkcode").toString();
@@ -80,7 +80,7 @@ public class ClientController {
 		if(!realCode.toLowerCase().equals(code.toLowerCase())){
 
 			return "codeError";
-		}
+		}*/
 		//验证账号
 		User loginUser = clientService.queryUserName(user.getUserAccount());
 

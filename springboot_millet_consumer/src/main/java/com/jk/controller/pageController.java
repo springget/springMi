@@ -45,6 +45,7 @@ public class pageController {
         return "html/wh/addgoods";
     }
 
+
     @RequestMapping("edit")
     public ModelAndView edit(Integer id){
         Goods goods = goodsService.findGoodsByid(id);
@@ -116,12 +117,14 @@ public class pageController {
         return "html/dhy/zhangHao";
     }
 
+    //查看会员
     @RequestMapping("clientList")
     public String clientList() {
         return "html/yyw/clientList";
     }
 
 
+    //查看
     @RequestMapping("memberList")
     public String memberList() {
         return "html/yyw/memberList";
@@ -135,7 +138,7 @@ public class pageController {
 
 
 
-
+    //修改积分
     @RequestMapping("updPresented")
     public ModelAndView updPresented(String id){
         System.out.println(id);
@@ -175,7 +178,6 @@ public class pageController {
     }
 
 
-<<<<<<< HEAD
     //查询优惠券
     @RequestMapping("addCoupon")
     public String addCoupon(){
@@ -184,40 +186,42 @@ public class pageController {
 
     //新增优惠卷
     @RequestMapping("queryCoupon")
-    public String queryCoupon(){
+    public String queryCoupon() {
         return "html/yyw/queryCoupon";
-=======
-//退款审核
-@RequestMapping("toUpdate")
-public ModelAndView toUpdate(Integer id){
-    Refund refund = DealService.findRefundByid(id);
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("html/lih/check");
-    mv.addObject("refund",refund);
-    return mv;
-}
+    }
+    //退款审核
+        @RequestMapping("toUpdate")
+        public ModelAndView toUpdate(Integer id){
+            Refund refund = DealService.findRefundByid(id);
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("html/lih/check");
+            mv.addObject("refund",refund);
+            return mv;
+        }
 
 //updateComment 回复
-@RequestMapping("updateComment")
-public ModelAndView updateComment(Integer id){
-    System.out.println(id);
-   Comment comment = DealService.findCommentByid(id);
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("/html/lih/reply");
-    mv.addObject("comment",comment);
+        @RequestMapping("updateComment")
+        public ModelAndView updateComment(Integer id){
+            System.out.println(id);
+            Comment comment = DealService.findCommentByid(id);
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("/html/lih/reply");
+            mv.addObject("comment",comment);
 
-    return mv;
-}
-    //轮播图
-    @RequestMapping("sss")
-    public String sss() {
-        return "html/lih/sss";
-    }
-    //轮播图
-    @RequestMapping("aaa")
-    public String aaa() {
-        return "html/lih/aaa";
->>>>>>> 67fdb01b614f3440787d6da03d1404d1c736ad68
-    }
+            return mv;
+        }
+        //轮播图
+        @RequestMapping("sss")
+        public String sss() {
+            return "html/lih/sss";
+        }
+        //轮播图
+        @RequestMapping("aaa")
+        public String aaa() {
+            return "html/lih/aaa";
+        }
+
+
+
 
 }
