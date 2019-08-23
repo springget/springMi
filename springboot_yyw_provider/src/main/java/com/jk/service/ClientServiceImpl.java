@@ -61,6 +61,9 @@ public class ClientServiceImpl implements ClientService{
         clientDao.updateCancel(id);
     }
 
+
+
+
     @Override
     public void addCoupon(Coupon coupon) {
         clientDao.addCoupon(coupon);

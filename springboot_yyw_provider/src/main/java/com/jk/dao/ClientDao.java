@@ -23,6 +23,7 @@ public interface ClientDao {
 
     void updateCancel(Integer id);
 
+
     void addCoupon(Coupon coupon);
 
     List<Coupon> queryCoupon(ParameUtil params);

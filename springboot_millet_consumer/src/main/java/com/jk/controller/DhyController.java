@@ -131,7 +131,11 @@ public class DhyController {
         User user = (User) request.getSession().getAttribute("user");
 
         List<Tree> list = dhyService.getTreeAll(user.getUserId());
+        //自己调自己
         list = TreeNoteUtil.getFatherNode(list);
+
+        list = TreeNoteUtil.getFatherNode(list);
+
         return list;
 
     }
@@ -201,7 +205,7 @@ public class DhyController {
     public String  queryRoleById(Integer id, Model model,HttpServletRequest request){
         List<Role> list = dhyService.editrole(id);
         List<String> list1 = dhyService.queryRoleById(id);
-        System.err.println(list1.get(0));
+    //    System.err.println(list1.get(0));
         request.getSession().setAttribute("id",list1.get(0));
         model.addAttribute("id",id);
         model.addAttribute("list",list);
