@@ -42,7 +42,7 @@ public class Goods implements Serializable {
     private Integer sales;  //总销量
     private Integer status;  //商品状态 1.出售中 0.仓库中
     private String typeName; //  (type表)类型名称
-
+    private Integer goodsLike;  // 1.喜欢 0.正常
 
 
     private Double  sumPrice;//总额度

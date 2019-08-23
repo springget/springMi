@@ -110,4 +110,10 @@ public class GoodsServiceImpl implements GoodsService{
     public void pass(Integer id) {
         goodsDao.pass(id);
     }
+
+    @Override
+    public List<Goods> queryHotGoods() {
+        return goodsDao.queryHotGoods();
+    }
+
 }

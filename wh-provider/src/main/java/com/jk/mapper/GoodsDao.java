@@ -41,4 +41,8 @@ public interface GoodsDao {
     void refuse(Integer id);
 
     void pass(Integer id);
+
+    List<Goods> queryHot();
+
+    List<Goods> queryHotGoods();
 }

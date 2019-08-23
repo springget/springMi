@@ -204,10 +204,17 @@
                 },
                 {field: 'xxx', title: '操作', width: 350,
                     formatter:function(value,row,index){
-                        return "<a href='JavaScript:edit("+row.goodsId+")'>编辑</a>                <a href='JavaScript:putawayOne("+row.goodsId+")'>上架</a>                <a href='JavaScript:ishot("+row.goodsId+")'>热卖</a>                <a href='JavaScript:refuse("+row.goodsId+")'>审核拒绝</a>                <a href='JavaScript:pass("+row.goodsId+")'>审核通过</a>                <a href='JavaScript:expand("+row.goodsId+")'>秒杀</a>";
+                        return "<a href='JavaScript:edit("+row.goodsId+")'>编辑</a>                <a href='JavaScript:putawayOne("+row.goodsId+")'>上架</a>                <a href='JavaScript:ishot("+row.goodsId+")'>热卖</a>                <a href='JavaScript:refuse("+row.goodsId+")'>审核拒绝</a>                <a href='JavaScript:pass("+row.goodsId+")'>审核通过</a>                <a href='JavaScript:seckill("+row.goodsId+")'>秒杀</a>";
                     }
                 }
             ]
+        });
+    }
+    function seckill(id){
+        //打开秒杀弹框
+        bootbox.dialog({
+            title: '设置秒杀',
+            message: createAddContent("../page/setSeckill?id="+id),
         });
     }
     function refuse(id){

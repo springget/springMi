@@ -40,4 +40,6 @@ public interface GoodsService {
     void refuse(Integer id);
 
     void pass(Integer id);
+
+    List<Goods> queryHotGoods();
 }

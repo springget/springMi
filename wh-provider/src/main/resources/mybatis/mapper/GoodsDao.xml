@@ -73,4 +73,7 @@
     <update id="pass" parameterType="integer">
         update t_goods a set a.audit=1 where goodsId = #{id}
     </update>
+    <select id="queryHotGoods" resultType="com.jk.model.Goods">
+        select * from t_goods a where a.ishot = 1
+    </select>
 </mapper>

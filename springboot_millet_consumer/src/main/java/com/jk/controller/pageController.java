@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("page")
 public class pageController {
@@ -60,14 +62,6 @@ public class pageController {
     public String main(){
         return "html/index";
     }
-
-
-
-
-
-
-
-
     //订单管理
    /* @RequestMapping("deal")
     public String deal(Integer id) {
@@ -135,7 +129,6 @@ public class pageController {
 
     @RequestMapping("updPresented")
     public ModelAndView updPresented(String id){
-        System.out.println(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("html/yyw/updPresented");
         mv.addObject("order",id);
@@ -180,4 +173,24 @@ public class pageController {
         return "html/hgj/toAnalyze";
     }
 
+    //秒杀回显
+    @RequestMapping("setSeckill")
+    public ModelAndView setSeckill(Integer id,HttpServletRequest request){
+        Goods goods = goodsService.findGoodsByid(id);
+        request.getSession().setAttribute("goods", goods);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("html/wh/seckill");
+        mv.addObject("goods",goods);
+        return mv;
+    }
+    // 个人中心
+    @RequestMapping("persion")
+    public String persion(){
+        return "html/wh/persion";
+    }
+    // 收益明细
+    @RequestMapping("highcharts")
+    public String highcharts(){
+        return "html/wh/highcharts";
+    }
 }

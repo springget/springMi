@@ -62,12 +62,6 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public User queryCoupon(Integer id) {
-        return clientDao.queryCoupon(id);
-    }
-
-
-    @Override
     public void addCoupon(Coupon coupon) {
         clientDao.addCoupon(coupon);
     }

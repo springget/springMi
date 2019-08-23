@@ -131,7 +131,7 @@ public class DhyController {
         User user = (User) request.getSession().getAttribute("user");
 
         List<Tree> list = dhyService.getTreeAll(user.getUserId());
-
+        list = TreeNoteUtil.getFatherNode(list);
         return list;
 
     }

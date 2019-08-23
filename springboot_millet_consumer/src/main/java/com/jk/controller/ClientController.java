@@ -65,10 +65,8 @@ public class ClientController {
     @RequestMapping("loginUser")
 	@ResponseBody
 	public String login(User user,String code,HttpServletRequest request){
-
 		//验证验证码
 		//从session中取出验证码
-        System.out.println(user.getUserAccount());
 		String realCode = request.getSession().getAttribute("checkcode").toString();
 		//校验验证码
 		if(!realCode.toLowerCase().equals(code.toLowerCase())){
@@ -78,11 +76,10 @@ public class ClientController {
 		//验证账号
 		User loginUser = clientService.queryUserName(user.getUserAccount());
 
-		if(loginUser == null){
+		if(loginUser==null){
 
 			return "userError";
 		}
-        System.out.println(loginUser.getUserPassword());
 		//验证密码
 		if(!loginUser.getUserPassword().equals(user.getUserPassword())){
 
