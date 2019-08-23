@@ -57,6 +57,14 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
+    public void updateCancel(Integer id) {
+        clientDao.updateCancel(id);
+    }
+
+
+
+
+    @Override
     public void addCoupon(Coupon coupon) {
         clientDao.addCoupon(coupon);
     }

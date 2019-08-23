@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body>
+<form role="form" id="formId">
+    <input th:value="${ress.ressid}" name="ressid" type="hidden">
+    <div class="form-group">
+        <label>收件人</label>
+        <input type="text" th:value="${ress.ressusername}" class="form-control" name="ressusername" placeholder="收件人"/>
+    </div>
+
+    <div class="form-group">
+        <label>联系方式</label>:
+        <input type="text" th:value="${ress.ressuserPhone}" class="form-control" name="ressuserPhone" placeholder="联系方式"/>
+    </div>
+    <div class="form-group">
+        <label>地址名称</label>
+        <input type="text" th:value="${ress.ressname}" class="form-control" name="ressname" placeholder="地址名称"/>
+    </div>
+    <div class="form-group">
+        <label>编码</label>:
+        <input type="text" th:value="${ress.resssite}" class="form-control" name="resssite" placeholder="编码"/>
+    </div>
+    <div class="form-group">
+        <label>标签</label>:
+        <input type="text" th:value="${ress.resslabel}" class="form-control" name="resslabel" placeholder="标签"/>
+    </div>
+
+
+</form>
+</body>
+
+</html>

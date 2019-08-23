@@ -25,11 +25,9 @@ public class Order   implements Serializable {
 
     private Double  preferentialMoney;//优惠
 
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date orderTime;//订单时间
-
 
 //临时
     private String goodsName; //商品名称
@@ -38,10 +36,9 @@ public class Order   implements Serializable {
 
     private Double fastMoney;//快递费
 
-
     private Integer userId;//用户Id
 
-    private Integer orderStatus;//交易状态 0 全部  1 待付款 2 代发货 3 已发货 4已完成 5已关闭 6退款中
+    private Integer orderStatus;//交易状态 0 全部  1 待支付 2 代发货 3 已发货 4已完成 5已关闭 6退款中
 
     private String userName;//用户姓名
 

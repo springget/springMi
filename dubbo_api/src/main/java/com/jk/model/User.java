@@ -35,6 +35,7 @@ public class User   implements Serializable {
     private Integer goodsId;//商品id
     private Integer userPhone;//用户手机号
     private String address;//地址
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date longinTime;//登陆时间
@@ -42,8 +43,19 @@ public class User   implements Serializable {
     private String petName;//昵称
     private Integer integral;//积分
     private Integer logisticId;//物流id
-
+    private String img;//头像
     private Integer memberName;  //关联member 查询会员表
+
+
+
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public Integer getMemberName() {
         return memberName;

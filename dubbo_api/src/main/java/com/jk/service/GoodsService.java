@@ -36,4 +36,10 @@ public interface GoodsService {
     void nohot(String id);
 
     List<Allocation> TypeOne();
+
+    void refuse(Integer id);
+
+    void pass(Integer id);
+
+    List<Goods> queryHotGoods();
 }

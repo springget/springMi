@@ -2,14 +2,13 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jk.model.Comment;
 import com.jk.model.Goods;
-import com.jk.model.Refund;
 import com.jk.service.GoodsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("page")
@@ -166,6 +165,9 @@ public class pageController {
         return "html/lih/deal";
     }
 
+
+
+
     //店铺管理
     @RequestMapping("toaddshop")
     public String toAddShop(){
@@ -182,6 +184,10 @@ public class pageController {
     @RequestMapping("addCoupon")
     public String addCoupon(){
         return "html/yyw/addCoupon";
+    //订单分析
+    @RequestMapping("toAnalyze")
+    public String toAnalyze(){
+        return "html/hgj/toAnalyze";
     }
 
     //新增优惠卷
@@ -224,4 +230,24 @@ public class pageController {
 
 
 
+    //秒杀回显
+    @RequestMapping("setSeckill")
+    public ModelAndView setSeckill(Integer id,HttpServletRequest request){
+        Goods goods = goodsService.findGoodsByid(id);
+        request.getSession().setAttribute("goods", goods);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("html/wh/seckill");
+        mv.addObject("goods",goods);
+        return mv;
+    }
+    // 个人中心
+    @RequestMapping("persion")
+    public String persion(){
+        return "html/wh/persion";
+    }
+    // 收益明细
+    @RequestMapping("highcharts")
+    public String highcharts(){
+        return "html/wh/highcharts";
+    }
 }

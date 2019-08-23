@@ -1,0 +1,288 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../js/highcharts/code/highcharts.js" ></script>
+
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body>
+<!--  表格 -->
+<div id="toolbar">
+</div>
+<div>
+    <center>
+
+        <table>
+            <tr>
+                <td><div id="container2" style="min-width: 300px; height: 300px; max-width: 450px; margin: 0 auto"></div></td>
+                <td><div id="container3" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div></td>
+                <td>
+                    <!--全部数据+折线图-->
+                    <table id="AnaTable">
+                        <center><font color="red" size="5px">订单分析数据---全部概览</font></center>
+                    </table>
+
+                    <table id="AnaTodayTable">
+                        <center><font color="green" size="4px">订单分析今日数据全部概览</font></center>
+                    </table>
+
+                    <table id="AnaYesterTable">
+                        <center><font color="green" size="4px">订单分析每月数据全部概览</font></center>
+                    </table>
+
+                    <table id="AnaSevenTable">
+                        <center><font color="green" size="4px">商品分析每年数据全部概览</font></center>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+    </center>
+</div>
+
+</body>
+<script>
+    $(function(){
+        initDataAna();
+        initDataAnaToday();
+        initDataAnaThirty();
+        initDatayearThirty();
+        binzhuangtu();
+        pic2();
+    });
+
+    //所有
+    function initDataAna(){
+        $('#AnaTable').bootstrapTable({
+            url:'../analyze/queryAnaList',
+            toolbar:'#toolbar',
+            pagination:false, //是否展示分页
+            pageList:[2, 4, 6, 50],//分页组件
+            pageNumber:1,
+            pageSize:2,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,//斑马线
+
+            columns:[
+                {field:'goodsName',title:'商品名称',align:'center'},
+                {field:'orderId',title:'订单号',align:'center'},
+                {field:'goodsPrice',title:'商品价格',align:'center'},
+                {field:'goodsNumber',title:'订单数量',align:'center'},
+                {field:'sales',title:'订单销量',align:'center'},
+                {field:'orderTime',title:'订单时间',align:'center'},
+                {field:'sumPrice',title:'总额度',align:'center'}
+
+            ]
+        });
+
+
+    }
+    //每天
+    function initDataAnaToday(){
+        $('#AnaTodayTable').bootstrapTable({
+            url:'../analyze/queryTodayAnaList',
+            toolbar:'#toolbar',
+            pagination:false, //是否展示分页
+            pageList:[2, 4, 6, 50],//分页组件
+            pageNumber:1,
+            pageSize:2,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,//斑马线
+
+            columns:[
+
+                {field:'goodsName',title:'商品名称',align:'center'},
+                {field:'orderId',title:'订单号',align:'center'},
+                {field:'goodsPrice',title:'商品价格',align:'center'},
+                {field:'goodsNumber',title:'订单数量',align:'center'},
+                {field:'sales',title:'订单销量',align:'center'},
+                {field:'orderTime',title:'订单时间',align:'center'},
+                {field:'sumPrice',title:'总额度',align:'center'}
+            ]
+        });
+
+    }
+
+    //每月
+    function initDataAnaThirty(){
+        $('#AnaYesterTable').bootstrapTable({
+            url:'../analyze/queryThirtyAnaList',
+            toolbar:'#toolbar',
+            pagination:false, //是否展示分页
+            pageList:[2, 4, 6, 50],//分页组件
+            pageNumber:1,
+            pageSize:2,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,//斑马线
+
+            columns:[
+
+                {field:'goodsName',title:'商品名称',align:'center'},
+                {field:'orderId',title:'订单号',align:'center'},
+                {field:'goodsPrice',title:'商品价格',align:'center'},
+                {field:'goodsNumber',title:'订单数量',align:'center'},
+                {field:'sales',title:'订单销量',align:'center'},
+                {field:'orderTime',title:'订单时间',align:'center'},
+                {field:'sumPrice',title:'总额度',align:'center'}
+
+            ]
+        });
+
+    }
+    //每年
+    function initDatayearThirty(){
+        $('#AnaSevenTable').bootstrapTable({
+            url:'../analyze/queryYearAnaList',
+            toolbar:'#toolbar',
+            pagination:false, //是否展示分页
+            pageList:[2, 4, 6, 50],//分页组件
+            pageNumber:1,
+            pageSize:2,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,//斑马线
+
+            columns:[
+
+                {field:'goodsName',title:'商品名称',align:'center'},
+                {field:'orderId',title:'订单号',align:'center'},
+                {field:'goodsPrice',title:'商品价格',align:'center'},
+                {field:'goodsNumber',title:'订单数量',align:'center'},
+                {field:'sales',title:'订单销量',align:'center'},
+                {field:'orderTime',title:'订单时间',align:'center'},
+                {field:'sumPrice',title:'总额度',align:'center'}
+
+            ]
+        });
+
+    }
+
+    function binzhuangtu(){
+        $.ajax({
+            url:'../analyze/queryGoodsByYear',
+            type:'post',
+            dataType:'json',
+            success:function(data){
+             Highcharts.chart('container2', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: '订单每年数量比例'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: '数量',
+                        colorByPoint: true,
+                        data: data,
+                    }]
+                });
+
+            },
+            error:function(){
+                alert(".....加载数据图失败")
+            }
+        })
+
+    }
+    function pic2(){
+        $.ajax({
+            url:"../analyze/queryBookByMonth",
+            type:"post",
+            dataType:"json",
+            success:function(data){
+                Highcharts.chart('container3', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '各月份订单数量'
+                    },
+                    xAxis: {
+                        categories: data.month,
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: '数量'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '数量',
+                        data: data.count
+                    }]
+                });
+            },error:function () {
+                alert("查询失败");
+            }
+        })
+    }
+
+</script>
+
+</html>

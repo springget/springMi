@@ -145,7 +145,6 @@
             },
             columns: [
                 {field: 'checkbox', checkbox: true},  //开启复选框
-                {field: 'goodsId', title: '商品ID', width: 50},
                 {field: 'goodsImg', title: '商品图片', width: 300,
                     formatter:function(value,row,index){
                         return "<img src='"+value+"' width='50' height='50'>";
@@ -192,12 +191,48 @@
                         }
                     }
                 },
+                {field: 'audit', title: '审核状态', width: 300,
+                    formatter:function(value,row,index){
+                        if(value==0){
+                            return "审核中";
+                        }else if(value==1){
+                            return "审核通过";
+                        }else if(value==2){
+                            return "审核拒绝";
+                        }
+                    }
+                },
                 {field: 'xxx', title: '操作', width: 350,
                     formatter:function(value,row,index){
-                        return "<a href='JavaScript:edit("+row.goodsId+")'>编辑</a>                <a href='JavaScript:putawayOne("+row.goodsId+")'>上架</a>                <a href='JavaScript:ishot("+row.goodsId+")'>热卖</a>                <a href='JavaScript:expand("+row.goodsId+")'>秒杀</a>";
+                        return "<a href='JavaScript:edit("+row.goodsId+")'>编辑</a>                <a href='JavaScript:putawayOne("+row.goodsId+")'>上架</a>                <a href='JavaScript:ishot("+row.goodsId+")'>热卖</a>                <a href='JavaScript:refuse("+row.goodsId+")'>审核拒绝</a>                <a href='JavaScript:pass("+row.goodsId+")'>审核通过</a>                <a href='JavaScript:seckill("+row.goodsId+")'>秒杀</a>";
                     }
                 }
             ]
+        });
+    }
+    function seckill(id){
+        //打开秒杀弹框
+        bootbox.dialog({
+            title: '设置秒杀',
+            message: createAddContent("../page/setSeckill?id="+id),
+        });
+    }
+    function refuse(id){
+        $.ajax({
+            url: '../goods/refuse',
+            data: {id:id},
+            success: function () {
+                $("#dataGrid").bootstrapTable("refresh");
+            }
+        });
+    }
+    function pass(id){
+        $.ajax({
+            url: '../goods/pass',
+            data: {id:id},
+            success: function () {
+                $("#dataGrid").bootstrapTable("refresh");
+            }
         });
     }
     function ishot(id){

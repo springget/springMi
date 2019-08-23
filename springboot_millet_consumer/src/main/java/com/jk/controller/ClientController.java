@@ -100,6 +100,13 @@ public class ClientController {
 		return "success";
 	}
 
+	@RequestMapping("updateCancel")
+	@ResponseBody
+    public void updateCancel(Integer id) {
+        clientService.updateCancel(id);
+    }
+
+
 	@RequestMapping("addCoupon")
     @ResponseBody
     public void addCoupon(Coupon coupon){

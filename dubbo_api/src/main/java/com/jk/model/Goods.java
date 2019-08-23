@@ -42,6 +42,11 @@ public class Goods implements Serializable {
     private Integer sales;  //总销量
     private Integer status;  //商品状态 1.出售中 0.仓库中
     private String typeName; //  (type表)类型名称
+    private Integer goodsLike;  // 1.喜欢 0.正常
+
+
+    private Double  sumPrice;//总额度
+
     private String userName;//用户姓名
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -54,6 +59,15 @@ public class Goods implements Serializable {
     private String edition;  //版本
     private Integer colorId;  //颜色表
 
+    private Integer audit;  //审核状态   1 审核通过 0 审核中 2 审核失败
+
+    public Integer getAudit() {
+        return audit;
+    }
+
+    public void setAudit(Integer audit) {
+        this.audit = audit;
+    }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -204,6 +218,14 @@ public class Goods implements Serializable {
 
     public void setAllId(Integer allId) {
         this.allId = allId;
+    }
+
+    public Double getSumPrice() {
+        return sumPrice;
+    }
+
+    public void setSumPrice(Double sumPrice) {
+        this.sumPrice = sumPrice;
     }
 
     public String getUserName() {

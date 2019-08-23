@@ -1,0 +1,431 @@
+<html xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+
+    <!--css-->
+    <link rel="stylesheet" type="text/css" href="../font/iconfont/iconfont.css" th:href="@{../icons/favicon.ico}">
+    <link rel="stylesheet" href="../css/normalize.css" th:href="@{../css/normalize.css}">
+    <link rel="stylesheet" href="../css/reset.css" th:href="@{../css/reset.css}">
+    <link rel='stylesheet' href="../css/common.css" th:href="@{../css/common.css}">
+    <link rel="stylesheet" href="../css/index.css" th:href="@{../css/index.css}">
+    <link rel="stylesheet" href="../css/wrapper.css" th:href="@{../css/wrapper.css}">
+    <link rel="stylesheet" href="../css/is-visible.css" th:href="@{../css/is-visible.css}">
+    <link rel="stylesheet" href="../css/tv.css" th:href="@{../css/tv.css}">
+
+ <!--<link rel="stylesheet" type="text/css" href="../css/yemian/shoppingCart.css" th:href="@{../css/yemian/shoppingCart.css}">
+    <script type="text/javascript" src="../js/common/jquery-3.1.1.min.js"   th:href="@{../js/common/jquery-3.1.1.min.js}"></script>-->
+
+</head>
+<body>
+<div class="site-header site-mini-header" style="border-bottom:2px solid red">
+    <div class="container" >
+
+        <div class="header-title" id="J_miniHeaderTitle"><h2>确认订单</h2></div>
+        <div class="topbar-info" id="J_userInfo"><span class="user"><a rel="nofollow" class="user-name" href="https://my.mi.com/portal" target="_blank"><i class="iconfont"></i></a><ul class="user-menu" style="display: none;"><li><a rel="nofollow" href="https://my.mi.com/portal" target="_blank">个人中心</a></li><li><a rel="nofollow" href="https://order.mi.com/user/comment" target="_blank">评价晒单</a></li><li><a rel="nofollow" href="https://order.mi.com/user/favorite" target="_blank">我的喜欢</a></li><li><a rel="nofollow" href="https://account.xiaomi.com/" target="_blank">小米帐号</a></li><li><a rel="nofollow" href="https://order.mi.com/site/logout">退出登录</a></li></ul></span><span class="sep">|</span><a rel="nofollow" class="link link-order" href="https://static.mi.com/order/" target="_blank">我的订单</a></div>
+    </div>
+</div>
+<!-- .site-mini-header END -->
+
+<div class="page-main" style="border-bottom:2px solid red">
+
+    <!-- 春节发货公告 END-->
+    <div class="container">
+        <div class="checkout-box">
+            <div class="section section-address">
+                <div class="section-header clearfix">
+                    <h3 class="title">收货地址</h3>
+
+                    <div class="more">
+                    </div>
+
+                    <div class="mitv-tips hide" style="margin-left: 0;border: none;" id="J_bigproPostTip"></div>
+
+
+                </div>
+                    <a href="javaScript:addOrderUrl()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加新地址</a>
+                    <a href="javaScript:deleteOrderUrl()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">删除地址</a>
+                <table id="table" data-options="fit:true"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--订单详情的tablo-->
+<div class="page-main" style="border-bottom:2px solid red">
+
+    <!-- 春节发货公告 END-->
+    <div class="container">
+        <div class="checkout-box">
+            <div class="section section-address">
+                <div class="section-header clearfix">
+                    <h3 class="title">商品详情</h3>
+
+                    <div class="more">
+                    </div>
+
+                    <div class="mitv-tips hide" style="margin-left: 0;border: none;" id="J_bigproPostTip1"></div>
+
+
+                </div>
+
+                <table id="huoAll" data-options="fit:true"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="site-header site-mini-header" style="border-bottom:1px solid black;width: 80%;margin-left: 150px">
+    <div class="container" >
+<div class="section section-options section-shipment clearfix">
+    <div class="section-header">
+        <h3 class="title">配送方式</h3>
+    </div>
+    <div class="section-body clearfix">
+        <ul class="clearfix J_optionList options ">
+            <li data-type="shipment" class="J_option selected" data-amount="0" data-value="2">
+                包邮                                                    </li>
+                  </ul>
+             </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-header site-mini-header" style="border-bottom:1px solid black;width: 80%;margin-left: 150px">
+    <div class="container" >
+
+    <div class="section-header">
+        <h3 class="title">发票</h3>
+    </div>
+    <div class="section-body clearfix">
+        <div class="invoice-result">
+            <span id="J_invoiceDesc">电子发票</span>
+            <span id="J_invoiceTitle">个人</span>
+            <span>商品明细</span>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="section-bar clearfix" style="float: right;margin-top: 10px;margin-right: 150px">
+    <div class="money-box" id="J_moneyBox" >
+            <ul>
+                <li class="clearfix">
+                    <label><a href="javascript:ss();" class="btn btn-primary" id="J_checkoutToPay" data-stat-id="9dc0c7cf32a1c0ca" >确定购买</a></label>
+
+                </li>
+            <li class="clearfix">
+                <label>商品件数：</label>
+                <span class="val" id="zSum">件</span>
+            </li>
+            <li class="clearfix">
+                <label>商品总价：</label>
+                <span class="val" id="zPrices">元</span>
+            </li>
+
+            <li class="clearfix">
+                <label>运费：</label>
+                <span class="val"><i data-id="J_postageVal">0</i>元</span>
+            </li>
+            <li class="clearfix total-price">
+                <label>应付总额：</label>
+                <span class="val"   id="duePrice">元</span>
+            </li>
+        </ul>
+    </div>
+    <div class="fl">
+        <div class="seleced-address hide" id="J_confirmAddress">
+        </div>
+        <div class="big-pro-tip hide J_confirmBigProTip"></div>
+    </div>
+    <div class="fr">
+
+        <a href="javascript:void(0);" class="btn btn-primary" id="J_checkoutToPay" data-stat-id="9dc0c7cf32a1c0ca" >去结算</a>
+        <a href="html/shoppingCart" class="btn  btn-return" data-stat-id="d5777c2afc47dad1">返回购物车</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+<script>
+    $(function(){
+        initDataAna();
+        querAllHuo();
+        queryzPrice();
+        queryzSum();
+    });
+    /*查询总钱数*/
+    function queryzPrice() {
+        $.ajax({
+            url:"../ress/queryzPrice",
+            success:function(data){
+               $("#zPrices").html(data);
+          },error:function () {
+                alert("失败");
+            }
+        })
+
+    }
+
+    /*查询总件数*/
+    function queryzSum() {
+        $.ajax({
+            url:"../ress/queryzSum",
+            success:function(data){
+                $("#zSum").html(data);
+
+            },error:function () {
+                alert("失败");
+            }
+        })
+    }
+
+    //查询收款表
+    function querAllHuo(){
+
+        $('#huoAll').bootstrapTable({
+            url:'../ress/findPaymentListAll',
+            toolbar:'#toolbar',
+            pagination:false, //是否展示分页
+            pageList:[2, 4, 6, 50],//分页组件
+            pageNumber:1,
+            pageSize:2,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,//斑马线
+
+            columns:[
+                {field:'checks',title:'',checkbox:true,width:100,align:'center'},
+                {field:'commImg',title:'商品图片',width:100,align:'center'},
+                {field:'commName',title:'商品名称',width:100,align:'center'},
+                {field:'commPrice',title:'商品价格',width:100,align:'center'},
+
+            ]
+
+        });
+
+
+    }
+
+
+
+//查询地址
+    function initDataAna(userId){
+        var userId = 1;
+        $('#table').bootstrapTable({
+            url:'../ress/queryRess?id='+userId,
+            toolbar:'#toolbar',
+            pagination:false, //是否展示分页
+            pageList:[2, 4, 6, 50],//分页组件
+            pageNumber:1,
+            pageSize:2,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,//斑马线
+
+            columns:[
+                {field:'checks',title:'',checkbox:true,width:100,align:'center'},
+                {field:'ressusername',title:'收件人名字',width:100,align:'center'},
+                {field:'ressuserPhone',title:'手机号',width:100,align:'center'},
+                {field:'ressname',title:'地址名称',width:100,align:'center'},
+                {field:'resssite',title:'地址编码',width:100,align:'center'},
+                {field:'resslabel',title:'地址标签',width:100,align:'center'},
+                {field: 'xxxx', title: '操作', width: 100,
+                  formatter: function (value,row,index){
+                      var str=JSON.stringify(row.ressid);
+                      var content = "    <a href='javascript:updateOrderUrl("+str+")'>修改地址</a>";
+
+             return content;
+
+         }
+         }
+
+            ]
+        });
+
+    }
+//总账
+    function ss() {
+
+        var arr = $('#huoAll').bootstrapTable("getSelections");//获取选中的行
+
+        if (arr.length <= 0) {
+            alert("请你选中要删除的数据！！！");
+        } else {
+            var jjj = 0;
+            for (var i = 0; i < arr.length; i++) {
+                jjj += arr[i].commPrice;
+
+            }
+            $("#duePrice").html(jjj);
+        }
+//新增地址
+        var res;
+
+        function createAddContent(url) {
+
+            $.ajax({
+                url: url,
+                async: false,
+                success: function (data) {
+                    res = data;
+                }
+            });
+            return res;
+        }
+
+        function addOrderUrl() {
+            var userId = 1;
+            //打开新增弹框
+            bootbox.dialog({
+                title: '添加收货地址',
+                message: createAddContent("../page/addOrderUrl"),
+                closeButton: true,//是否显示关闭按钮
+                buttons: {
+                    "success": {
+                        "label": "<i class='icon-ok'></i>保存",
+                        "className": "btn-sm btn-success",
+                        "callback": function () {
+
+                            var userId = 1;
+                            $.ajax({
+                                url: '../ress/addRess?id=' + userId,
+                                type: 'post',
+                                data: $("#formId").serialize(),
+                                success: function () {
+                                    alert("新增成功");
+                                    location.href = location;
+                                    //刷新表格
+                                }, error: function () {
+                                    alert("新增失败");
+
+                                }
+                            });
+                        }
+                    },
+                    "cancel": {
+                        "label": "<i class='icon-info'></i> 取消",
+                        "className": "btn-sm btn-danger",
+                        "callback": function () {
+
+                        }
+                    }
+                }
+
+            });
+        }
+
+        //删除地址
+        function deleteOrderUrl() {
+
+            var arr = $('#table').bootstrapTable("getSelections");//获取选中的行
+
+            if (arr.length <= 0) {
+                alert("请你选中要删除的数据！！！");
+            } else {
+                var ids = "";
+                for (var i = 0; i < arr.length; i++) {
+                    ids += arr[i].ressid + ",";
+                    alert(ids);
+                }
+
+                $.ajax({
+                    url: "../ress/deleteOrderUrl",
+                    data: {ids: ids},
+                    type: "post",
+                    success: function () {
+                        alert("删除成功！");
+                        location.href = location;
+                    }, error: function () {
+                        alert("失败");
+                    }
+                })
+            }
+        }
+
+
+//修改地址
+
+        function updateOrderUrl(id) {
+            alert(id);
+            bootbox.dialog({
+                title: '修改',
+                message: createAddContent("../page/addOrderUrls?id=" + id),
+                closeButton: true,//是否显示关闭按钮
+                buttons: {
+                    "success": {
+                        "label": "<i class='icon-ok'></i> 保存",
+                        "className": "btn-sm btn-success",
+                        "callback": function () {
+                            $.ajax({
+                                url: '../ress/updateOrderUrls',
+                                type: 'post',
+                                cache: false,
+                                data: $("#formId").serialize(),
+                                success: function () {
+                                    alert("修改成功")
+                                    location.href = location;
+                                }, error: function () {
+                                    alert("失败");
+                                }
+                            });
+                        }
+                    },
+                    "cancel": {
+                        "label": "<i class='icon-info'></i> 取消",
+                        "className": "btn-sm btn-danger",
+                        "callback": function () {
+                        }
+                    }
+                }
+            });
+        }
+
+
+    }
+
+
+</script>
+
+</html>

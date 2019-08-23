@@ -184,4 +184,14 @@ public class GoodsController {
         //System.out.println(split[0]);
         return split[0];
     }
+    @RequestMapping("refuse")
+    @ResponseBody
+    public void refuse(Integer id){
+        goodsService.refuse(id);
+    }
+    @RequestMapping("pass")
+    @ResponseBody
+    public void pass(Integer id){
+        goodsService.pass(id);
+    }
 }
