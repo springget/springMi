@@ -1,10 +1,8 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jk.model.Goods;
-import com.jk.model.Pedition;
+import com.jk.model.*;
 
-import com.jk.model.Television;
 import com.jk.service.FrontService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +31,11 @@ public class FrontController {
     @RequestMapping("login")
     public String touserlist() {
         return "html/qiantai/login";
+    }
+
+    @RequestMapping("queryforget")
+    public String queryforget() {
+        return "html/qiantai/forget";
     }
 
     //查询手机
@@ -93,7 +97,28 @@ public class FrontController {
     }
 
 
+    @RequestMapping("loginLuser")//验证账号
+    @ResponseBody
+    public String loginLuser(Luser luser, HttpServletRequest request){
 
+        //验证账号
+        Luser loginLuser = frontService.loginLuser(luser.getUsername());
+
+        if(loginLuser == null){
+
+            return "userError";
+        }
+        System.out.println(loginLuser.getPassword());
+        //验证密码
+        if(!loginLuser.getPassword().equals(luser.getPassword())){
+
+            return "pwError";
+        }
+        //登录成功
+
+        request.getSession().setAttribute("luser", loginLuser);
+        return "success";
+    }
 
 
 }

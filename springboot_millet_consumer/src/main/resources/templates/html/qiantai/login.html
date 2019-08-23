@@ -193,14 +193,14 @@
     <!--<span style="color: #e0e0e0">|</span>
     <a href="#" class="choose right">扫码登录</a>-->
     <form id="userForm">
-        <input type="text" placeholder="邮箱/手机号/小米账号" id="login-text"  name="userAccount">
-        <input type="password" placeholder="密码" id="login-pwd" name="userPassword">
+        <input type="text" placeholder="邮箱/手机号/小米账号" id="login-text"  name="username">
+        <input type="password" placeholder="密码" id="login-pwd" name="password">
         <input type="submit" value="登录" id="login-sub" onclick="login()">
     </form>
     <span class="forget">
         <a href="#">注册小米账号</a>
         <span>|</span>
-        <a href="#">忘记密码?</a></span>
+        <a href="../front/queryforget">忘记密码?</a></span>
 
     </div>
 </div>
@@ -223,7 +223,7 @@
             var form = $("#userForm").serialize();
 
             $.ajax({
-                url:"../client/loginUser",
+                url:"../front/loginLuser",
                 data:form,
                 type:"post",
                 success:function(data){

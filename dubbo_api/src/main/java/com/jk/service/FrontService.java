@@ -1,6 +1,8 @@
 package com.jk.service;
 
 import com.jk.model.Goods;
+
+import com.jk.model.Luser;
 import com.jk.model.Pedition;
 import com.jk.model.Television;
 
@@ -15,4 +17,6 @@ public interface FrontService {
     List<Pedition> lickMemory();
 
     Goods pxiangQing(Integer id);
+
+    Luser loginLuser(String username);
 }

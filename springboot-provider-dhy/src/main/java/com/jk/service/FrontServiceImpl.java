@@ -3,6 +3,7 @@ package com.jk.service;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jk.mapper.FrontMapper;
 import com.jk.model.Goods;
+import com.jk.model.Luser;
 import com.jk.model.Pedition;
 import com.jk.model.Television;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class FrontServiceImpl implements FrontService{
     @Override
     public Goods pxiangQing(Integer id) {
         return frontMapper.pxiangQing(id);
+    }
+
+    @Override
+    public Luser loginLuser(String username) {
+        return frontMapper.loginLuser(username);
     }
 }
