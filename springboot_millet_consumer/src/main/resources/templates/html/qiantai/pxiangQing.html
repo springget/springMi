@@ -43,55 +43,27 @@
 		//选择内存减钱
 		function internal1(val) {
 
-
 			var pri = $("#price").html();//获取当前商品总价格
+			var pri = $("#price2").html();//获取当前商品总价格
 			var price = parseInt(pri);
 
 			var va = $("#me1").val();
 
 				$("#price").html(price-va);
+			$("#price2").html(price-va);
 
 		}
 		//选择内存加钱
 		function internal11(val) {
 			var pri = $("#price").html();//获取当前商品总价格
+			var pri = $("#price2").html();//获取当前商品总价格
 			var price = parseInt(pri);
 			var val = parseInt(val);
 			//计算价格z
 			$("#price").html(price+val);
-
+			$("#price2").html(price+val);
 		}
 
-/*
-		//选择内存
-		function internal11(val) {
-			var ids = $("#ids").val();
-			$.ajax({
-				url:"../zch/queryItemPrice",
-				type:"post",
-				data:{ids:ids},
-				type:"json",
-				success:function (data) {
-					//alert(data.commodityPrice);
-					//每选择一项内存从新给总价格赋值
-					$("#price").html(data.price);
-
-					//从新获取当前商品总价格
-					var pri = $("#price").html();
-					var price = parseInt(pri);
-
-					//获取每个内存价格
-					var vall = parseInt(val);
-					//计算价格
-					$("#price").html(price+vall);
-
-				},
-				error:function(){
-					alert("查询价格失败");
-				}
-			})
-
-		}*/
 	</script>
 	<body>
 	<!-- start header -->
@@ -204,7 +176,7 @@
 				<span th:text="${goods.battery}"></span>，<span th:text="${goods.system}"></span> /
 				<span th:text="${goods.screen}"></span> /<span th:text="${goods.camera}"></span></div>
 
-			<div class="jiage ml20 mt10"><span name="price" id="price1"></span>元</div>
+			<div class="jiage ml20 mt10"><span id="price2" th:text="${goods.goodsPrice}"></span>元</div>
 			<div class="ft20 ml20 mt20">选择版本</div>
 			<div class="xzbb ml20 mt10">
 
