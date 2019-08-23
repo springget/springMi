@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.RessDao" >
+    <!--查询地址-->
+    <select id="queryRess" resultType="com.jk.model.Ress" parameterType="Integer">
+select r.*,u.userPhone from t_ress r,t_user u
+where r.userId=u.userId
+and  u.userId=#{id}
+</select>
+    <!--新增地址-->
+<insert id="addRess" parameterType="com.jk.model.Ress">
+insert into t_ress(ressusername,ressuserPhone,ressname,resssite,resslabel,userId)
+values (#{ressusername},#{ressuserPhone},#{ressname},#{resssite},#{resslabel},#{userId})
+
+</insert>
+    <!--删除地址-->
+    <delete id="deleteOrderUrl" parameterType="string">
+        delete from t_ress where ressid = #{id}
+    </delete>
+<!--修改地址-->
+    <update id="updateOrderUrls" parameterType="com.jk.model.Ress">
+  		update t_ress set ressusername=#{ressusername},ressuserPhone=#{ressuserPhone},
+  		ressname=#{ressname},resssite=#{resssite},resslabel=#{resslabel} where ressid=#{ressid}
+  </update>
+<!--结账表查询-->
+ <select id="findPaymentListAll"  resultType="com.jk.model.Payment">
+SELECT * FROM t_payment
+</select>
+    <!--查询总钱数-->
+<select id="queryzPrice"  resultType="Integer">
+SELECT sum(commPrice) FROM t_payment
+</select>
+    <!--查询总件数-->
+    <select id="queryzSum"  resultType="Integer">
+SELECT count(*) FROM t_payment
+</select>
+</mapper>
