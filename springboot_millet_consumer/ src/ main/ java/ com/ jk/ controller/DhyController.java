@@ -134,9 +134,6 @@ public class DhyController {
         //自己调自己
         list = TreeNoteUtil.getFatherNode(list);
 
-        list = TreeNoteUtil.getFatherNode(list);
-
-        list = TreeNoteUtil.getFatherNode(list);
 
         return list;
 
