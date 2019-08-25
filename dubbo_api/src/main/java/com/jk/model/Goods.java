@@ -56,6 +56,9 @@ public class Goods implements Serializable {
     private String ishot; //是否热卖  1 热卖 0不
     private String isseckill; //是否秒杀  1 秒杀 0 不
     private Integer allId;  //配置表
+    private String edition;  //版本
+    private Integer colorId;  //颜色表
+
     private Integer audit;  //审核状态   1 审核通过 0 审核中 2 审核失败
 
     public Integer getAudit() {
@@ -84,6 +87,42 @@ public class Goods implements Serializable {
     private String fingerprint;   //指纹
     private String location;   //定位
     private String system;   //系统
+    //颜色表
+    private String pcolor;
+    private String pcolor1;
+
+    public String getPcolor() {
+        return pcolor;
+    }
+
+    public void setPcolor(String pcolor) {
+        this.pcolor = pcolor;
+    }
+
+    public String getPcolor1() {
+        return pcolor1;
+    }
+
+    public void setPcolor1(String pcolor1) {
+        this.pcolor1 = pcolor1;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+
+    public Integer getColorId() {
+        return colorId;
+    }
+
+    public void setColorId(Integer colorId) {
+        this.colorId = colorId;
+    }
 
     public String getRam() {
         return ram;

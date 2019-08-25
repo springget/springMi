@@ -46,7 +46,7 @@
 
     <style type="text/css">
         body{
-            background: url("../js/upload/4.jpg") no-repeat;
+            background: url("./1.jpg") no-repeat;
             background-size:100% 100%;
             background-attachment:fixed;
         }
@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                  <div class="form-group">
+    <!--              <div class="form-group">
                 <label class="col-md-3 control-label">验证码</label>
                 <div class="col-md-9">
                     <input type="password" class="form-control" placeholder="请输入验证码" size="5" id="code" />
@@ -98,12 +98,15 @@
                     <img  src="../client/getCode" id="img"  onclick="changeCode(this)">
 
                 </div>
-            </div>
+            </div>-->
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-4">
                         <input type="button" class="form-control"  id="login"  value="登录"/>
                     </div>
+                    <!--<div class="col-md-offset-2 col-md-4">
+                        <input type="button" class="form-control"  id="zhu"  value="注册"/>
+                    </div>-->
                 </div>
             </form>
         </div>
@@ -115,13 +118,13 @@
 </body>
 
 <script type="text/javascript">
-    changeCode = function(img){
+   /* changeCode = function(img){
 
 
         $(img).attr("src",$(img).attr("src")+"?1");
 
 
-    }
+    }*/
 
     $("#login").click(
 
@@ -132,14 +135,14 @@
             var form = $("#userForm").serialize();
 
             $.ajax({
-                url:"../client/loginUser?code="+code,
+                url:"../client/loginUser",
                 data:form,
                 type:"post",
                 success:function(data){
 
-                    if(data=="codeError"){
+                    /*if(data=="codeError"){
                         alert("验证码错误");
-                    }
+                    }*/
                     if(data=="userError"){
                         alert("请输入正确账号");
                     }
