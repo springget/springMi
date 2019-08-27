@@ -64,6 +64,35 @@
 
     }
 
+    //可选择尺寸
+    function size() {
+
+        $.ajax({
+            url:"../front/tvSize",
+            type:"post",
+            dataType:"json",
+            success:function(data){
+
+                for(var i=0;i<data.length;i++){
+                    if(i==i){
+                        $("#size"+i).html(data[i].version);
+                        $("#me"+i).val(data[i].price);
+                    }
+                }
+                $("#price").html(data[0].price);
+                $("#price1").html(data[0].price);
+
+            },
+            error:function(){
+                alert("查询内存失败");
+            }
+        })
+
+    }
+
+
+
+
     //选择内存
     function internal11(val) {
 
@@ -74,6 +103,21 @@
         //计算价格
         $("#price").html(val);
         $("#price1").html(val);
+
+    }
+
+    //选择尺寸
+    function tvSize(val) {
+
+
+        var pri = $("#price").html();//获取当前商品总价格
+
+        var price = parseInt(pri);
+
+        var val = parseInt(val);
+
+        //计算价格
+        $("#price").html(price+val);
 
     }
 
@@ -207,6 +251,28 @@
 
                 <div class="clear"></div>
             </div>
+
+
+<!--            <div class="ft20 ml20 mt20">选择尺寸</div>
+            <div class="xzbb ml20 mt10">
+                <div class="banben fl">
+                    <a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="size0" name="size" checked value="" onclick="size(this.value)" >
+                    </a>
+                </div>
+                <div class="banben fr">
+                    <a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="size1" name="size" value="" onclick="size(this.value)" >
+                    </a>
+                </div>
+
+            </div>-->
+
+
             <div class="ft20 ml20 mt20"></div>
             <div class="xzbb ml20 mt10">
 
@@ -231,7 +297,8 @@
         <div class="clear"></div>
     </div>
     <!-- 隐藏id -->
-    <input name="id" id="televId" th:value="${list.televId}">
+    <input name="id" id="televId" th:value="${list.televId}" type="hidden">
+    <input name="id" id="televName" th:value="${list.televName}" type="hidden">
 </form>
 <!-- footer -->
 <footer class="mt20 center">
@@ -250,11 +317,14 @@
 //加入购物车
     function addTv() {
 /*        var tv = $("#addForm").serialize();*/
-        var verison = $("#")
+        var televId = $("#televId").val();
+        var televName = $("#televName").val();
+ /*       alert(televId);
+        alert(televName);*/
         $.ajax({
             url:"../front/addTv",
             type:"post",
-            data:{},
+            data:{id:televId,id:televName},
             success:function (data) {
                 alert("新增成功！");
             }

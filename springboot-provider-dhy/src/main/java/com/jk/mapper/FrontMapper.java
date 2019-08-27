@@ -1,8 +1,10 @@
 package com.jk.mapper;
 
 import com.jk.model.Goods;
+import com.jk.model.Luser;
 import com.jk.model.Television;
 import com.jk.model.TvVersion;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -28,4 +30,10 @@ public interface FrontMapper {
 
     @Select("select * from tv_version")
     List<TvVersion> tvVersion();
+
+    @Select("select * from l_user where username = #{username}")
+    Luser register(String username);
+
+    @Insert("insert into l_user(username,password,name) values(#{username},#{password},#{name})")
+    void addUser(Luser user);
 }

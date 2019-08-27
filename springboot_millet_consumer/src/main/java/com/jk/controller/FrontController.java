@@ -1,19 +1,25 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.jk.model.Goods;
+import com.jk.model.Luser;
 import com.jk.model.Television;
 import com.jk.model.TvVersion;
 import com.jk.service.FrontService;
+import com.jk.util.CheckImgUtil;
+import com.jk.util.CheckSumBuilder;
+import com.jk.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -25,6 +31,108 @@ public class FrontController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+
+
+    //前台注册
+    @RequestMapping("register")
+
+    public String register(){
+        return "html/qiantai/register";
+    }
+
+
+    //注册查重
+    @RequestMapping("checkUsername")
+    @ResponseBody
+    public String loginUser(Luser user, String code, HttpServletRequest request,String username){
+
+        //短信验证码
+	/*	String realcode = request.getSession().getAttribute("ckcode").toString();
+		System.out.println(realcode);
+		if(!realcode.equals(code)) {
+
+			return "codeError";
+		}*/
+        System.out.println(username);
+        Luser luser = frontService.register(username);
+
+        if(luser != null){
+            return "userError";
+        }
+
+        return "success";
+    }
+
+    //注册
+    @RequestMapping("addUser")
+    @ResponseBody
+    public String addUser(Luser user,String code,HttpServletRequest request){
+       System.out.println(user.getUsername());
+
+        //图片
+        String realcode = request.getSession().getAttribute("checkcode").toString();
+        //System.out.println(realcode);
+        if(!realcode.toLowerCase().equals(code.toLowerCase())) {
+
+            return "codeError";
+        }
+
+        frontService.addUser(user);
+
+        return "success";
+    }
+
+
+    @RequestMapping("getCode")
+    @ResponseBody
+    public void getcode(String tel,HttpServletRequest request) throws Exception{
+        System.out.println(tel);
+
+        //短信验证码
+
+    	String url = "https://api.netease.im/sms/sendcode.action";
+
+		String appkey = "a4afd456bc8cf461833108c680e15c5f";
+
+		String curTime = String.valueOf(Calendar.getInstance().getTimeInMillis()/1000);
+
+		String nonce = UUID.randomUUID().toString().replace("-","");
+
+		String checkSum = CheckSumBuilder.getCheckSum("3ca5c205a153",nonce,curTime);
+
+		//设置hander 参数
+
+		HashMap<String, Object> headers = new HashMap<>();
+
+		headers.put("Appkey", appkey);
+		headers.put("Nonce", nonce);
+		headers.put("CurTime", curTime);
+		headers.put("CheckSum", checkSum);
+
+		HashMap<String, Object>  params = new HashMap<>();
+
+		params.put("mobile", tel);
+		params.put("templateid", "14801329");
+
+		String str = HttpClientUtil.post(url, params, headers);
+		JSONObject jsonObject = JSONObject.parseObject(str);
+
+		String code = jsonObject.getString("code");
+		System.out.println(code);
+		if("200".equals(code)) {
+			String aa = jsonObject.getString("obj");
+			request.getSession().setAttribute("ckcode", aa);
+			System.out.println(aa);
+		}
+
+        //图片验证码
+
+    }
+
+
+
+
 
     @RequestMapping("pxiangQing")
     public String mi8(Integer id){
@@ -158,11 +266,12 @@ public class FrontController {
     }
 
 
-    @RequestMapping("addTv")
+/*    @RequestMapping("addTv")
     @ResponseBody
-    public void addTv(){
+    public void addTv(String id,String name){
 
-    }
+    }*/
+
 
 
 }

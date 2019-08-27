@@ -43,6 +43,10 @@
 
 
 </head>
+
+
+
+
 <script>
 
     $(function(){
@@ -295,6 +299,128 @@
 
 
 </script>
+
+
+<script>
+
+
+
+
+    var startTime = new Date();
+
+    //定义参数可返回当天的日期和时间
+
+    startTime.setFullYear(2019, 8, 26);
+
+    //调用设置年份
+
+    startTime.setHours(23);
+
+    //调用设置指定的时间的小时字段
+
+    startTime.setMinutes(59);
+
+    //调用设置指定时间的分钟字段
+
+    startTime.setSeconds(59);
+
+    //调用设置指定时间的秒钟字段
+
+    startTime.setMilliseconds(999);
+
+    //调用置指定时间的毫秒字段
+
+    var EndTime=startTime.getTime();
+
+    //定义参数可返回距 1970 年 1 月 1 日之间的毫秒数
+
+    function GetRTime(){
+
+        //定义方法
+
+        var NowTime = new Date();
+
+        //定义参数可返回当天的日期和时间
+
+        var nMS = EndTime - NowTime.getTime();
+
+        //定义参数 EndTime减去NowTime参数获得返回距 1970 年 1 月 1 日之间的毫秒数
+
+        var nD = Math.floor(nMS/(1000 * 60 * 60 * 24));
+
+        //定义参数 获得天数
+
+        var nH = Math.floor(nMS/(1000*60*60)) % 24;
+
+        //定义参数 获得小时
+
+        var nM = Math.floor(nMS/(1000*60)) % 60;
+
+        //定义参数 获得分钟
+
+        var nS = Math.floor(nMS/1000) % 60;
+
+        //定义参数 获得秒钟
+
+        if (nMS < 0){
+
+            //如果秒钟大于0
+
+            $("#dao").hide();
+
+            //获得天数隐藏
+
+            $("#daoend").show();
+
+            //获得活动截止时间展开
+
+        }else{
+
+            //否则
+
+            $("#dao").show();
+
+            //天数展开
+
+            $("#daoend").hide();
+
+            //活动截止时间隐藏
+
+            $("#RemainD").text(nD);
+
+            //显示天数
+
+            $("#h").text(nH);
+
+            //显示小时
+
+            $("#m").text(nM);
+
+            //显示分钟
+
+            $("#s").text(nS);
+
+            //显示秒钟
+
+        }
+
+    }
+
+
+    $(document).ready(function () {
+
+        //定义方法
+
+        var timer_rt = window.setInterval("GetRTime()", 1000);
+
+        //定义参数 显示出GetRTime()方法 1000毫秒以后启动
+
+    });
+
+
+</script>
+
+
 <body>
 
 <!--头部广告部分-->
@@ -1026,15 +1152,15 @@
         <!--闪购秒杀区域-->
         <div class = 'sg-ms clearfix'>
             <div class = 'sg-ms-time'>
-                <h2>22:00 场</h2>
+                <h2><span id="d">小米秒杀</span></h2>
                 <img src = "../icons/flashpurchase.png" alt = "">
-                <div class = 'ms-text'>距离开始还有</div>
+                <div class = 'ms-text'>距离结束还有</div>
                 <div class = 'sg-ms-cd'>
-                    <span class = 'h'></span>
+                    <span class = 'h' id = "h"></span>
                     <div class = 'fl dot'>:</div>
-                    <span class = 'm'></span>
+                    <span class = 'm' id = "m"></span>
                     <div class = 'fl dot'>:</div>
-                    <span class = 's'></span>
+                    <span class = 's' id = "s"></span>
                 </div>
             </div>
             <!--秒杀轮播区域-->

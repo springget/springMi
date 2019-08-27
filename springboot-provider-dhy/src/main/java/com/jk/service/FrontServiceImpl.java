@@ -2,10 +2,7 @@ package com.jk.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jk.mapper.FrontMapper;
-import com.jk.model.Goods;
-import com.jk.model.Television;
-import com.jk.model.TvVersion;
-import com.jk.model.TvxiantQing;
+import com.jk.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -56,5 +53,17 @@ public class FrontServiceImpl implements FrontService{
     @Override
     public List<TvVersion> tvVersion() {
         return frontMapper.tvVersion();
+    }
+
+    @Override
+    public Luser register(String username) {
+
+        return frontMapper.register(username);
+    }
+
+    @Override
+    public void addUser(Luser user) {
+
+        frontMapper.addUser(user);
     }
 }
