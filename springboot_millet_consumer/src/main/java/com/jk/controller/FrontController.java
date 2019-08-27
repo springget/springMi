@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.jk.model.*;
 
 import com.jk.model.Goods;
@@ -8,20 +9,17 @@ import com.jk.model.Luser;
 import com.jk.model.Television;
 import com.jk.model.TvVersion;
 import com.jk.service.FrontService;
-import com.jk.util.CheckImgUtil;
 import com.jk.util.CheckSumBuilder;
 import com.jk.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -137,12 +135,6 @@ public class FrontController {
 
         //图片验证码
 
-    }
-
-
-    @RequestMapping("pxiangQing")
-    public String mi8(Integer id) {
-        return "html/qiantai/pxiangQing";
     }
 
     @RequestMapping("queryforget")
@@ -359,13 +351,15 @@ public class FrontController {
         return list;
     }
 
-
-  /*  @RequestMapping("addTv")
+    //秒杀商品展示
+    @RequestMapping("miaosha")
     @ResponseBody
-    public void addTv(){
+    public List<Goods> miaosha(){
 
-    }*/
+        List<Goods> list = frontService.queryMiaosha();
 
+        return list;
+    }
 
 }
 

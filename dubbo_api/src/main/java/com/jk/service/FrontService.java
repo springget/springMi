@@ -41,4 +41,6 @@ public interface FrontService {
     Luser register(String username);
 
     void addUser(Luser user);
+
+    List<Goods> queryMiaosha();
 }

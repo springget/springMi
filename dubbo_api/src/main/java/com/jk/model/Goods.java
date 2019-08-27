@@ -36,6 +36,7 @@ public class Goods implements Serializable {
     private Date goodsTime;//商品发布时间
     private String  goodsInfo;//商品描述
     private Double  goodsPrice;//商品价格
+    private Double oldPrice;//秒杀前价格
     private Integer  commentId;//评论id
     private Integer  userId;//用户id
     private Integer  orderId;//订单id
@@ -90,6 +91,22 @@ public class Goods implements Serializable {
     //颜色表
     private String pcolor;
     private String pcolor1;
+
+    public Double getOldPrice() {
+        return oldPrice;
+    }
+
+    public void setOldPrice(Double oldPrice) {
+        this.oldPrice = oldPrice;
+    }
+
+    public Integer getGoodsLike() {
+        return goodsLike;
+    }
+
+    public void setGoodsLike(Integer goodsLike) {
+        this.goodsLike = goodsLike;
+    }
 
     public String getPcolor() {
         return pcolor;

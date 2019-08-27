@@ -49,4 +49,9 @@ public interface FrontMapper {
 
     @Insert("insert into l_user(username,password,name) values(#{username},#{password},#{name})")
     void addUser(Luser user);
+
+    @Select("select * from t_goods t\n" +
+            "where t.goodsTime >= date(now())\n" +
+            "and t.goodsTime < DATE_ADD(date(now()),INTERVAL 1 DAY) and isseckill = 1 limit 0,4")
+    List<Goods> queryMiaosha();
 }

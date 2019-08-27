@@ -98,4 +98,9 @@ public class FrontServiceImpl implements FrontService{
 
         frontMapper.addUser(user);
     }
+
+    @Override
+    public List<Goods> queryMiaosha() {
+        return frontMapper.queryMiaosha();
+    }
 }

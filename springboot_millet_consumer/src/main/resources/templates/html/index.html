@@ -428,6 +428,7 @@
     $(function(){
         queryshouji1();
         dianshi();
+        miaosha();
     })
 
     //手机
@@ -470,6 +471,33 @@
 
         })
     }
+
+
+
+    //秒杀商品展示
+    function miaosha() {
+        $.ajax({
+            url:"../front/miaosha",
+            success:function(data){
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+                  /*  alert(data)*/
+                    aa +="    <li class = 'wrap-1 no-ml'><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\">\n" +
+                        "        <div class='bg'></div>\n" +
+                        "        <div class = 'content'>\n" +
+                        "        <a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = "+data[i].goodsImg+"></a>\n" +
+                        "        <h3>"+data[i].goodsName+"</h3>\n" +
+                        "    <p class = 'p1'>"+data[i].goodsInfo+"</p>\n" +
+                        "        <p class = 'p2'>"+data[i].goodsPrice+"元 <span> "+data[i].oldPrice+"元</span></p>\n" +
+                        "    </div>\n </a>" +
+                        "    </li>";
+                }
+                $("#miaosha").html(aa);
+            }
+
+        })
+    }
+
 
 </script>
 
@@ -1184,8 +1212,8 @@
             <!--秒杀轮播区域-->
             <div class = 'sg-ms-wrap'>
                 <div class = 'box'>
-                    <ul>
-                        <li class = 'wrap-1 no-ml'><a href = "#"></a>
+                    <ul id="miaosha">
+                       <!-- <li class = 'wrap-1 no-ml'><a href = "#"></a>
                             <div class='bg'></div>
                             <div class = 'content'>
                                 <a href = "#">
@@ -1272,7 +1300,7 @@
                                 <p class = 'p1'>让爱车成为移动充电站</p>
                                 <p class = 'p2'>1 元 <span> 69元</span></p>
                             </div>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </div>
