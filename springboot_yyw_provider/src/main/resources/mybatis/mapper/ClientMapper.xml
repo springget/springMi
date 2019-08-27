@@ -32,6 +32,7 @@
         select * from  t_member m ,t_user u
            <where>
              u.memberId=m.memberId
+             and m.memberName!=0
 
                  <if test="keshou != null and keshou != 0 and keshou == 1">
                      and u.userName like '%${shouhu}%'

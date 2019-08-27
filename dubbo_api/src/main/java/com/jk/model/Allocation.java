@@ -21,6 +21,15 @@ public class Allocation implements Serializable {
     private String fingerprint;   //指纹
     private String location;   //定位
     private String system;   //系统
+    private String color;   //颜色
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public Integer getId() {
         return id;

@@ -2,13 +2,15 @@
 package com.jk.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.jk.model.Comment;
 import com.jk.model.Goods;
-import com.jk.model.Ress;
+import com.jk.model.Refund;
 import com.jk.service.GoodsService;
-import com.jk.service.RessService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("page")
@@ -47,6 +49,7 @@ public class pageController {
     public String addgoods(){
         return "html/wh/addgoods";
     }
+
 
     @RequestMapping("edit")
     public ModelAndView edit(Integer id){
@@ -119,12 +122,14 @@ public class pageController {
         return "html/dhy/zhangHao";
     }
 
+    //查看会员
     @RequestMapping("clientList")
     public String clientList() {
         return "html/yyw/clientList";
     }
 
 
+    //查看
     @RequestMapping("memberList")
     public String memberList() {
         return "html/yyw/memberList";
@@ -137,6 +142,8 @@ public class pageController {
     }
 
 
+
+    //修改积分
     @RequestMapping("updPresented")
     public ModelAndView updPresented(String id){
         System.out.println(id);
@@ -178,32 +185,79 @@ public class pageController {
         return "html/hgj/addlongShop";
     }
 
+
+    //查询优惠券
+    @RequestMapping("addCoupon")
+    public String addCoupon() {
+        return "html/yyw/addCoupon";
+
+    }
     //订单分析
     @RequestMapping("toAnalyze")
     public String toAnalyze(){
         return "html/hgj/toAnalyze";
     }
 
-    //订单支付
-    @RequestMapping("toOrderPay")
-    public String toOrderPay(){
-        return "html/hgj/toOrderPay";
+    //新增优惠卷
+    @RequestMapping("queryCoupon")
+    public String queryCoupon() {
+        return "html/yyw/queryCoupon";
     }
+    //退款审核
+        @RequestMapping("toUpdate")
+        public ModelAndView toUpdate(Integer id){
+            Refund refund = DealService.findRefundByid(id);
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("html/lih/check");
+            mv.addObject("refund",refund);
+            return mv;
+        }
+
+//updateComment 回复
+        @RequestMapping("updateComment")
+        public ModelAndView updateComment(Integer id){
+            System.out.println(id);
+            Comment comment = DealService.findCommentByid(id);
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName("/html/lih/reply");
+            mv.addObject("comment",comment);
+
+            return mv;
+        }
+        //轮播图
+        @RequestMapping("sss")
+        public String sss() {
+            return "html/lih/sss";
+        }
+        //轮播图
+        @RequestMapping("aaa")
+        public String aaa() {
+            return "html/lih/aaa";
+        }
 
 
-    //新增订单地址弹框
-    @RequestMapping("addOrderUrl")
-    public String addOrderUrl(){
-        return "html/hgj/addOrderUrl";
-    }
 
-   //修改地址回显
-    @RequestMapping("addOrderUrls")
-    public ModelAndView addOrderUrls(Integer id){
-        Ress ress = ressService.findRessByid(id);
+
+    //秒杀回显
+    @RequestMapping("setSeckill")
+    public ModelAndView setSeckill(Integer id,HttpServletRequest request){
+        Goods goods = goodsService.findGoodsByid(id);
+        request.getSession().setAttribute("goods", goods);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("html/hgj/updateOrderUrl");
-        mv.addObject("ress",ress);
+        mv.setViewName("html/wh/seckill");
+        mv.addObject("goods",goods);
         return mv;
     }
+    // 个人中心
+    @RequestMapping("persion")
+    public String persion(){
+        return "html/wh/persion";
+    }
+    // 收益明细
+    @RequestMapping("highcharts")
+    public String highcharts(){
+        return "html/wh/highcharts";
+    }
+
+
 }

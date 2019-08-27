@@ -421,6 +421,58 @@
 </script>
 
 
+
+<script>
+
+    //查询手机
+    $(function(){
+        queryshouji1();
+        dianshi();
+    })
+
+    //手机
+    function queryshouji1() {
+        $.ajax({
+            url:"../front/queryshouji1",
+            success:function(data){
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li> <div>\n" +
+                        "        <a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = \"../images/product-1.jpg\" alt = \"\"></a>\n" +
+                        "            </div><h3><a href = \"#\">"+data[i].goodsName+"</a></h3>\n" +
+                        "                    <p class = 'p1'>"+data[i].goodsInfo+"</p>\n" +
+                        "                    <p class = 'p2'>"+data[i].goodsPrice+"</p></li>";
+                }
+                $("#shouji1").html(aa);
+            }
+
+        })
+    }
+
+    //电视
+    function dianshi() {
+        $.ajax({
+            url:"../front/dianshi",
+            success:function(data){
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href='../front/pxiangQing'><img src=\"../picture/ds1.png\"></a>" +
+                        "      <div class='item-tit'>\n" +
+                        "        <a href=\"#\">"+data[i].televName+"</a>\n" +
+                        "        <p>"+data[i].tvPrice+"起</p>\n" +
+                        "    </div>" +
+                        "    </li>";
+                }
+                $("#dianshi").html(aa);
+            }
+
+        })
+    }
+
+</script>
+
 <body>
 
 <!--头部广告部分-->
@@ -835,43 +887,9 @@
                 </li>
                 <li class='nav-item'><a href="miTV.html">电视</a>
                     <div class='item-children item3 w1226 no-show'>
-                        <ul class='children-list'>
-                            <li><a href="#"><img src="../picture/ds1.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="./../mi.首页+电视55/miTV.html">小米电视4A</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/ds2.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="./../小米电视32/index.html">小米电视4A</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/ds3.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米电视4A</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/ds4.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米电视4A</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#"><img src="../picture/ds5.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米电视4A</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
-                            <li><a href="#" class='no-after'><img src="../picture/ds6.png" alt=""></a>
-                                <div class='item-tit'>
-                                    <a href="#">小米电视4A</a>
-                                    <p>2699起</p>
-                                </div>
-                            </li>
+                        <ul class='children-list' id="dianshi">
+
+
                         </ul>
                     </div>
                 </li>
@@ -1281,71 +1299,11 @@
                 </div>
 
                 <div class = 'fl phone-r'>
-                    <ul>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/product-1.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj2.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj3.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj4.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj5.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj6.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj7.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/sj8.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">红米6A</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
+                    <ul  id="shouji1">
+
+
+                      <!--  //查询手机-->
+
                     </ul>
                 </div>
             </div>

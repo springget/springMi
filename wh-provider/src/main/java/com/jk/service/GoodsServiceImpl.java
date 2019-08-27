@@ -100,4 +100,20 @@ public class GoodsServiceImpl implements GoodsService{
     public List<Allocation> TypeOne() {
         return goodsDao.TypeOne();
     }
+
+    @Override
+    public void refuse(Integer id) {
+        goodsDao.refuse(id);
+    }
+
+    @Override
+    public void pass(Integer id) {
+        goodsDao.pass(id);
+    }
+
+    @Override
+    public List<Goods> queryHotGoods() {
+        return goodsDao.queryHotGoods();
+    }
+
 }

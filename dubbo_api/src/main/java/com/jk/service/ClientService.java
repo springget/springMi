@@ -18,9 +18,6 @@ public interface ClientService {
 
     void updateCancel(Integer id);
 
-
-
-
     void addCoupon(Coupon coupon);
 
     PageUtil queryCoupon(ParameUtil params);
