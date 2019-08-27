@@ -21,8 +21,6 @@
     <!-- 引入jquery -->
     <script type="text/javascript" src="../djs/jquery.min.js"></script>
 
-
-
     <!-- 引入jquery -->
     <script type="text/javascript" src="../djs/jquery.min.js"></script>
 
@@ -59,9 +57,33 @@
         tv1();
         tv2();
         tv3();
+        hotGoods();
     })
 
+    function hotGoods() {
+        $.ajax({
 
+            url:"../seckill/queryHotGoods",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
+                        "      <div class='item-tit'>\n" +
+                        "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
+                        "        <p>"+data[i].goodsPrice+"起</p>\n" +
+                        "    </div>" +
+                        "    </li>";
+                }
+
+                $("#hotGoods").html(aa);
+
+            }
+
+        })
+    }
     function phone1() {
 
    $.ajax({
@@ -2579,96 +2601,16 @@
         <!--周边商品区域-->
         <div class = 'product-item-ha'>
             <div class = 'phone clearfix'>
-                <h2>周边</h2>
+                <h2>热门</h2>
                 <div class = 'moreb zb'>
                     <ul>
-                        <li class = 'current'>热门</li>
-                        <li>出行</li>
-                        <li>居家</li>
-                        <li>生活周边</li>
-                        <li>箱包</li>
                     </ul>
                 </div>
             </div>
             <div class = 'pro-all clearfix'>
                 <div class = 'fl phone-r rim show-activea'>
-                    <ul class = 'show'>
-                        <li>
-                            <a href = "#"><img src = "../images/tj-1.jpg" alt = ""></a>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb8.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">TS尼龙偏光太阳镜 米家定制灰色</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb9.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">米兔招财猫足金吊坠
-</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb10.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">小米短袖T恤 两件装</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb11.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">8H记忆绵护椎腰靠
-</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <a href = "#"><img src = "../images/tj-2.jpg" alt = ""></a>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb12.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">自动折叠伞 黑</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb13.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">小米棒球帽 藏蓝</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb14.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">贝医生巴氏牙刷(四色装)</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li class = 'small-li'>
-                            <h3><a href = "#">小米净水器</a></h3>
-                            <p class = 'p2'>1799元</p>
-                            <a href = "#"><img src = "../images/product-small-1.jpg" alt = ""></a>
-                        </li>
-                        <li class = 'small-li'>
-                            <a href = "#">
-                                浏览更多
-                                <small>热门</small>
-                            </a>
-                            <a href = "#"><i class = 'iconfont'></i></a>
-                        </li>
+                    <ul class = 'show' id="hotGoods">
+
                     </ul>
                     <ul class = 'no-show'>
                         <li>

@@ -3,6 +3,7 @@ package com.jk.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jk.model.Goods;
 import com.jk.service.GoodsService;
+import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;

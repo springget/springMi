@@ -1,70 +1,41 @@
 <!DOCTYPE html>
 <html lang = "en" xmlns:th="http://www.thymeleaf.org">
 	<head>
+		<!-- 引入jquery -->
+		<script type="text/javascript" src="../djs/jquery.min.js"></script>
+		<!-- 引入bootstrap的css -->
+		<link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- 引入bootstrap-treeview的css -->
+		<link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+		<!-- 引入bootstrap-addTabs的css -->
+		<link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+		<!-- 引入bootstrap-table的css -->
+		<link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+		<!-- 引入fileinput的css -->
+		<link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+		<!-- 引入my97 -->
+		<script type="text/javascript" src="../js/my97/WdatePicker.js"></script>
+		<!-- 引入bootstrap的js-->
+		<script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+		<!-- 引入bootstrap的js-->
+		<script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+		<!-- 引入bootstrap的js-->
+		<script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+		<!-- 引入bootstrap-table的js-->
+		<script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+		<!-- 引入bootbox.js -->
+		<script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+		<!-- 引入fileinput的js -->
+		<script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+		<!--  引入fileinput的js -->
+		<script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+		<script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
 		<meta charset="UTF-8">
         <meta name="author" content="order by dede58.com"/>
 		<title>小米6立即购买-小米商城</title>
 		<link rel="stylesheet" type="text/css" href="../../ym/css/style.css">
-		<!-- 引入jquery -->
-		<script type="text/javascript" src="../djs/jquery.min.js"></script>
-
 	</head>
-	<script>
-		$(function(){
-			lickMemory();
-		})
-
-		//可选择内存
-		function lickMemory() {
-
-			$.ajax({
-				url:"../front/lickMemory",
-				type:"post",
-				dataType:"json",
-				success:function(data){
-					for(var i=0;i<data.length;i++){
-						//alert(data[i].memoryName);
-						if(i==i){
-							$("#m"+i).html(data[i].edition);
-							$("#me"+i).val(data[i].price);
-
-						}
-					}
-					//$("#price").html(data[0].price);
-					//$("#price1").html(data[0].price);
-					//alert($("#me0").val());
-				},
-				error:function(){
-					alert("查询内存失败");
-				}
-			})
-
-		}
-		//选择内存减钱
-		function internal1(val) {
-
-			var pri = $("#price").html();//获取当前商品总价格
-			var pri = $("#price2").html();//获取当前商品总价格
-			var price = parseInt(pri);
-
-			var va = $("#me1").val();
-
-				$("#price").html(price-va);
-			$("#price2").html(price-va);
-
-		}
-		//选择内存加钱
-		function internal11(val) {
-			var pri = $("#price").html();//获取当前商品总价格
-			var pri = $("#price2").html();//获取当前商品总价格
-			var price = parseInt(pri);
-			var val = parseInt(val);
-			//计算价格z
-			$("#price").html(price+val);
-			$("#price2").html(price+val);
-		}
-
-	</script>
 	<body>
 	<!-- start header -->
 		<header>
@@ -207,7 +178,7 @@
 					<a>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name="pcolor1" value=""><span th:text="${goods.pcolor1}"></span>
+						<input type="radio" name="pcolor" value=""><span th:text="${goods.pcolor1}"></span>
 					</a>
 				</div>
 
@@ -228,7 +199,17 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	</form>
+	</form><br><br><br><br><br><br><br><br><br><br>
+	<div class="xiangqing">
+		<div class="neirong w">
+			<div class="xiaomi6 fl"><span>评论详情</span></div>
+			<nav class="fr">
+				<div class="clear"></div>
+			</nav>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<table id="dataGrid"></table>
 	<!-- footer -->
 	<footer class="mt20 center">
 
@@ -237,223 +218,117 @@
 			<div>违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</div>
 
 		</footer>
-
+<input type="hidden" th:value="${goods.goodsId}" id="goodsId">
 	</body>
-</html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <title>小米6立即购买-小米商城</title>
-    <link rel="stylesheet" type="text/css" href="../../ym/css/style.css">
-
-
-    <!-- 引入jquery -->
-    <script type="text/javascript" src="../djs/jquery.min.js"></script>
-
-
-    <!-- 引入bootstrap的css -->
-    <link  href="../djs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
-    <!-- 引入bootstrap-treeview的css -->
-    <link  href="../djs/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
-    <!-- 引入bootstrap-addTabs的css -->
-    <link  href="../djs/addTabs/addTabs.css" rel="stylesheet" >
-    <!-- 引入bootstrap-table的css -->
-    <link  href="../djs/table/bootstrap-table.min.css" rel="stylesheet" >
-    <!-- 引入fileinput的css -->
-    <link type="text/css" rel="stylesheet" href="../djs/fileinput/css/fileinput.min.css" />
-
-
-    <!-- 引入my97 -->
-    <script type="text/javascript" src="../djs/my97/WdatePicker.js"></script>
-    <!-- 引入bootstrap的js-->
-    <script type="text/javascript" src="../djs/bootstrap/js/bootstrap.min.js"></script>
-    <!-- 引入bootstrap的js-->
-    <script type="text/javascript" src="../djs/treeview/bootstrap-treeview.min.js"></script>
-    <!-- 引入bootstrap的js-->
-    <script type="text/javascript" src="../djs/addTabs/addTabs.js"></script>
-    <!-- 引入bootstrap-table的js-->
-    <script type="text/javascript" src="../djs/table/bootstrap-table.min.js"></script>
-    <script type="text/javascript" src="../djs/table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <!-- 引入bootbox.js -->
-    <script type="text/javascript" src="../djs/bootbox/bootbox.js"></script>
-    <!-- 引入fileinput的js -->
-    <script type="text/javascript" src="../djs/fileinput/js/fileinput.min.js"></script>
-    <!--  引入fileinput的js -->
-    <script type="text/javascript" src="../djs/fileinput/js/locales/zh.js"></script>
-
-    <script type="text/javascript" src="../djs/fileinput/themes/fa/theme.js"></script>
-
-
-</head>
-<body>
-<!-- start header -->
-<header>
-    <div class="top center">
-        <div class="left fl">
-            <ul>
-                <li><a href="http://www.mi.com/" target="_blank">小米商城</a></li>
-                <li>|</li>
-                <li><a href="">MIUI</a></li>
-                <li>|</li>
-                <li><a href="">米聊</a></li>
-                <li>|</li>
-                <li><a href="">游戏</a></li>
-                <li>|</li>
-                <li><a href="">多看阅读</a></li>
-                <li>|</li>
-                <li><a href="">云服务</a></li>
-                <li>|</li>
-                <li><a href="">金融</a></li>
-                <li>|</li>
-                <li><a href="">小米商城移动版</a></li>
-                <li>|</li>
-                <li><a href="">问题反馈</a></li>
-                <li>|</li>
-                <li><a href="">Select Region</a></li>
-                <div class="clear"></div>
-            </ul>
-        </div>
-        <div class="right fr">
-            <div class="gouwuche fr"><a href="">购物车</a></div>
-            <div class="fr">
-                <ul>
-                    <li><a href="./login.html" target="_blank">登录</a></li>
-                    <li>|</li>
-                    <li><a href="./register.html" target="_blank" >注册</a></li>
-                    <li>|</li>
-                    <li><a href="">消息通知</a></li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-    </div>
-</header>
-<!--end header -->
-
-<!-- start banner_x -->
-<div class="banner_x center">
-    <a href="./index.html" target="_blank"><div class="logo fl"></div></a>
-    <a href=""><div class="ad_top fl"></div></a>
-    <div class="nav fl">
-        <ul>
-            <li><a href="">小米手机</a></li>
-            <li><a href="">红米</a></li>
-            <li><a href="">平板·笔记本</a></li>
-            <li><a href="">电视</a></li>
-            <li><a href="">盒子·影音</a></li>
-            <li><a href="">路由器</a></li>
-            <li><a href="">智能硬件</a></li>
-            <li><a href="">服务</a></li>
-            <li><a href="">社区</a></li>
-        </ul>
-    </div>
-    <div class="search fr">
-        <form action="" method="post">
-            <div class="text fl">
-                <input type="text" class="shuru"  placeholder="小米6&nbsp;小米MIX现货">
-            </div>
-            <div class="submit fl">
-                <input type="submit" class="sousuo" value="搜索"/>
-            </div>
-            <div class="clear"></div>
-        </form>
-        <div class="clear"></div>
-    </div>
-</div>
-<!-- end banner_x -->
-
-
-<!-- xiangqing -->
-<form action="post" method="">
-    <div class="xiangqing">
-        <div class="neirong w">
-            <div class="xiaomi6 fl">小米6</div>
-            <nav class="fr">
-                <li><a href="">概述</a></li>
-                <li>|</li>
-                <li><a href="">变焦双摄</a></li>
-                <li>|</li>
-                <li><a href="">设计</a></li>
-                <li>|</li>
-                <li><a href="">参数</a></li>
-                <li>|</li>
-                <li><a href="">F码通道</a></li>
-                <li>|</li>
-                <li><a href="">用户评价</a></li>
-                <div class="clear"></div>
-            </nav>
-            <div class="clear"></div>
-        </div>
-    </div>
-
-    <div class="jieshao mt20 w">
-        <div class="left fl"><img src="../../ym/image/liebiao_xiaomi6.jpg"></div>
-        <div class="right fr">
-            <div class="h3 ml20 mt20">小米6</div>
-            <div class="jianjie mr40 ml20 mt10">变焦双摄，4 轴防抖 / 骁龙835 旗舰处理器，6GB 大内存，最大可选128GB 闪存 / 5.15" 护眼屏 / 四曲面玻璃/陶瓷机身</div>
-            <div class="jiage ml20 mt10">2499.00元</div>
-            <div class="ft20 ml20 mt20">选择版本</div>
-            <div class="xzbb ml20 mt10">
-                <div class="banben fl">
-                    <a>
-
-                        <input type="radio" name="a" value="1" > 4GB+64GB
-                        <span>2499元</span>
-                    </a>
-                </div>
-                <div class="banben fr">
-                    <a>
-
-                        <input type="radio" name="a" value="1" > 6GB+128GB
-                        <span>2499元</span>
-                    </a>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="ft20 ml20 mt20">选择颜色</div>
-            <div class="xzbb ml20 mt10">
-                <div class="banben">
-                    <a>
-                        <span class="yuandian"></span>
-                        <span class="yanse">亮黑色</span>
-                    </a>
-
-                </div>
-            </div>
-            <div class="xqxq mt20 ml20">
-                <div class="top1 mt10">
-                    <div class="left1 fl">小米6 全网通版 6GB内存 64GB 亮黑色</div>
-                    <div class="right1 fr">2499.00元</div>
-                    <div class="clear"></div>
-                </div>
-                <div class="bot mt20 ft20 ftbc">总计：2499元</div>
-            </div>
-            <div class="xiadan ml20 mt20">
-                <input class="jrgwc"  type="button" name="jrgwc" value="立即选购" />
-                <input class="jrgwc" type="button" name="jrgwc" value="加入购物车" />
-
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-</form>
-<!-- footer -->
-<footer class="mt20 center">
-
-    <div class="mt20">小米商城|MIUI|米聊|多看书城|小米路由器|视频电话|小米天猫店|小米淘宝直营店|小米网盟|小米移动|隐私政策|Select Region</div>
-    <div>©mi.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2014]0059-0009号</div>
-    <div>违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</div>
-
-</footer>
-
-</body>
 <script>
-    function f() {
-/*        input[type="radio"]:checked +.advice{
-            background-image:url('https://caiyunupload.b0.upaiyun.com/newweb/imgs/icon-checked.png');
-        }*/
-    }
-</script>
+		$(function(){
+			lickMemory();
+			initDataGrid();
+		})
+		function initDataGrid() {
+			var id = $("#goodsId").val();
+			//创建bootstrapTable
+			$("#dataGrid").bootstrapTable({
+				url: "../content/queryContent?id="+id,
+				method: 'post',
+				striped: true,  					// 斑马线效果     默认false
+				//只允许选中一行
+				singleSelect: false,
+				//选中行是不选中复选框或者单选按钮
+				clickToSelect: true,
+				showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+				cardView: false,                    //是否显示详细视图
+				uniqueId: "id",                 	//每一行的唯一标识，一般为主键列
+				showColumns: true,                  //是否显示所有的列
+				showRefresh: true,                  //是否显示刷新按钮
+				minimumCountColumns: 2,     		//  最少留两列
+				detailView: false,                  //是否显示父子表
+				toolbar: '#tabToolBar',   			//  工具定义位置
+				sidePagination: 'server',
+				toolbar: '#toolbar',
+				pagination: false, //是否展示分页
+				pageList: [2, 4, 8, 10],//分页组件
+				pageNumber: 1,
+				pageSize: 12,//默认每页条数
+				//启动回车键做搜索功能
+				searchOnEnterKey: true,
+				//设置为false 将禁止所有列的排序。
+				sortable: true,
+				//设置默认排序为 name,直接对应数据库的字段
+				sortName: 'id',
+				//定义排序方式，'asc' 或者 'desc'。
+				sortOrder: "desc",
+				//设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+				// 设置为limit可以获取limit, offset, search, sort, order
+				queryParamsType: 'undefined',
+				// 请求服务器数据
+				queryParams: function queryParams(params) {
+					var param = {
+						pageNumber: params.pageNumber,
+						pageSize: params.pageSize,
+
+					};
+					return param;
+				},
+				columns: [
+					{field: 'userName', title: '评论人', width: 300},
+					{field: 'commentInfo', title: '评论内容', width: 300},
+					{field: 'commentTime', title: '评论时间', width: 300},
+					{field: 'xxx', title: '操作', width: 350,
+						formatter:function(value,row,index){
+							return "<button type='button' class='btn btn-Warning btn-lg' onclick='soldOut()'>回复</button>";
+						}
+					}
+				]
+			});
+		}
+		//可选择内存
+		function lickMemory() {
+			$.ajax({
+				url:"../front/lickMemory",
+				type:"post",
+				dataType:"json",
+				success:function(data){
+					for(var i=0;i<data.length;i++){
+						//alert(data[i].memoryName);
+						if(i==i){
+							$("#m"+i).html(data[i].edition);
+							$("#me"+i).val(data[i].price);
+						}
+					}
+					//$("#price").html(data[0].price);
+					//$("#price1").html(data[0].price);
+					//alert($("#me0").val());
+				},
+				error:function(){
+					alert("查询内存失败");
+				}
+			})
+
+		}
+		//选择内存减钱
+		function internal1(val) {
+76
+			var pri = $("#price").html();//获取当前商品总价格
+			var pri = $("#price2").html();//获取当前商品总价格
+			var price = parseInt(pri);
+
+			var va = $("#me1").val();
+
+			$("#price").html(price-va);
+			$("#price2").html(price-va);
+
+		}
+
+		//选择内存加钱
+		function internal11(val) {
+			var pri = $("#price").html();//获取当前商品总价格
+			var pri = $("#price2").html();//获取当前商品总价格
+			var price = parseInt(pri);
+			var val = parseInt(val);
+			//计算价格
+			$("#price").html(price+val);
+			$("#price2").html(price+val);
+		}
+	</script>
 </html>
