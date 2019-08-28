@@ -2,7 +2,7 @@ package com.jk.mapper;
 
 import com.jk.model.Role;
 import com.jk.model.Tree;
-import com.jk.model.Zhanghao;
+import com.jk.model.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -14,12 +14,12 @@ public interface DhyMapper {
 
     List<Role> queryRole(Map map);
 
-    List<Zhanghao> queryZhanghao(Map map);
+    List<User> queryZhanghao(Map map);
 
     @Select("select * from l_role where id = #{id}")
     Role showXiangQing(Integer id);
-    @Select("select * from t_zhanghao where id = #{id}")
-    Zhanghao showXiangQing2(Integer id);
+
+    User showXiangQing2(Integer id);
 
     @Update("update t_zhanghao set status = 1 where id = #{id}")
     void updateStatus(Integer id);
@@ -28,7 +28,6 @@ public interface DhyMapper {
     void updateStatus2(Integer id);
 
     List<Tree> getTreeAll(Integer userId);
-
 
     List<Tree> queryOrgAll2(@Param("id") int id, @Param("pid") int pid);
 

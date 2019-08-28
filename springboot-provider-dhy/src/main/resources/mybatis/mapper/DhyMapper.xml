@@ -8,19 +8,33 @@
 
   </select>
 
-  <select id="queryZhanghao" resultType="com.jk.model.Zhanghao">
+  <select id="queryZhanghao" resultType="com.jk.model.User">
 
-    select * from t_zhanghao <include refid="cha2"></include>
+    select * from t_user s,user_role ur,l_role r
+    where s.userId = ur.userid
+    and ur.roleid = r.id
+
+    <include refid="cha2"></include>
 
   </select>
 
+
+  <select id="showXiangQing2" resultType="com.jk.model.User">
+
+     select * from t_user s,user_role ur,l_role r
+        where s.userId = ur.userid
+        and ur.roleid = r.id and s.userId = #{id}
+
+  </select>
+
+
   <select id="getTreeAll" resultType="com.jk.model.Tree">
         SELECT sp.* from t_user s ,user_role ur ,l_role sr,role_permission rp,tree sp
-		where s.userid = ur.userid
+		where s.userId = ur.userid
 		and ur.roleid = sr.id
 		and sr.id = rp.roleid
 		and rp.perid = sp.id
-		and s.userid = #{userId} GROUP BY sp.text
+		and s.userId = #{userId} GROUP BY sp.text
 
   </select>
 
@@ -52,13 +66,13 @@
 
   <sql id="cha2">
 
-    <where>
+
       <if test="name!= null and name !=''">
 
-        and (name like ("%"#{name}"%") or email like ("%"#{name}"%"))
+        and userName like "%${name}%"
       </if>
 
-    </where>
+
 
   </sql>
 

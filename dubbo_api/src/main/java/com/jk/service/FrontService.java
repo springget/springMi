@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.model.Goods;
+import com.jk.model.Luser;
 
 import com.jk.model.Luser;
 import com.jk.model.Pedition;
@@ -36,4 +37,10 @@ public interface FrontService {
     Television querytvxiangQing(Integer tid);
 
     List<TvVersion> tvVersion();
+
+    Luser register(String username);
+
+    void addUser(Luser user);
+
+    List<Goods> queryMiaosha();
 }

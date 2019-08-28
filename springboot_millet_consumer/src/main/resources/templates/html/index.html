@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>-->
-<html lang = "en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="c">
+
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=1226">
@@ -47,6 +47,10 @@
 
 
 </head>
+
+
+
+
 <script>
 
     $(function(){
@@ -59,9 +63,48 @@
         tv1();
         tv2();
         tv3();
+        hotGoods();
+        load_data();
     })
 
+    //页面刚加载的时候，开始判断，如果有用户名，就显示在页面上，如果没有用户名的话，就显示登录名称
+    function load_data(){
+        var theme = $("#luser").val();
 
+        if(theme==null||theme==""){
+            $("#cue").show();
+            $("#uname").html('');
+        }else{
+            $("#cue").hide();
+            $("#uname").html(theme);
+        }
+    }
+
+    //页面刚加载的时候，开始判断，如果有用户名，就显示在页面上，如果没有用户名的话，就显示登录名称
+    function hotGoods() {
+        $.ajax(
+        {
+            url:"../seckill/queryHotGoods",
+
+            success:function(data){
+
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
+                        "      <div class='item-tit'>\n" +
+                        "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
+                        "        <p>"+data[i].goodsPrice+"起</p>\n" +
+                        "    </div>" +
+                        "    </li>";
+                }
+
+                $("#hotGoods").html(aa);
+
+            }
+
+        })
+    }
     function phone1() {
 
    $.ajax({
@@ -208,10 +251,10 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href=''><img src=\"../picture/h1.png\"></a>" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src=\"../picture/h1.png\"></a>" +
                     "      <div class='item-tit'>\n" +
                     "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
-                    "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                    "        <p>"+data[i].goodsPrice+"起</p>\n" +
                     "    </div>" +
                     "    </li>";
                 }
@@ -234,10 +277,10 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src=\"../picture/h2.png\"></a>" +
                         "      <div class='item-tit'>\n" +
                         "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
-                        "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                        "        <p>"+data[i].goodsPrice+"起</p>\n" +
                         "    </div>" +
                         "    </li>";
                 }
@@ -249,32 +292,131 @@
         })
     }
 
-    function redmi() {
-        $.ajax({
 
-            url:"../front/queryPhone2",
-
-            success:function(data){
-
-                var aa = "";
-                for (var i = 0; i < data.length; i++) {
-
-                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
-                        "      <div class='item-tit'>\n" +
-                        "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
-                        "        <p>"+data[i].goodsNumber+"起</p>\n" +
-                        "    </div>" +
-                        "    </li>";
-                }
-
-                $("#redmi").html(aa);
-
-            }
-
-        })
-    }
 
 </script>
+
+
+<script>
+
+
+
+
+    var startTime = new Date();
+
+    //定义参数可返回当天的日期和时间
+
+    startTime.setFullYear(2019, 8, 26);
+
+    //调用设置年份
+
+    startTime.setHours(23);
+
+    //调用设置指定的时间的小时字段
+
+    startTime.setMinutes(59);
+
+    //调用设置指定时间的分钟字段
+
+    startTime.setSeconds(59);
+
+    //调用设置指定时间的秒钟字段
+
+    startTime.setMilliseconds(999);
+
+    //调用置指定时间的毫秒字段
+
+    var EndTime=startTime.getTime();
+
+    //定义参数可返回距 1970 年 1 月 1 日之间的毫秒数
+
+    function GetRTime(){
+
+        //定义方法
+
+        var NowTime = new Date();
+
+        //定义参数可返回当天的日期和时间
+
+        var nMS = EndTime - NowTime.getTime();
+
+        //定义参数 EndTime减去NowTime参数获得返回距 1970 年 1 月 1 日之间的毫秒数
+
+        var nD = Math.floor(nMS/(1000 * 60 * 60 * 24));
+
+        //定义参数 获得天数
+
+        var nH = Math.floor(nMS/(1000*60*60)) % 24;
+
+        //定义参数 获得小时
+
+        var nM = Math.floor(nMS/(1000*60)) % 60;
+
+        //定义参数 获得分钟
+
+        var nS = Math.floor(nMS/1000) % 60;
+
+        //定义参数 获得秒钟
+
+        if (nMS < 0){
+
+            //如果秒钟大于0
+
+            $("#dao").hide();
+
+            //获得天数隐藏
+
+            $("#daoend").show();
+
+            //获得活动截止时间展开
+
+        }else{
+
+            //否则
+
+            $("#dao").show();
+
+            //天数展开
+
+            $("#daoend").hide();
+
+            //活动截止时间隐藏
+
+            $("#RemainD").text(nD);
+
+            //显示天数
+
+            $("#h").text(nH);
+
+            //显示小时
+
+            $("#m").text(nM);
+
+            //显示分钟
+
+            $("#s").text(nS);
+
+            //显示秒钟
+
+        }
+
+    }
+
+
+    $(document).ready(function () {
+
+        //定义方法
+
+        var timer_rt = window.setInterval("GetRTime()", 1000);
+
+        //定义参数 显示出GetRTime()方法 1000毫秒以后启动
+
+    });
+
+
+</script>
+
+
 
 <script>
 
@@ -282,6 +424,7 @@
     $(function(){
         queryshouji1();
         dianshi();
+        miaosha();
     })
 
     //手机
@@ -321,13 +464,42 @@
                 }
                 $("#dianshi").html(aa);
             }
+        })
+    }
+
+
+
+    //秒杀商品展示
+    function miaosha() {
+        $.ajax({
+            url:"../front/miaosha",
+            success:function(data){
+                var aa = "";
+                for (var i = 0; i < data.length; i++) {
+                  /*  alert(data)*/
+                    aa +="    <li class = 'wrap-1 no-ml'><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\">\n" +
+                        "        <div class='bg'></div>\n" +
+                        "        <div class = 'content'>\n" +
+                        "        <a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = "+data[i].goodsImg+"></a>\n" +
+                        "        <h3>"+data[i].goodsName+"</h3>\n" +
+                        "    <p class = 'p1'>"+data[i].goodsInfo+"</p>\n" +
+                        "        <p class = 'p2'>"+data[i].goodsPrice+"元 <span> "+data[i].oldPrice+"元</span></p>\n" +
+                        "    </div>\n </a>" +
+                        "    </li>";
+                }
+                $("#miaosha").html(aa);
+            }
 
         })
     }
 
+
 </script>
 
 <body>
+
+<!--<input type="hidden" th:value="${session.luser.username}" id="luser">-->
+<input type="hidden" th:value="${session.luser}==null?'':'欢迎'+${session.luser.username}+'&nbsp&nbsp <a href=\'../front/zhuxiao\'>注销</a>'+'&nbsp&nbsp <a href=\'../page/persion\'>个人中心</a>'" id="luser">
 
 <!--头部广告部分-->
 <div class = 'h-adv'><a class = 'go-adv' href = "#"></a></div>
@@ -367,14 +539,18 @@
         </div>
         <!--登录注册-->
         <div class = 'link fr'>
-            <a href = "../front/login">登录</a>
-            <span class = 'sep'>|</span>
-            <a href = "#">注册</a>
-            <span class = 'sep'>|</span>
-            <a href = "#">消息通知</a>
-        </div>
-    </div>
-</header>
+             <span id="cue">
+                 <a href = "../front/login">登录</a></span>
+            <span id="uname">
+            </span>
+
+               <span class = 'sep'>|</span>
+               <a href = "#">注册</a>
+               <span class = 'sep'>|</span>
+               <a href = "#">消息通知</a>
+           </div>
+       </div>
+   </header>
 
 <!--导航链接-->
 <section class = 'mi-h-menu'>
@@ -387,7 +563,7 @@
                 <li class = 'nav-Category'>
                     <div class = 'site-category'>
                         <ul class = 'site-nav-list'>
-                            <li><a href = "#">手机 电话卡<i class = 'iconfont icon-fangxiang' ></i></a>
+                            <li><a href = "#">手机 电话卡<i class = 'iconfont icon-fangxiang'></i></a>
                                 <div class = 'children clearfix children-col-4'>
                                     <ul class = 'children-list-col children-list-col-1 fl' id = "phone">
 
@@ -1024,22 +1200,22 @@
         <!--闪购秒杀区域-->
         <div class = 'sg-ms clearfix'>
             <div class = 'sg-ms-time'>
-                <h2>22:00 场</h2>
+                <h2><span id="d">小米秒杀</span></h2>
                 <img src = "../icons/flashpurchase.png" alt = "">
-                <div class = 'ms-text'>距离开始还有</div>
+                <div class = 'ms-text'>距离结束还有</div>
                 <div class = 'sg-ms-cd'>
-                    <span class = 'h'></span>
+                    <span class = 'h' id = "h"></span>
                     <div class = 'fl dot'>:</div>
-                    <span class = 'm'></span>
+                    <span class = 'm' id = "m"></span>
                     <div class = 'fl dot'>:</div>
-                    <span class = 's'></span>
+                    <span class = 's' id = "s"></span>
                 </div>
             </div>
             <!--秒杀轮播区域-->
             <div class = 'sg-ms-wrap'>
                 <div class = 'box'>
-                    <ul>
-                        <li class = 'wrap-1 no-ml'><a href = "#"></a>
+                    <ul id="miaosha">
+                       <!-- <li class = 'wrap-1 no-ml'><a href = "#"></a>
                             <div class='bg'></div>
                             <div class = 'content'>
                                 <a href = "#">
@@ -1126,7 +1302,7 @@
                                 <p class = 'p1'>让爱车成为移动充电站</p>
                                 <p class = 'p2'>1 元 <span> 69元</span></p>
                             </div>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -2555,96 +2731,16 @@
         <!--周边商品区域-->
         <div class = 'product-item-ha'>
             <div class = 'phone clearfix'>
-                <h2>周边</h2>
+                <h2>热门</h2>
                 <div class = 'moreb zb'>
                     <ul>
-                        <li class = 'current'>热门</li>
-                        <li>出行</li>
-                        <li>居家</li>
-                        <li>生活周边</li>
-                        <li>箱包</li>
                     </ul>
                 </div>
             </div>
             <div class = 'pro-all clearfix'>
                 <div class = 'fl phone-r rim show-activea'>
-                    <ul class = 'show'>
-                        <li>
-                            <a href = "#"><img src = "../images/tj-1.jpg" alt = ""></a>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb8.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">TS尼龙偏光太阳镜 米家定制灰色</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb9.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">米兔招财猫足金吊坠
-</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb10.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">小米短袖T恤 两件装</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb11.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">8H记忆绵护椎腰靠
-</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <a href = "#"><img src = "../images/tj-2.jpg" alt = ""></a>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb12.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">自动折叠伞 黑</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb13.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">小米棒球帽 藏蓝</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li>
-                            <div>
-                                <a href = "#"><img src = "../images/zb14.jpg" alt = ""></a>
-                            </div>
-                            <h3><a href = "#">贝医生巴氏牙刷(四色装)</a></h3>
-                            <p class = 'p1'>AI人脸解锁，小巧全面屏，高性能处理器</p>
-                            <p class = 'p2'>549元 <span>599元</span></p>
-                        </li>
-                        <li class = 'small-li'>
-                            <h3><a href = "#">小米净水器</a></h3>
-                            <p class = 'p2'>1799元</p>
-                            <a href = "#"><img src = "../images/product-small-1.jpg" alt = ""></a>
-                        </li>
-                        <li class = 'small-li'>
-                            <a href = "#">
-                                浏览更多
-                                <small>热门</small>
-                            </a>
-                            <a href = "#"><i class = 'iconfont'></i></a>
-                        </li>
+                    <ul class = 'show' id="hotGoods">
+
                     </ul>
                     <ul class = 'no-show'>
                         <li>

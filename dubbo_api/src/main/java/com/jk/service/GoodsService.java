@@ -42,4 +42,6 @@ public interface GoodsService {
     void pass(Integer id);
 
     List<Goods> queryHotGoods();
+
+    void setSeckill(Integer id);
 }

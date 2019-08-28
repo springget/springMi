@@ -61,7 +61,7 @@ public class DhyController {
 
     public ModelAndView showXiangQing2(Integer id, ModelAndView model){
        /* System.err.println(id);*/
-        Zhanghao list = dhyService.showXiangQing2(id);
+        User list = dhyService.showXiangQing2(id);
 
         model.setViewName("html/dhy/role");
         model.addObject("list",list);
@@ -133,6 +133,7 @@ public class DhyController {
         List<Tree> list = dhyService.getTreeAll(user.getUserId());
         //自己调自己
         list = TreeNoteUtil.getFatherNode(list);
+
         return list;
     }
 
@@ -185,7 +186,7 @@ public class DhyController {
     @RequestMapping("cxbyridtree")
     @ResponseBody
     public List<Tree> cxbyridtree(Integer id){
-        System.out.println(id);
+        /*System.out.println(id);*/
         return dhyService.querytreebyrid(id,0);
     }
 

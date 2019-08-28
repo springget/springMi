@@ -48,36 +48,36 @@
         <tr>
             <td>手机号</td>
             <td>
-                <input type="text" class="form-control" th:value="${list.phone}" disabled>
+                <input type="text" class="form-control" th:value="${list.userPhone}" disabled>
             </td>
         </tr>
         <tr>
             <td>姓名</td>
             <td>
-                <input type="text" class="form-control" th:value="${list.name}" disabled>
+                <input type="text" class="form-control" th:value="${list.userName}" disabled>
             </td>
         </tr>
 
         <tr>
-            <td>邮箱</td>
+            <td>角色</td>
             <td>
-                <input type="text" class="form-control" th:value="${list.email}"  disabled>
+                <input type="text" class="form-control" th:value="${list.name}"  disabled>
             </td>
         </tr>
 
-        <tr>
+<!--        <tr>
             <td>选择角色</td>
             <td>
-                <!--
+                &lt;!&ndash;
                     ${list.role}==1?'超管':'普通用户'
-                -->
+                &ndash;&gt;
                 <input type="text" class="form-control" th:value="${list.role}==1?'超管':'普通用户'"  disabled>
-              <!--  <select class="form-control" disabled>
+              &lt;!&ndash;  <select class="form-control" disabled>
                     <option value="1">超级管理员</option>
                     <option value="2">客服</option>
-                </select>-->
+                </select>&ndash;&gt;
             </td>
-        </tr>
+        </tr>-->
 
     </table>
 

@@ -76,4 +76,7 @@
     <select id="queryHotGoods" resultType="com.jk.model.Goods">
         select * from t_goods a where a.ishot = 1
     </select>
+    <update id="setSeckill" parameterType="integer">
+        update t_goods set isseckill = 1 , goodsTime =now() where goodsId = #{id}
+    </update>
 </mapper>

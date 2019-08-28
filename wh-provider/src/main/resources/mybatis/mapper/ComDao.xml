@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.ComDao">
+    <select id="queryContent" resultType="com.jk.model.Comment" parameterType="integer">
+        select * from t_comment a,t_user b,t_goods c where a.userId=b.userId
+         and a.goodsId=c.goodsId and c.goodsId=#{id}
+    </select>
+</mapper>

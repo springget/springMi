@@ -2,7 +2,7 @@ package com.jk.model;
 
 import java.io.Serializable;
 
-public class Luser implements Serializable{
+public class Luser implements Serializable {
 
     private Integer id;
 

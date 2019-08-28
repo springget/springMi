@@ -116,4 +116,9 @@ public class GoodsServiceImpl implements GoodsService{
         return goodsDao.queryHotGoods();
     }
 
+    @Override
+    public void setSeckill(Integer id) {
+        goodsDao.setSeckill(id);
+    }
+
 }

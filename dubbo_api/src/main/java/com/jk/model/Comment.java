@@ -12,7 +12,7 @@ public class Comment   implements Serializable {
 
     private Integer commentId;     //评论ID
     private String commentInfo;    //评论内容
-    private String reply;//回复内容
+    private String reply;          //回复内容
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

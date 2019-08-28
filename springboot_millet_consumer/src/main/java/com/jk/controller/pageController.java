@@ -6,6 +6,7 @@ import com.jk.model.Comment;
 import com.jk.model.Goods;
 import com.jk.model.Refund;
 import com.jk.service.GoodsService;
+import com.jk.service.RessService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,10 @@ public class pageController {
 
     @Reference
     private GoodsService goodsService;
+
+
+    @Reference
+    private RessService ressService;
 
     @Reference
     private com.jk.service.DealService DealService;
@@ -142,7 +147,6 @@ public class pageController {
     //修改积分
     @RequestMapping("updPresented")
     public ModelAndView updPresented(String id){
-        System.out.println(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("html/yyw/updPresented");
         mv.addObject("order",id);
@@ -212,7 +216,6 @@ public class pageController {
 //updateComment 回复
         @RequestMapping("updateComment")
         public ModelAndView updateComment(Integer id){
-            System.out.println(id);
             Comment comment = DealService.findCommentByid(id);
             ModelAndView mv = new ModelAndView();
             mv.setViewName("/html/lih/reply");
@@ -244,16 +247,17 @@ public class pageController {
         mv.addObject("goods",goods);
         return mv;
     }
+
     // 个人中心
     @RequestMapping("persion")
     public String persion(){
         return "html/wh/persion";
     }
+
     // 收益明细
     @RequestMapping("highcharts")
     public String highcharts(){
         return "html/wh/highcharts";
     }
-
 
 }

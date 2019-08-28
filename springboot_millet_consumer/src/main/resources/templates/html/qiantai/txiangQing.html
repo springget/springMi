@@ -5,11 +5,8 @@
     <meta name="author" content="order by dede58.com"/>
     <title>小米6立即购买-小米商城</title>
     <link rel="stylesheet" type="text/css" href="../../ym/css/style.css">
-
-
     <!-- 引入jquery -->
     <script type="text/javascript" src="../djs/jquery.min.js"></script>
-
     <!-- 引入my97 -->
     <script type="text/javascript" src="../djs/my97/WdatePicker.js"></script>
     <!-- 引入bootstrap的js-->
@@ -64,6 +61,35 @@
 
     }
 
+    //可选择尺寸
+    function size() {
+
+        $.ajax({
+            url:"../front/tvSize",
+            type:"post",
+            dataType:"json",
+            success:function(data){
+
+                for(var i=0;i<data.length;i++){
+                    if(i==i){
+                        $("#size"+i).html(data[i].version);
+                        $("#me"+i).val(data[i].price);
+                    }
+                }
+                $("#price").html(data[0].price);
+                $("#price1").html(data[0].price);
+
+            },
+            error:function(){
+                alert("查询内存失败");
+            }
+        })
+
+    }
+
+
+
+
     //选择内存
     function internal11(val) {
 
@@ -74,6 +100,21 @@
         //计算价格
         $("#price").html(val);
         $("#price1").html(val);
+
+    }
+
+    //选择尺寸
+    function tvSize(val) {
+
+
+        var pri = $("#price").html();//获取当前商品总价格
+
+        var price = parseInt(pri);
+
+        var val = parseInt(val);
+
+        //计算价格
+        $("#price").html(price+val);
 
     }
 
@@ -149,7 +190,7 @@
                 <input type="text" class="shuru"  placeholder="小米6&nbsp;小米MIX现货">
             </div>
             <div class="submit fl">
-                <input type="submit" class="sousuo" value="搜索"/>
+                < type="submit" class="sousuo" value="搜索"/>
             </div>
             <div class="clear"></div>
         </form>
@@ -186,7 +227,7 @@
         <div class="left fl"><img src="../../ym/image/xmad_14926862610682_UhkfS.png"></div>
         <div class="right fr">
             <div class="h3 ml20 mt20"><p><span th:text="${list.televInfo}"></span></p></div>
-            <div class="jianjie mr40 ml20 mt10"><!--<span th:text="${list.televPrice}"></span>--></div>
+            <div class="jianjie mr40 ml20 mt10"><!--<span th:text="${list.televu}"></span>--></div>
             <div class="jiage ml20 mt10"></div>
 
             <div class="ft20 ml20 mt20">选择版本</div>
@@ -195,18 +236,41 @@
 
                 <div class="banben fl">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" id="me0" name="version" checked value="" onclick="internal11(this.value)" >
+                    <input type="radio" id="me0" name="version" checked  value="" onclick="internal11(this.value)" >
                     &nbsp;&nbsp;&nbsp;<span id="m0"></span>
                 </div>
 
                 <div class="banben fr">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" id="me1" name="version" value="" onclick="internal11(this.value)">
+                    <input type="radio" id="me1" name="vesion"  value="" onclick="internal11(this.value)">
                     &nbsp;&nbsp;&nbsp;<span id="m1"></span>
                 </div>
 
                 <div class="clear"></div>
             </div>
+
+
+
+<!--            <div class="ft20 ml20 mt20">选择尺寸</div>
+            <div class="xzbb ml20 mt10">
+                <div class="banben fl">
+                    <a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="size0" name="size" checked value="" onclick="size(this.value)" >
+                    </a>
+                </div>
+                <div class="banben fr">
+                    <a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="size1" name="size" value="" onclick="size(this.value)" >
+                    </a>
+                </div>
+
+            </div>-->
+
+
             <div class="ft20 ml20 mt20"></div>
             <div class="xzbb ml20 mt10">
 
@@ -222,7 +286,6 @@
                 <div class="bot mt20 ft20 ftbc"><span id="price"></span></div>
             </div>
             <div class="xiadan ml20 mt20">
-
 <!--                <input class="jrgwc"  type="button" name="jrgwc" value="立即选购"  onclick="" />-->
                 <input class="jrgwc" type="button" name="jrgwc" value="加入购物车" onclick="addTv()" />
 
@@ -231,7 +294,8 @@
         <div class="clear"></div>
     </div>
     <!-- 隐藏id -->
-    <input name="id" id="televId" th:value="${list.televId}">
+    <input name="id" id="televId" th:value="${list.televId}" type="hidden">
+    <input name="id" id="televName" th:value="${list.televName}" type="hidden">
 </form>
 <!-- footer -->
 <footer class="mt20 center">
@@ -250,11 +314,14 @@
 //加入购物车
     function addTv() {
 /*        var tv = $("#addForm").serialize();*/
-        var verison = $("#")
+        var televId = $("#televId").val();
+        var televName = $("#televName").val();
+ /*       alert(televId);
+        alert(televName);*/
         $.ajax({
             url:"../front/addTv",
             type:"post",
-            data:{},
+            data:{id:televId,id:televName},
             success:function (data) {
                 alert("新增成功！");
             }

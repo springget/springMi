@@ -45,4 +45,6 @@ public interface GoodsDao {
     List<Goods> queryHot();
 
     List<Goods> queryHotGoods();
+
+    void setSeckill(Integer id);
 }

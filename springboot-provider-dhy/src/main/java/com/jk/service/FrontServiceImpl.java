@@ -2,6 +2,7 @@ package com.jk.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jk.mapper.FrontMapper;
+import com.jk.model.*;
 import com.jk.model.Goods;
 import com.jk.model.Luser;
 import com.jk.model.Pedition;
@@ -84,5 +85,22 @@ public class FrontServiceImpl implements FrontService{
     @Override
     public List<TvVersion> tvVersion() {
         return frontMapper.tvVersion();
+    }
+
+    @Override
+    public Luser register(String username) {
+
+        return frontMapper.register(username);
+    }
+
+    @Override
+    public void addUser(Luser user) {
+
+        frontMapper.addUser(user);
+    }
+
+    @Override
+    public List<Goods> queryMiaosha() {
+        return frontMapper.queryMiaosha();
     }
 }
