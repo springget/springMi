@@ -35,7 +35,7 @@ public class DhyServiceImpl implements DhyService{
         Map map = new HashMap<>();
 
         map.put("name",parameUtil.getName());
-        /*        System.err.println(parameUtil.getName());*/
+/*            System.err.println(parameUtil.getName());*/
         List<Role> list = dhyMapper.queryRole(map);
 
         PageInfo<Role> pageInfo = new PageInfo<>(list);
@@ -56,10 +56,10 @@ public class DhyServiceImpl implements DhyService{
         Map map = new HashMap<>();
 
         map.put("name",parameUtil.getName());
-        System.err.println(parameUtil.getName());
-        List<Zhanghao> list = dhyMapper.queryZhanghao(map);
+/*        System.err.println(parameUtil.getName());*/
+        List<User> list = dhyMapper.queryZhanghao(map);
 
-        PageInfo<Zhanghao> pageInfo = new PageInfo<>(list);
+        PageInfo<User> pageInfo = new PageInfo<>(list);
 
         PageUtil page= new PageUtil((int)pageInfo.getTotal(),parameUtil.getPageNumber(), parameUtil.getPageSize());
 
@@ -75,7 +75,7 @@ public class DhyServiceImpl implements DhyService{
     }
 
     @Override
-    public Zhanghao showXiangQing2(Integer id) {
+    public User showXiangQing2(Integer id) {
         return dhyMapper.showXiangQing2(id);
     }
 

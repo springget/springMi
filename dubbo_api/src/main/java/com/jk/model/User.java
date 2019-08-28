@@ -38,16 +38,44 @@ public class User   implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date longinTime;//登陆时间
+    private Date loginTime;//登陆时间
     private String consignee;//收货人
     private String petName;//昵称
     private Integer integral;//积分
     private Integer logisticId;//物流id
     private String img;//头像
     private Integer memberName;  //关联member 查询会员表
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createTime; //用户创建时间
+    private Integer count; // 登录次数
 
+    //role表中的name
+    private String name;
 
+    public Integer getCount() {
+        return count;
+    }
 
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getImg() {
         return img;
@@ -145,12 +173,12 @@ public class User   implements Serializable {
         this.address = address;
     }
 
-    public Date getLonginTime() {
-        return longinTime;
+    public Date getLoginTime() {
+        return loginTime;
     }
 
-    public void setLonginTime(Date longinTime) {
-        this.longinTime = longinTime;
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
     }
 
     public String getConsignee() {

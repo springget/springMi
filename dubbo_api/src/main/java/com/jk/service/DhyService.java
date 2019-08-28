@@ -2,7 +2,7 @@ package com.jk.service;
 
 import com.jk.model.Role;
 import com.jk.model.Tree;
-import com.jk.model.Zhanghao;
+import com.jk.model.User;
 import com.jk.util.PageUtil;
 import com.jk.util.ParameUtil;
 
@@ -19,7 +19,7 @@ public interface DhyService {
 
     Role showXiangQing(Integer id);
 
-    Zhanghao showXiangQing2(Integer id);
+    User showXiangQing2(Integer id);
 
     void updateStatus(Integer id);
 

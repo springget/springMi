@@ -63,7 +63,7 @@
            <input type="checkbox" name="danxuan" value="5">编辑
            <br>
            -->
-        <input type="text" class="form-control" name = "name" id="name" placeholder="用户名字或邮箱">
+        <input type="text" class="form-control" name = "name" id="name" placeholder="用户名字">
     </div>
 
         <button type="button" class="btn btn-success" onclick="queryData()">搜索</button>
@@ -156,12 +156,12 @@
                 return param;
             },
             columns: [
-                {field: 'id', title: '序号', width: 300},
-                {field: 'email', title: '邮箱', width: 300},
-                {field: 'name', title: '姓名', width: 300},      //  列    field   代表是 后台  传过来的值
-                {field: 'phone', title: '手机号', width: 300},
-                {field: 'role', title: '角色名称', width: 300},      //  列    field   代表是 后台  传过来的值
-                {field: 'status', title: '状态', width: 300,
+                {field: 'userId', title: '序号', width: 300},
+/*                {field: 'email', title: '邮箱', width: 300},*/
+                {field: 'userName', title: '姓名', width: 300},      //  列    field   代表是 后台  传过来的值
+                {field: 'userPhone', title: '手机号', width: 300},
+                {field: 'name', title: '角色名称', width: 300},      //  列    field   代表是 后台  传过来的值
+       /*         {field: 'status', title: '状态', width: 300,
                     formatter:function(value,row,index){
                         if(value=='0'){
                             return "正常";
@@ -169,20 +169,20 @@
                             return "禁用";
                         }
                     }
-                },
+                },*/
                 {field: 'count', title: '登录次数', width: 300},
-                {field: 'lastLogin', title: '最近登录时间', width: 300},
+                {field: 'loginTime', title: '最近登录时间', width: 300},
                 {field: 'createTime', title: '创建时间', width: 300},
                 {field: 'cz', title: '操作', width: 300,
                     formatter:function(value,row,index){
-                        var a = "<a href='javaScript:xiangqing(\""+row.id+"\")'>详情</a>";
-                        a += "   <a href='javaScript:editqx(\""+row.id+"\")'>角色</a>";
-                        if(row.status=='0'){
-                            a += "   <a href='javaScript:down(\""+row.id+"\")'>禁用</a>";
+                        var a = "<a href='javaScript:xiangqing(\""+row.userId+"\")'>详情</a>";
+                        a += "   <a href='javaScript:editqx(\""+row.userId+"\")'>角色</a>";
+                 /*       if(row.status=='0'){
+                            a += "   <a href='javaScript:down(\""+row.userId+"\")'>禁用</a>";
                         }else{
-                            a += "   <a href='javaScript:up(\""+row.id+"\")'>启用</a>";
+                            a += "   <a href='javaScript:up(\""+row.userId+"\")'>启用</a>";
                         }
-
+*/
                         return a;
                     }
                 }
@@ -194,6 +194,7 @@
     function queryData() {
         var aa = $("input[name = 'danxuan']:checked").val();
         /*alert(aa)*/
+/*        alert($("#name").val())*/
         $("#dataGrid").bootstrapTable("refresh", {
             "query": {
 
@@ -298,7 +299,7 @@
         /*     location.href = "../dhy/showXiangQing?id="+gid;*/
         //打开新增弹框
         bootbox.dialog({
-            title: '新增用户',
+            title: '用户详情',
             message: createAddContent("../dhy/showXiangQing2?id="+id),
             closeButton: true,//是否显示关闭按钮
             buttons: {

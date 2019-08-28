@@ -208,10 +208,10 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href=''><img src=\"../picture/h1.png\"></a>" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src=\"../picture/h1.png\"></a>" +
                     "      <div class='item-tit'>\n" +
                     "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
-                    "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                    "        <p>"+data[i].goodsPrice+"起</p>\n" +
                     "    </div>" +
                     "    </li>";
                 }
@@ -234,10 +234,10 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src=\"../picture/h2.png\"></a>" +
                         "      <div class='item-tit'>\n" +
                         "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
-                        "        <p>"+data[i].goodsNumber+"起</p>\n" +
+                        "        <p>"+data[i].goodsPrice+"起</p>\n" +
                         "    </div>" +
                         "    </li>";
                 }
@@ -249,30 +249,7 @@
         })
     }
 
-    function redmi() {
-        $.ajax({
 
-            url:"../front/queryPhone2",
-
-            success:function(data){
-
-                var aa = "";
-                for (var i = 0; i < data.length; i++) {
-
-                    aa += "<li><a href=''><img src=\"../picture/h2.png\"></a>" +
-                        "      <div class='item-tit'>\n" +
-                        "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
-                        "        <p>"+data[i].goodsNumber+"起</p>\n" +
-                        "    </div>" +
-                        "    </li>";
-                }
-
-                $("#redmi").html(aa);
-
-            }
-
-        })
-    }
 
 /*
 //家电

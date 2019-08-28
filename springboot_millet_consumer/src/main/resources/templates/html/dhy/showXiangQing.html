@@ -54,7 +54,8 @@
         <tr>
             <td>描述</td>
             <td>
-                <input type="text" class="form-control" th:value="${list.description}" disabled>
+<!--                <input type="text" class="form-control" th:value="${list.description}" disabled>-->
+                <textarea th:text ="${list.description}" disabled></textarea>
             </td>
         </tr>
     </table>
