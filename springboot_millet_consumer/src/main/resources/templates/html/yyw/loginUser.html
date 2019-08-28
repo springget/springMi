@@ -1,7 +1,5 @@
-
 <html>
 <head>
-
     <title>标题</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -119,27 +117,20 @@
 
 <script type="text/javascript">
    /* changeCode = function(img){
-
-
         $(img).attr("src",$(img).attr("src")+"?1");
-
-
     }*/
-
     $("#login").click(
-
         function(){
             var userAccount = $("#userAccount").val();
             var userPassword = $("#userPassword").val();
             var code = $("#code").val();
             var form = $("#userForm").serialize();
-
             $.ajax({
                 url:"../client/loginUser",
                 data:form,
                 type:"post",
                 success:function(data){
-
+                    localStorage.setItem("username",userAccount);
                     /*if(data=="codeError"){
                         alert("验证码错误");
                     }*/
@@ -152,26 +143,16 @@
                     if(data=="success"){
                         location.href="../page/index";
                     }
-
                 },error:function(){
                     alert("失败")
                 }
-
-
-
             })
-
-
         }
     )
 
     $("#zhu").click(
-
         function(){
-            alert(22222)
            location.href="../page/toregister";
-
-
         }
     )
 

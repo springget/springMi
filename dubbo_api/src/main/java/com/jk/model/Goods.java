@@ -26,23 +26,23 @@ import java.util.Date;
  */
 public class Goods implements Serializable {
 
-    private Integer goodsId;//商品Id
-    private String goodsName; //商品名称
-    private Integer goodsNumber;//商品数量
-    private String goodsImg;//商品图片
-    private Integer typeId;//类型id
+    private Integer goodsId;          //商品Id
+    private String goodsName;         //商品名称
+    private Integer goodsNumber;      //商品数量
+    private String goodsImg;          //商品图片
+    private Integer typeId;           //类型id
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date goodsTime;//商品发布时间
-    private String  goodsInfo;//商品描述
-    private Double  goodsPrice;//商品价格
-    private Integer  commentId;//评论id
-    private Integer  userId;//用户id
-    private Integer  orderId;//订单id
-    private Integer sales;  //总销量
-    private Integer status;  //商品状态 1.出售中 0.仓库中
-    private String typeName; //  (type表)类型名称
-    private Integer goodsLike;  // 1.喜欢 0.正常
+    private Date goodsTime;         //商品发布时间
+    private String  goodsInfo;      //商品描述
+    private Double  goodsPrice;     //商品价格
+    private Integer  commentId;     //评论id
+    private Integer  userId;        //用户id
+    private Integer  orderId;       //订单id
+    private Integer sales;          //总销量
+    private Integer status;         //商品状态 1.出售中 0.仓库中
+    private String typeName;        //(type表)类型名称
+    private Integer goodsLike;      // 1.喜欢 0.正常
 
 
     private Double  sumPrice;//总额度

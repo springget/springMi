@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>-->
-<html lang = "en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="c">
+
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=1226">
@@ -42,8 +42,6 @@
     <script type="text/javascript" src="../djs/fileinput/js/locales/zh.js"></script>
 
     <script type="text/javascript" src="../djs/fileinput/themes/fa/theme.js"></script>
-
-
 </head>
 <script>
 
@@ -58,11 +56,26 @@
         tv2();
         tv3();
         hotGoods();
+        load_data();
     })
 
-    function hotGoods() {
-        $.ajax({
+    //页面刚加载的时候，开始判断，如果有用户名，就显示在页面上，如果没有用户名的话，就显示登录名称
+    function load_data(){
+        var theme = $("#luser").val();
 
+        if(theme==null||theme==""){
+            $("#cue").show();
+            $("#uname").html('');
+        }else{
+            $("#cue").hide();
+            $("#uname").html(theme);
+        }
+    }
+
+    //页面刚加载的时候，开始判断，如果有用户名，就显示在页面上，如果没有用户名的话，就显示登录名称
+    function hotGoods() {
+        $.ajax(
+        {
             url:"../seckill/queryHotGoods",
 
             success:function(data){
@@ -85,28 +98,19 @@
         })
     }
     function phone1() {
-
    $.ajax({
-
             url:"../front/queryPhone1",
-
             success:function(data){
-
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
                     aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = \"../picture/xm8-80.png\"\n" +
                         "alt = \"\">"+data[i].goodsName+"</a></li>";
                 }
-
                 $("#phone").html(aa);
-
             }
-
         })
     }
-
-
 
     function phone2() {
 
@@ -367,13 +371,15 @@
                 }
                 $("#dianshi").html(aa);
             }
-
         })
     }
 
 </script>
 
 <body>
+
+<!--<input type="hidden" th:value="${session.luser.username}" id="luser">-->
+<input type="hidden" th:value="${session.luser}==null?'':'欢迎'+${session.luser.username}+'&nbsp&nbsp <a href=\'../front/zhuxiao\'>注销</a>'+'&nbsp&nbsp <a href=\'../page/persion\'>个人中心</a>'" id="luser">
 
 <!--头部广告部分-->
 <div class = 'h-adv'><a class = 'go-adv' href = "#"></a></div>
@@ -413,16 +419,20 @@
         </div>
         <!--登录注册-->
         <div class = 'link fr'>
-            <a href = "#">登录</a>
-            <span class = 'sep'>|</span>
-            <a href = "#">注册</a>
-            <span class = 'sep'>|</span>
-            <a href = "#">消息通知</a>
-        </div>
-    </div>
-</header>
+             <span id="cue">
+                 <a href = "../front/login">登录</a></span>
+            <span id="uname">
+            </span>
 
-<!--导航链接-->
+               <span class = 'sep'>|</span>
+               <a href = "#">注册</a>
+               <span class = 'sep'>|</span>
+               <a href = "#">消息通知</a>
+           </div>
+       </div>
+   </header>
+
+   <!--导航链接-->
 <section class = 'mi-h-menu'>
     <div class = 'w1226 mi-se-h clearfix'>
         <!--mi-logo部分-->
@@ -3367,11 +3377,4 @@
 <script src='../js/index.js'></script>
 <script src = '../js/time-cd.js'></script>
 </body>
-
-
-<script>
-
-
-
-</script>
 </html>

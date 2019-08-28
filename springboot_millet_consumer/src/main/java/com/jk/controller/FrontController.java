@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -174,7 +176,6 @@ public class FrontController {
                     return "pwError";
                 }
                 //登录成功
-
                 request.getSession().setAttribute("luser", loginLuser);
                 return "success";
             }
@@ -256,6 +257,9 @@ public class FrontController {
     public void addTv(){
 
     }*/
-
-
+@RequestMapping("zhuxiao")
+    public String zhuxiao (HttpServletRequest request){
+  request.getSession().removeAttribute("luser");//清空session信息
+    return "html/index";
+}
 }

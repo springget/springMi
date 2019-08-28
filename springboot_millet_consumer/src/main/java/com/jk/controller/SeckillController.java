@@ -35,12 +35,12 @@ public class SeckillController {
 
     @RequestMapping("setSeckill")
     @ResponseBody
-    public void setSeckill(Integer count,Integer time, HttpServletRequest request){
+    public void setSeckill(Integer count,HttpServletRequest request,Integer id){
         Goods goods = (Goods) request.getSession().getAttribute("goods");
+        goodsService.setSeckill(id);
         String key = "seckill"+goods.getGoodsId();
         ModelAndView mv = new ModelAndView();
         redisTemplate.opsForValue().set(key,count);
-        redisTemplate.expire(key, time, TimeUnit.MINUTES);
     }
 
     @RequestMapping("getSeckill")
