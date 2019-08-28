@@ -41,10 +41,10 @@
 <body>
 <form role="form" id="formId">
     <input th:value="${goods.goodsNumber}" type="hidden" id="goodsNumber">
+    <input th:value="${goods.goodsId}" type="hidden" id="goodsId">
     商品名称:<input type="text" th:value="${goods.goodsName}" class="form-control" name="goodsName" disabled/>
     库存:<input type="text" th:value="${goods.goodsNumber}" class="form-control" name="goodsNumber" disabled/>
     设置数量:<button type="button" onclick="jian()">-</button><input id="number"><button type='button' onclick='add()'>+</button><br>
-    开始时间:<input  class="Wdate" id="startDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">结束时间<input  class="Wdate" id="endDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br>
     <button type="button" onclick="setSeckill()">保存</button>
 </form>
 </body>
@@ -63,19 +63,15 @@
     function setSeckill(){
         var count = $("#number").val();
         var size = $("#goodsNumber").val();
-        var start = $("#startDate").val();
-        var end = $("#endDate").val();
-        var a = new Date(start).getTime();
-        var b = new Date(end).getTime();
-        var c = (b-a)/1000;
-        alert(c);
+        var id = $("#goodsId").val();
+        alert(id)
         if (count>size) {
             alert("库存不足");
             return ;
         }
         $.ajax({
-            url:"../seckill/setSeckill",
-            data:{count:count,time:c},
+            url:"../seckill/setSeckill?id="+id,
+            data:{count:count},
             success:function(){
                 alert("设置成功");
                 location.href=location;

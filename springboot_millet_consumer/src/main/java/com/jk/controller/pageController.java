@@ -147,7 +147,6 @@ public class pageController {
     //修改积分
     @RequestMapping("updPresented")
     public ModelAndView updPresented(String id){
-        System.out.println(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("html/yyw/updPresented");
         mv.addObject("order",id);
@@ -217,7 +216,6 @@ public class pageController {
 //updateComment 回复
         @RequestMapping("updateComment")
         public ModelAndView updateComment(Integer id){
-            System.out.println(id);
             Comment comment = DealService.findCommentByid(id);
             ModelAndView mv = new ModelAndView();
             mv.setViewName("/html/lih/reply");
@@ -249,16 +247,17 @@ public class pageController {
         mv.addObject("goods",goods);
         return mv;
     }
+
     // 个人中心
     @RequestMapping("persion")
     public String persion(){
         return "html/wh/persion";
     }
+
     // 收益明细
     @RequestMapping("highcharts")
     public String highcharts(){
         return "html/wh/highcharts";
     }
-
 
 }

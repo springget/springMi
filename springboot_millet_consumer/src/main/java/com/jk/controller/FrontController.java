@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -361,5 +363,11 @@ public class FrontController {
         return list;
     }
 
+
+@RequestMapping("zhuxiao")
+    public String zhuxiao (HttpServletRequest request){
+  request.getSession().removeAttribute("luser");//清空session信息
+    return "html/index";
+}
 }
 
