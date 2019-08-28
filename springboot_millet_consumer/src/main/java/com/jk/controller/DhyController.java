@@ -133,13 +133,7 @@ public class DhyController {
         List<Tree> list = dhyService.getTreeAll(user.getUserId());
         //自己调自己
         list = TreeNoteUtil.getFatherNode(list);
-
-        list = TreeNoteUtil.getFatherNode(list);
-
-        list = TreeNoteUtil.getFatherNode(list);
-
         return list;
-
     }
 
 

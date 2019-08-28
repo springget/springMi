@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="c">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel = "icon" href = "../icons/favicon.ico" type = "image/x-icon">
+    <link rel = "stylesheet" type = "text/css" href = "../font/iconfont/iconfont.css">
+    <link rel = "stylesheet" href = "../css/normalize.css">
+    <link rel = "stylesheet" href = "../css/reset.css">
+    <link rel = 'stylesheet' href = "../css/common.css">
+    <link rel="stylesheet" href="../css/is-visible.css">
+    <link rel = "stylesheet" href = "../css/index.css">
+    <link rel = "stylesheet" href = "../css/wrap.css">
+    <link rel = "stylesheet" href = "../css/wrapper.css">
+
+    <script type="text/javascript" src="../djs/jquery.min.js"></script>
+</head>
+
+<body>
+　<c:forEach items="${mSol}" var="mSol">
+    <div class = 'pro-all clearfix'>
+    <div class = 'fl phone-r'>
+        <ul  id="shouji1">
+
+            <div th:each="mmm:${mSol}">
+            <li>
+                <a href="../front/txiangQing?tid="><img src="../picture/h1.png"></a>
+                     <div class='item-tit'>
+
+                         <a href=\"\"><span th:text="${mmm.goodsName}" th:value="${mmm.goodsName}" type="hidden"></span></a>
+                         <p><span th:text="${mmm.goodsPrice}" th:value="${mmm.goodsPrice}" type="hidden"></span>起</p>
+                     </div>
+            </li>
+            </div>
+        </ul>
+    </div>
+    </div>
+</c:forEach>
+
+
+</body>
+</html>

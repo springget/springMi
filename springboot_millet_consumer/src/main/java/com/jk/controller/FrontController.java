@@ -30,7 +30,7 @@ public class FrontController {
     private FrontService frontService;
 
 
-    //財務管理
+    //登陆
     @RequestMapping("login")
     public String touserlist() {
         return "html/qiantai/login";

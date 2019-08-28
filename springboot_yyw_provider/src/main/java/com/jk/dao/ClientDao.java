@@ -1,6 +1,7 @@
 package com.jk.dao;
 
 import com.jk.model.Coupon;
+import com.jk.model.Goods;
 import com.jk.model.Member;
 import com.jk.model.User;
 import com.jk.util.ParameUtil;
@@ -27,5 +28,6 @@ public interface ClientDao {
     void addCoupon(Coupon coupon);
 
     List<Coupon> queryCoupon(ParameUtil params);
+
 }
 

@@ -274,30 +274,6 @@
         })
     }
 
-/*
-//家电
-    function queryJiadian() {
-        $.ajax({
-            url:"../front/queryJiadian",
-            success:function(data){
-                var aa = "";
-                for (var i = 0; i < data.length; i++) {
-
-                    aa += "<li> <div>\n" +
-                        "        <a href = \"#\"><img src = \"../images/product-1.jpg\" alt = \"\"></a>\n" +
-                        "            </div><h3><a href = \"#\">"+data[i].goodsName+"</a></h3>\n" +
-                        "                    <p class = 'p1'>"+data[i].goodsInfo+"</p>\n" +
-                        "                    <p class = 'p2'>"+data[i].goodsPrice+"</p></li>";
-                }
-                $("#shouji1").html(aa);
-            }
-
-        })
-    }
-*/
-
-
-
 </script>
 
 <script>
@@ -391,7 +367,7 @@
         </div>
         <!--登录注册-->
         <div class = 'link fr'>
-            <a href = "#">登录</a>
+            <a href = "../front/login">登录</a>
             <span class = 'sep'>|</span>
             <a href = "#">注册</a>
             <span class = 'sep'>|</span>
@@ -956,10 +932,10 @@
             </ul>
 
         </div>
-        <!--头部搜索部分-->
+        <!--头部搜索部分  条差 -->
         <div class = 'header-search'>
-            <input class = 'search-text' type = "text">
-            <button class = 'search-btn iconfont icon-fangdajing'></button>
+            <input class = 'search-text' type = "text" id="goodsName" name="goodsName">
+            <button class = 'search-btn iconfont icon-fangdajing'  onclick="initDataGrid()"></button>
 
             <div class='drop_list no-show'>
                 <ul>
@@ -3429,7 +3405,12 @@
 
 <script>
 
+ function initDataGrid() {
+     var goodsName = $("#goodsName").val();
+     location.href="../client/queryCommodity?goodsName="+goodsName;
 
+
+ }
 
 </script>
 </html>

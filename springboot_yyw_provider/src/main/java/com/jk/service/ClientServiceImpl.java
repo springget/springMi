@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.dao.ClientDao;
 import com.jk.model.Coupon;
+import com.jk.model.Goods;
 import com.jk.model.Member;
 import com.jk.model.User;
 import com.jk.util.PageUtil;
@@ -79,6 +80,7 @@ public class ClientServiceImpl implements ClientService{
 
         return pageUtil;
     }
+
 
 
 }
