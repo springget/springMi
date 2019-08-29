@@ -431,29 +431,28 @@ public class DealController {
 
         }
        // mongoTemplate.remove(query,GoShop.class, "shop");*/
+            String[] split = id.split(",");
+            System.out.println(id);
+            Criteria criteria = new Criteria();
+            criteria.where("goodsId").in(id);
+            Luser luser = (Luser) request.getSession().getAttribute("luser");
+            criteria.and("userId").is(1);
+            Query query = new Query();
+            query.addCriteria(criteria);
+            List<GoShop> shopList = mongoTemplate.find(query, GoShop.class, "shop");
+            for (GoShop shop : shopList) {
+                GoShop shop2 = new GoShop();
+                shop2.setGoodsId(shop.getGoodsId());
+                shop2.setGoodsInfo(shop.getGoodsInfo());
+                shop2.setGoodsName(shop.getGoodsName());
+                shop2.setGoodsNumber(shop.getGoodsNumber());
+                shop2.setGoodsPrice(shop.getGoodsPrice());
+                shop2.setUserId(shop.getUserId());
+                mongoTemplate.save(shop2, "goShop");
+            }
 
-        String[] split = id.split(",");
-        System.out.println(id);
-        Criteria criteria = new Criteria();
-        criteria.where("goodsId").in(id);
-        Luser luser = (Luser) request.getSession().getAttribute("luser");
-        criteria.and("userId").is(1);
-        Query query = new Query();
-        query.addCriteria(criteria);
-        List<GoShop> shopList = mongoTemplate.find(query, GoShop.class, "shop");
-        for (GoShop shop : shopList) {
-            GoShop shop2 = new GoShop();
-            shop2.setGoodsId(shop.getGoodsId());
-            shop2.setGoodsInfo(shop.getGoodsInfo());
-            shop2.setGoodsName(shop.getGoodsName());
-            shop2.setGoodsNumber(shop.getGoodsNumber());
-            shop2.setGoodsPrice(shop.getGoodsPrice());
-            shop2.setUserId(shop.getUserId());
-            mongoTemplate.save(shop2, "goShop");
+            mongoTemplate.remove(query,GoShop.class, "shop");
         }
 
-        mongoTemplate.remove(query,GoShop.class, "shop");
+
     }
-
-
-}
