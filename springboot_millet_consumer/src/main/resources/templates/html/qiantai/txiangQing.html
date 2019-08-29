@@ -25,7 +25,33 @@
     <script type="text/javascript" src="../djs/fileinput/js/locales/zh.js"></script>
 
     <script type="text/javascript" src="../djs/fileinput/themes/fa/theme.js"></script>
+<script type="text/javascript">
 
+
+        //加入购物车
+        function qqqq(){
+            var asd= $("#luser").val();
+            alert(asd);
+            if(asd==null && asd==''){
+                location.href = "../front/login";
+            }else{
+            var televId = $("#televId").val();
+            var televName = $("#televName").val();
+            var asd= $("#asd").val();
+
+            $.ajax({
+                url: "../deal/add2",
+                type: "post",
+                data: {goodsId: televId},
+                success: function (data) {
+                    location.href = "../page/shoppingCart";
+                }
+
+            })
+            }
+        }
+
+    </script>
 </head>
 <script>
 
@@ -287,13 +313,14 @@
             </div>
             <div class="xiadan ml20 mt20">
 <!--                <input class="jrgwc"  type="button" name="jrgwc" value="立即选购"  onclick="" />-->
-                <input class="jrgwc" type="button" name="jrgwc" value="加入购物车" onclick="addTv()" />
+               <input class="jrgwc" type="button" name="jrgwc" value="加入购物车" onclick="qqqq()" >
 
             </div>
         </div>
         <div class="clear"></div>
     </div>
     <!-- 隐藏id -->
+    <input type="hidden" th:value="${session.luser.id}" id="luser">
     <input name="id" id="televId" th:value="${list.televId}" type="hidden">
     <input name="id" id="televName" th:value="${list.televName}" type="hidden">
 </form>
@@ -312,12 +339,12 @@
 
 
 //加入购物车
-    function addTv() {
-/*        var tv = $("#addForm").serialize();*/
+  /*  function addTv() {
+/!*        var tv = $("#addForm").serialize();*!/
         var televId = $("#televId").val();
         var televName = $("#televName").val();
- /*       alert(televId);
-        alert(televName);*/
+ /!*       alert(televId);
+        alert(televName);*!/
         $.ajax({
             url:"../front/addTv",
             type:"post",
@@ -330,7 +357,7 @@
         })
 
     }
-    
+    */
 </script>
 
 </html>

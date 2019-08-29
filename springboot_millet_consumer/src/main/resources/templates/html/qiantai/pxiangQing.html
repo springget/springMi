@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="c">
 	<head>
 		<!-- 引入jquery -->
 		<script type="text/javascript" src="../djs/jquery.min.js"></script>
@@ -35,7 +35,38 @@
         <meta name="author" content="order by dede58.com"/>
 		<title>小米6立即购买-小米商城</title>
 		<link rel="stylesheet" type="text/css" href="../../ym/css/style.css">
+
+		<script type="text/javascript">
+
+
+			//加入购物车
+			function qqqq(){
+				var asd= $("#luser").val();
+				var televId = $("#goodsId").val();
+
+				if(asd==null || asd==''){
+					alert("请登录");
+					location.href = "../front/login?id="+televId;
+				}else{
+					var televId = $("#goodsId").val();
+					var televName = $("#televName").val();
+					var asd= $("#asd").val();
+
+					$.ajax({
+						url: "../deal/add",
+						type: "post",
+						data: {goodsId: televId},
+						success: function (data) {
+							location.href = "../page/shoppingCart";
+						}
+
+					})
+				}
+			}
+
+		</script>
 	</head>
+
 	<body>
 	<!-- start header -->
 		<header>
@@ -64,19 +95,7 @@
 						<div class="clear"></div>
 					</ul>
 				</div>
-				<div class="right fr">
-					<div class="gouwuche fr"><a href="">购物车</a></div>
-					<div class="fr">
-						<ul>
-							<li><a href="./login.html" target="_blank">登录</a></li>
-							<li>|</li>
-							<li><a href="./register.html" target="_blank" >注册</a></li>
-							<li>|</li>
-							<li><a href="">消息通知</a></li>
-						</ul>
-					</div>
-					<div class="clear"></div>
-				</div>
+
 				<div class="clear"></div>
 			</div>
 		</header>
@@ -138,7 +157,7 @@
 		</div>
 	</div>
 	<div class="jieshao mt20 w">
-		<div class="left fl"><img src="../../ym/image/liebiao_xiaomi6.jpg"></div>
+		<div class="left fl"><img th:src="@{${goods.goodsImg}}" th:width="600px" th:height="610px"></div>
 		<div class="right fr">
 			<div class="h3 ml20 mt20"><span th:text="${goods.goodsName}"></span></div>
 			<div class="jianjie mr40 ml20 mt10">
@@ -146,7 +165,6 @@
 				<span th:text="${goods.cpu}"></span> <span th:text="${goods.location}"></span>，
 				<span th:text="${goods.battery}"></span>，<span th:text="${goods.system}"></span> /
 				<span th:text="${goods.screen}"></span> /<span th:text="${goods.camera}"></span></div>
-
 			<div class="jiage ml20 mt10"><span id="price2" th:text="${goods.goodsPrice}"></span>元</div>
 			<div class="ft20 ml20 mt20">选择版本</div>
 			<div class="xzbb ml20 mt10">
@@ -192,13 +210,14 @@
 				<div class="bot mt20 ft20 ftbc">总计：<span id="price" th:text="${goods.goodsPrice}"></span><!--<span name="price" id="price"></span>-->元</div>
 			</div>
 			<div class="xiadan ml20 mt20">
-					<input class="jrgwc"  type="button" name="jrgwc" value="立即选购" />
-					<input class="jrgwc" type="button" name="jrgwc" value="加入购物车" />
+				<!--	<input class="jrgwc"  type="button" name="jrgwc" value="立即选购" />-->
+				<input class="jrgwc" type="button" name="jrgwc" value="加入购物车" onclick="qqqq()" >
 
 			</div>
 		</div>
 		<div class="clear"></div>
 	</div>
+		<input type="hidden" th:value="${session.luser}" id="luser">
 	</form><br><br><br><br><br><br><br><br><br><br>
 	<div class="xiangqing">
 		<div class="neirong w">
@@ -219,6 +238,7 @@
 
 		</footer>
 <input type="hidden" th:value="${goods.goodsId}" id="goodsId">
+
 	</body>
 <script>
 		$(function(){

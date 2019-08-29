@@ -221,7 +221,8 @@ public class DealServiceImpl implements DealService {
     @Override
     public Comment findCommentByid(Integer id) {
         Criteria criteria = new Criteria();
-        criteria.is(id);
+        criteria.where("goodsId").in(id);
+
         Query query = new Query();
         query.addCriteria(criteria);
         Comment comment=  mongoTemplate.findOne(query, Comment.class,"Comment");
@@ -241,6 +242,41 @@ public class DealServiceImpl implements DealService {
         query.addCriteria(c);
 
         mongoTemplate.updateFirst(query, update,"Comment");
+    }
+
+    @Override
+  /*  public List<GoShop> findOrderListAll(Integer id) {*/
+        public List<GoShop> findOrderListAll(Integer userId) {
+     /*   Criteria criteria = new Criteria();
+        Query query = new Query();
+
+        query.addCriteria(criteria);
+
+        Integer count=(int) mongoTemplate.count(query, Comment.class,"Comment");
+        System.out.println(count);
+
+        PageUtil pageUtil = new  PageUtil(count, param.getPageNumber(), param.getPageSize());
+        Integer skip = pageUtil.getFirstResultCount();
+
+        query.skip(skip);
+        query.limit(param.getPageSize());*/
+        Query query = new Query();
+        Criteria criteria = new Criteria();
+        criteria.and("userId").is(userId);
+
+        query.addCriteria(criteria);
+        List<GoShop> list=mongoTemplate.find(query,GoShop.class, "shop");
+       return list;
+    }
+
+    @Override
+    public void deleteGood(Integer id,Integer userId) {
+        Criteria criteria = new Criteria();
+        criteria.and("goodsId").in(id);
+        criteria.and("userId").is(userId);
+        Query query = new Query();
+        query.addCriteria(criteria);
+        mongoTemplate.remove(query,GoShop.class, "shop");
     }
 
 

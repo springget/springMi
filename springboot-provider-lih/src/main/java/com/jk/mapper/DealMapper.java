@@ -60,5 +60,6 @@ public interface DealMapper {
     List<Order> queryDd7(ParameUtil param);
 
     Refund findRefundByid(Integer id);
-
+/*    @Select("select * from t_order  o ")
+    List<Order> findOrderListAll();*/
 }

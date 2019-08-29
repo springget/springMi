@@ -39,13 +39,13 @@ public class FrontController {
 
     //登陆
     @RequestMapping("login")
-    public String touserlist() {
+    public String touserlist(Integer id,Model m ) {
+        m.addAttribute("id",id);
         return "html/qiantai/login";
     }
 
-    //前台注册
+    //前台注册 跳页面
     @RequestMapping("register")
-
     public String register() {
         return "html/qiantai/register";
     }
@@ -76,27 +76,27 @@ public class FrontController {
     //注册
     @RequestMapping("addUser")
     @ResponseBody
-    public String addUser(Luser user, String code, HttpServletRequest request) {
-        System.out.println(user.getUsername());
+    public void addUser(Luser user, HttpServletRequest request) {
 
-        //图片
-        String realcode = request.getSession().getAttribute("checkcode").toString();
+
+/*        //图片
+        String realcode = request.getSession().getAttribute("checkcode").toString();*/
         //System.out.println(realcode);
-        if (!realcode.toLowerCase().equals(code.toLowerCase())) {
+      /*  if (!realcode.toLowerCase().equals(code.toLowerCase())) {
 
             return "codeError";
-        }
+        }*/
 
         frontService.addUser(user);
 
-        return "success";
+
     }
 
 
-    @RequestMapping("getCode")
+  /*  @RequestMapping("getCode")
     @ResponseBody
     public void getcode(String tel, HttpServletRequest request) throws Exception {
-        System.out.println(tel);
+      *//*  System.out.println(tel);*//*
 
         //短信验证码
 
@@ -128,16 +128,16 @@ public class FrontController {
         JSONObject jsonObject = JSONObject.parseObject(str);
 
         String code = jsonObject.getString("code");
-        System.out.println(code);
+    *//*    System.out.println(code);*//*
         if ("200".equals(code)) {
             String aa = jsonObject.getString("obj");
             request.getSession().setAttribute("ckcode", aa);
-            System.out.println(aa);
+           *//* System.out.println(aa);*//*
         }
 
         //图片验证码
 
-    }
+    }*/
 
     @RequestMapping("queryforget")
     public String queryforget() {

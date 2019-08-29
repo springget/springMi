@@ -1,30 +1,36 @@
-<!DOCTYPE html>
+
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 
 <head>
+    <script type="text/javascript" src="../js/common/common.min.js"  th:href="@{../js/common/common.min.js}"></script>
+<!-- <script type="text/javascript" src="../js/yemian/shoppingCart.min.js"  th:href="@{../js/yemian/shoppingCart.min.js}"></script>-->
+
+
+
     <div th:fragment="header">
         <meta charset="utf-8">
 
-        <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" th:href="@{../icons/favicon.ico}">
-        <link rel="stylesheet" type="text/css" href="../../static/font/iconfont/iconfont.css" th:href="@{../icons/favicon.ico}">
+      <!--  <link rel="icon" href="../icons/favicon.ico" type="image/x-icon" th:href="@{../icons/favicon.ico}">-->
+       <link rel="stylesheet" type="text/css" href="../font/iconfont/iconfont.css" th:href="@{../icons/favicon.ico}">
         <link rel="stylesheet" href="../css/normalize.css" th:href="@{../css/normalize.css}">
         <link rel="stylesheet" href="../css/reset.css" th:href="@{../css/reset.css}">
         <link rel='stylesheet' href="../css/common.css" th:href="@{../css/common.css}">
         <link rel="stylesheet" href="../css/index.css" th:href="@{../css/index.css}">
         <link rel="stylesheet" href="../css/wrapper.css" th:href="@{../css/wrapper.css}">
         <link rel="stylesheet" href="../css/is-visible.css" th:href="@{../css/is-visible.css}">
-        <link rel="stylesheet" href="../css/tv.css" th:href="@{../css/tv.css}">
+       <link rel="stylesheet" href="../css/tv.css" th:href="@{../css/tv.css}">
 
 
         <script type="text/javascript" src="../js/jquery-1.12.3.js"></script>
-        <script type="text/javascript" src='../js/tv.js'></script>
+       <!--<script type="text/javascript" src='../js/tv.js'></script>-->
 
-        <link rel="stylesheet" type="text/css" href="../css/common/font-awesome.min.css" th:href="@{../css/common/font-awesome.min.css}">
+       <!-- <link rel="stylesheet" type="text/css" href="../css/common/font-awesome.min.css" th:href="@{../css/common/font-awesome.min.css}">-->
         <link rel="stylesheet" type="text/css" href="../css/yemian/shoppingCart.css" th:href="@{../css/yemian/shoppingCart.css}">
         <script type="text/javascript" src="../js/common/jquery-3.1.1.min.js"   th:href="@{../js/common/jquery-3.1.1.min.js}"></script>
         <title></title>
     </div>
+    <script src="../js/jquery-1.8.0.js"></script>
 </head>
 <body>
 <meta charset="utf-8">
@@ -68,12 +74,12 @@
                             <p class="item"><a href="#">降价商品</a></p>
                             <p class="item"><a href="#">返修退换货</a></p></div>
                         <div class="fore"><p class="item"><a href="#">我的关注</a></p>
-                            <p class="item"><a href="#">我的飞豆</a></p>
+                            <p class="item"><a href="#">我的豆</a></p>
                             <p class="item"><a href="#">我的理财</a></p>
-                            <p class="item"><a href="#">雄飞白嫖</a></p></div>
+
                     </div>
                 </div>
-            </li>
+
             <li class="spacer"></li>
             <li><a href="#">xx会员</a></li>
             <li class="spacer"></li>
@@ -123,7 +129,7 @@
 });</script>
 <header>
     <div class="header">
-        <div class="logo"><a href="../page/findshouyee"><img src="../img/logo.v2.png" alt="logo"></a><a href="#"
+        <div class="logo"><a href="../page/findshouyee"><img src="../1.jpg" alt="logo"></a><a href="#"
                                                                               class="shoppingcartLink"><b>购物车</b></a>
         </div>
         <div class="cart-search"><input placeholder="自营" class="searchBox"><a class="searchBtn">搜索</a></div>
@@ -144,7 +150,7 @@
         <div class="conWidth">
             <div class="cart-main">
                 <div class="cart-main-head">
-                    <div class="h-checkbox"><span class="h-check"><input type="checkbox" class="allCheck"></span><span>全选</span>
+                <div class="h-checkbox"><!--span class="h-check"><input type="checkbox" onclick="allCheck()" id="qx"></span><span>全选</span>-->
                     </div>
                     <div class="h-goods">商品</div>
                     <div class="h-props"></div>
@@ -161,17 +167,18 @@
             <div class="cart-footer">
                 <div class="options-box clear">
                     <div class="selectAll">
-                        <div class="cart-checkbox"><input type="checkbox" class="allCheck"><span>全选</span></div>
+                        <div class="cart-checkbox"><!--<input type="checkbox" onclick="allCheck()" id="qx"><span>全选</span>--></div>
                     </div>
-                    <div class="operation"><a class="deleteMoreGood">删除选中的商品</a><a class="removeMoreGood">移到我的关注</a><a
-                            class="clearOverdueGood">清除下柜商品</a></div>
+                    <div class="operation"><a class="deleteMoreGood">删除选中的商品</a><a class="removeMoreGood">移到我的关注</a>
+                        <a class="clearOverdueGood">清除下柜商品</a></div>
                     <div class="toolbar-right">
-                        <div class="btnArea floatR"><a href="../page/forder">去结算</a></div>
+                        <div class="btnArea floatR"><a href="javascript:jiesuan()">去结算</a></div>
                         <div class="price-sum">
-                            <div><span class="sum-txt" >总价：</span><span class="sum-price"><em>¥8364.00</em></span><br><span
-                                    class="txt">将节省:</span><span class="price">- ¥297.00</span></div>
+                            <div><span class="sum-txt" >总价：</span><span class="sum-price" ><em><input id="zj" readonly></em></span><br><span
+                                    class="txt"><!--将节省:</span><span class="price"> <input id="js" readonly>  </span>-->
+                           <span>已选择</span><em >  <input id="gs" readonly></em><span>件商品</span>
                         </div>
-                        <div class="amount-sum"><span>已选择</span><em id="amount-val">3</em><span>件商品</span></div>
+
                     </div>
                 </div>
             </div>
@@ -296,41 +303,34 @@
             <div class = "ft-bg"></div>
         </div>
     </div>
-
+    </div>
+<input type="text" id="imput">
 </footer>
-
 
 
 </body>
 
-<script type="text/javascript" src="../js/common/common.min.js"  th:href="@{../js/common/common.min.js}"></script>
-<script type="text/javascript" src="../js/yemian/shoppingCart.min.js"  th:href="@{../js/yemian/shoppingCart.min.js}"></script>
+
 <script>
     $(function () {
         querAllHuo();
+     /*   jiaqian();*/
     })
     //循环表格
     function querAllHuo() {
         var strAllss = "";
         $.ajax({
-            url: "../order/findOrderListAll",
+            url: "../deal/findOrderListAll",
             async: false,
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     strAllss += '<div class="cart-main-list">'+
                         '<div class="cart-main-shop">'+
-                        ' <div class="cart-checkbox"><input type="checkbox" class="listCheck"></div>'+
-                        '  <span class="s-text"><a class="shop-name">'+data[i].supplier_name+'</a></span>'+
                         ' <div class="shop-extra">'+
                         '  <div class="extra-info-main"><span class="info-main-flag">满¥99免运费(10kg内)'+
                         '	<b  class="icon-angle-down"></b><div class="lineshade"></div><div class="info-main-box">'+
-                        '<span class="info-main-tit">小计：¥33916.00</span>'+
                         '<span class="info-main-tit">总重：'+data[i].weight+'kg</span><div class="box-detail ml20"><ul>'+
                         '<li   class="curr"><span>满¥99</span><span class="lightGreen ml5">已免运费</span>'+
-                        '<span class="floatR">10kg内免运费</span></li><li><span>满¥199</span>'+
-                        '<span class="floatR">20kg内免运费</span></li><li><span>满¥299</span>'+
-                        '<span class="floatR">30kg内免运费</span></li><li><span>满¥399</span>'+
-                        '<span class="floatR">40kg内免运费</span></li><li><span>超过50kg运费以结算页为准</span>'+
                         '<span class="floatR">'+
                         '<a href="#"   class="lightBlue">详情 ></a></span></li></ul></div></div></span>'+
                         ' </div>'+
@@ -347,13 +347,13 @@
                         '  <div class="goods-item">'+
                         '  <div class="goods-item-form clear">'+
                         '   <div class="cell f-checkbox">'+
-                        '   <div class="cart-checkbox"><input type="checkbox" class="itemCheck"></div>'+
+                        '   <div class="cart-checkbox"><input type="checkbox" onclick="changeMonry('+i+','+data[i].goodsPrice+','+data[i].goodsId+')" value="'+data[i].goodsId+'" name="checkName"></div>'+
                         '</div>'+
                         '  <div class="cell f-goods">'+
                         '  <div class="f-goods-item">'+
-                        '    <div class="f-item-img"><a href="#"><img src="img/ad.png" alt=""></a></div>'+
+                        '    <div class="f-item-img"><a href="#"><img src="../images/'+data[i].goodsImg+'" alt=""></a></div>'+
                         '   <div class="f-item-msg">'+
-                        '     <div class="msg-name"><a href="#">'+data[i].shop_name+'</a></div>'+
+                        '     <div class="msg-name"><a href="#">'+data[i].goodsName+'</a></div>'+
                         '    <div class="msg-extend"><span><i class="icon-gift"></i><a '+
                         '          title="购买礼品服务">购买礼品服务</a></span><span><i'+
                         '        class="icon-wrench"></i><a title="购买增值保障">购买增值保障</a></span>'+
@@ -362,9 +362,9 @@
                         '  </div>'+
                         '  </div>'+
                         '  <div class="cell f-props">'+
-                        '  <div class="f-props-txt">颜色：白色</div>'+
+                        '  <div class="f-props-txt">描述：'+data[i].goodsInfo+'</div>'+
                         ' </div>'+
-                        ' <div class="cell f-price"><strong>¥   '+data[i].order_price+'</strong>'+
+                        ' <div class="cell f-price"><strong ><input id="text'+i+'" value="'+data[i].goodsPrice+'"> </strong>'+
                         '  <div><a class="sales-promotion"><span>更多促销</span><span '+
                         '   class="icon-angle-down ml5"></span></a>'+
                         ' <div class="sales-main">'+
@@ -380,17 +380,17 @@
                         '           class="sale-no ml20">取消</a></div> '+
                         ' </div>'+
                         ' </div>'+
-                        ' <a title="商品比加入购物车降价250.00" '+
-                        '   class="lightGreen floatR cutPrice">降价<span>¥250.00</span></a></div>'+
+                        ' <a   class="lightGreen floatR cutPrice">降价<span id="sp"></span></a></div>'+//¥<input id="in'+i+'"  readonly size=3 value="0">
                         '  <div class="cell f-quantity">'+
-                        ' <div class="quantity-form"><a class="quantityDown mount-down">-</a><input'+
-                        '  value="1" class="quantityNum mount-input"><a'+
-                        '    class="quantityUp mount-up">+</a></div>'+
+                        ' <div class="quantity-form"><input id="min2'+i+'" name=""  style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="-"  onclick=jian('+i+','+data[i].goodsPrice+','+data[i].preferentialMoney+','+data[i].goodsId+')>'+
+                       ' <input id="text_box2'+i+'" name="" type="text" value="'+data[i].goodsNumber+'"  style=" width:30px; text-align:center; border:1px solid #ccc;" />'+
+                       ' <input id="add2" name="" style=" width:20px; height:18px;border:1px solid #ccc;" type="button" value="+"   onclick=add('+i+','+data[i].goodsPrice+','+data[i].preferentialMoney+','+data[i].goodsId+') >'+
+                       ' </div>'+
                         '<div>有货</div>'+
                         ' </div>'+
-                        ' <div class="cell f-sum"><strong>¥2788.00</strong><span class="weight">0.96kg</span>'+
+                        ' <div class="cell f-sum"><strong>$<input id="st'+i+'"  readonly size=3 ></input></strong>'+
                         '</div>'+
-                        ' <div class="cell f-ops"><a class="deleteGood">删除</a><a class="removeGood">移到我的关注</a>'+
+                        ' <div class="cell f-ops"><a href="javascript:deleteGood('+data[i].goodsId+')">删除</a><a class="removeGood">移到我的关注</a>'+
                         ' </div>'+
                         ' </div>'+
                         ' </div>'+
@@ -398,12 +398,126 @@
                         '</div>'+
                         '</div>'+
                         ' </div>';
+
                 }
+
                 $("#huoAll").html(strAllss);
+
+            }
+
+        })
+
+    }
+    deleteGood =function(id){
+
+        $.ajax({
+            url:"../deal/deleteGood?id="+id,
+            success:function(){
+                location.href=location;
             }
         })
 
+    }
+
+
+
+
+
+    function jian(i,price,preferentialMoney,id){
+        var count = $("#text_box2"+i).val() <= 0 ? 0 : $("#text_box2"+i).val()-1;
+        $("#text_box2"+i).val(count);
+      var sumPrice = (count)*price;
+        var preferential=(count)*preferentialMoney;
+        $("#st"+i).val(sumPrice);
+        $("#in"+i).val(preferential);
+            $.ajax({
+                url:"../deal/update2",
+                data:{id:id,count:count},
+                success:function () {
+
+                 }
+            })
+         }
+    //加
+    function add(i,price,preferentialMoney,id){
+        var count = $("#text_box2"+i).val();
+        count = Number(count);
+        $("#text_box2"+i).val(count+1);
+     var sumPrice = (count+1)*price;
+        $("#st"+i).val(sumPrice);
+    var preferential=(count+1)*preferentialMoney;
+        $("#in"+i).val(preferential);
+        $.ajax({
+            url:"../deal/update",
+            data:{id:id,count:count},
+            success:function () {
+
+            }
+        })
+    }
+
+    sum=0;
+    number=0;
+    jiangjia=0;
+    //综合 sum=0;
+    function changeMonry(i,price,id){
+       var a=  parseInt($("#st"+i).val());//总价
+        var b=parseInt($("#text_box2"+i).val());//个数
+        var c=  parseInt($("#in"+i).val());//降价
+        sum=sum+a;
+        number=number+b;
+        jiangjia=jiangjia+c;
+        $("#zj").val(sum);
+       $("#gs").val(number);
+        $("#js").val(jiangjia);
 
     }
+
+   /* function jiaqian(){
+        var count = $("#text_box2"+i).val();
+        alert(count)
+        var price = $("#text"+i).val();
+        alert(price)
+       /!*var aa= count*price;*!/
+      /!*  $("#st"+i).val(aa);*!/
+    }*/
+
+    //全选
+    function allCheck(){
+        var checked=document.getElementById("qx").checked;
+        var arr=document.getElementsByName("checkName");
+        for(var i=0;i<arr.length;i++){
+            arr[i].checked=checked;
+        }
+    }
+
+  function  jiesuan(){
+//string id   查mongdb的商品表  + sql的物流表
+      var arr = document.getElementsByName("checkName");
+      var temp = "";
+      for(var i=0;i<arr.length;i++){
+          //判断 将选中的去除value  ==  ID
+          if(arr[i].checked){
+              temp += ","+arr[i].value;
+          }
+      }
+      var id = temp.substr(1);
+      alert(id)
+     $.ajax({
+         url:"../deal/order",
+         data:{id:id},
+         success:function(){
+             location.href=location;
+               location.href="../page/toOrderPay"
+         }
+     })
+  }
+
+
 </script>
+
+
+
+
+
 </html>

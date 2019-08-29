@@ -18,14 +18,15 @@
 </head>
 
 <body>
+
 　<c:forEach items="${mSol}" var="mSol">
-    <div class = 'pro-all clearfix'>
+    <div class = 'pro-all clearfix' align="center">
     <div class = 'fl phone-r'>
         <ul  id="shouji1">
 
             <div th:each="mmm:${mSol}">
             <li>
-                <a href="../front/txiangQing?tid="><img src="../picture/h1.png"></a>
+                <a href="../front/txiangQing?tid="><img th:src="${mmm.goodsImg}"></a>
                      <div class='item-tit'>
 
                          <a href=\"\"><span th:text="${mmm.goodsName}" th:value="${mmm.goodsName}" type="hidden"></span></a>
@@ -38,6 +39,6 @@
     </div>
 </c:forEach>
 
-
 </body>
+
 </html>

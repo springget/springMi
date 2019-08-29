@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <div th:fragment="header">
+    <link rel="stylesheet" href="../css/common/font-awesome.min.css" th:src="@{../css/common/font-awesome.min.css}">
+    <link rel="stylesheet" href="../css/common/order-common.css" th:src="@{../css/common/order-common.css}">
+    <link rel="stylesheet" href="../css/common/pagination.css" th:src="@{../css/common/pagination.css}">
+    <link rel="stylesheet" type="text/css" href="../css/yemian/myOrder.css"   th:src="@{../css/yemian/myOrder.css}">
+        <script src="../js/common/jquery-3.1.1.min.js" th:src="@{../js/common/jquery-3.1.1.min.js}"></script>
+    <title></title>
+    </div>
+        </head>
+<body>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../css/common/head.css" th:src="@{../css/common/head.css}">
+<div id="footToTop" class="shortcut">
+    <div class="shortcut-menu">
+        <ul class="floatL">
+            <li class="location menu-list posR">
+                <div class="menu-link"><i class="icon-map-marker addr-icon"></i><a class="head-addr-select">北京</a></div>
+                <div class="dropdown addr-choose">
+                    <div class="addr-item"><a class="addr-city addr-selected">北京</a></div>
+                    <div class="addr-item"><a class="addr-city">上海</a></div>
+                    <div class="addr-item"><a class="addr-city">广州</a></div>
+                    <div class="addr-item"><a class="addr-city">福建</a></div>
+                    <div class="addr-item"><a class="addr-city">四川</a></div>
+                    <div class="addr-item"><a class="addr-city">安徽</a></div>
+                    <div class="addr-item"><a class="addr-city">西安</a></div>
+                    <div class="addr-item"><a class="addr-city">西藏</a></div>
+                    <div class="addr-item"><a class="addr-city">啦啦</a></div>
+                    <div class="addr-item"><a class="addr-city">啦啦啦</a></div>
+                </div>
+            </li>
+        </ul>
+        <ul class="floatR">
+            <li><a href="../page/qtlogin"  th:text="${session.luser}"></a><a href="../page/qtzhuce" class="highlight">免费注册</a></li>
+            <li class="spacer"></li>
+            <li><a href="../page/forder">我的订单</a></li>
+            <li class="spacer"></li>
+            <li class="menu-list posR">
+                <div class="menu-link"><a href="../page/querydingdan">我的雄飞</a><i class="icon-angle-down"></i></div>
+                <div class="dropdown myhome">
+                    <div class="userinfo">
+                        <div class="user-pic"><a href="#" class="icon-user user-icon"></a></div>
+                        <div class="user-name"><a href="#" th:text="${session.luser}"></a></div>
+                        <div class="user-extra"><a href="#">优惠券</a><span class="spacer"></span><a href="#">消息</a></div>
+                    </div>
+                    <div class="otherlist">
+                        <div class="fore"><p class="item"><a href="#">待处理订单</a></p>
+                            <p class="item"><a href="#">我的问答</a></p>
+                            <p class="item"><a href="#">降价商品</a></p>
+                            <p class="item"><a href="#">返修退换货</a></p></div>
+                        <div class="fore"><p class="item"><a href="#">我的关注</a></p>
+                            <p class="item"><a href="#">我的飞豆</a></p>
+                            <p class="item"><a href="#">我的理财</a></p>
+                            <p class="item"><a href="#">雄飞白嫖</a></p></div>
+                    </div>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li><a href="#">xx会员</a></li>
+            <li class="spacer"></li>
+            <li><a href="#">企业采购</a></li>
+            <li class="spacer"></li>
+            <li class="menu-list posR">
+                <div class="menu-link"><a href="#">客户服务</a><i class="icon-angle-down"></i></div>
+                <div class="dropdown clientserv">
+                    <div class="client-title">客户</div>
+                    <div class="client-item"><a href="#">帮助中心</a></div>
+                    <div class="client-item"><a href="#">售后服务</a></div>
+                    <div class="client-item"><a href="#">在线客服</a></div>
+                    <div class="client-item"><a href="#">意见反馈</a></div>
+                    <div class="client-item"><a href="#">电话客服</a></div>
+                    <div class="client-item"><a href="#">客服邮箱</a></div>
+                    <div class="client-item"><a href="#">金融咨询</a></div>
+                    <div class="client-title">商户</div>
+                    <div class="client-item"><a href="#">xx商学院</a></div>
+                    <div class="client-item"><a href="#">商家入驻</a></div>
+                </div>
+            </li>
+            <li class="spacer"></li>
+            <li class="menu-list posR">
+                <div class="menu-link"><a href="#">网站导航</a><i class="icon-angle-down"></i></div>
+                <div class="dropdown sitebar">
+                    <div class="client-title">客户</div>
+                    <div class="client-item"><a href="#">帮助中心</a></div>
+                    <div class="client-item"><a href="#">售后服务</a></div>
+                    <div class="client-item"><a href="#">在线客服</a></div>
+                    <div class="client-item"><a href="#">意见反馈</a></div>
+                    <div class="client-item"><a href="#">电话客服</a></div>
+                    <div class="client-item"><a href="#">客服邮箱</a></div>
+                    <div class="client-item"><a href="#">金融咨询</a></div>
+                    <div class="client-title">商户</div>
+                    <div class="client-item"><a href="#">xx商学院</a></div>
+                    <div class="client-item"><a href="#">商家入驻</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">$('.addr-city').on('click', function () {
+    $(this).addClass('addr-selected').parent()
+        .siblings('.addr-item').children('.addr-city')
+        .removeClass('addr-selected');
+    $('.head-addr-select').text($(this).text());
+});</script>
+<header id="nav">
+    <div class="conWidth">
+        <div class="logo"><a href="../page/findshouyee" class="logo-pic"><img src="../img/logo.v2.png" alt=""></a><a href="../page/querydingdan"
+                                                                                                    class="logo-txt">我的雄飞</a><a
+                href="../page/findshouyee" class="logo-link">返回雄飞首页</a></div>
+        <div class="navitems">
+            <ul class="nav-list">
+                <li class="nav-item-1"><a href="../page/findshouyee">首页</a></li>
+                <li class="nav-item-2">
+                    <dl>
+                        <dt><span>账户设置</span><i class="icon-angle-down"></i></dt>
+                        <dd><a href="#"><span>个人信息</span></a><a href="#"><span>账户安全</span></a><a
+                                href="#"><span>账号绑定</span></a><a href="#"><span>我的级别</span></a><a
+                                href="#"><span>收货地址</span></a><a href="#"><span>分享绑定</span></a><a
+                                href="#"><span>邮件订阅</span></a><a href="#"><span>消费记录</span></a><a
+                                href="#"><span>应用授权</span></a><a href="#"><span>快捷支付</span></a><a
+                                href="#"><span>增票资质</span></a><a href="#"><span>企业发票</span></a><a
+                                href="#"><span>采购需求单</span></a></dd>
+                    </dl>
+                </li>
+                <li class="nav-item-3">
+                    <dl>
+                        <dt><span>社区</span><i class="icon-angle-down"></i></dt>
+                        <dd><a href="#"><span>个人主页</span></a><a href="#"><span>我的活动</span></a><a
+                                href="#"><span>我的圈子</span></a><a href="#"><span>我的帖子</span></a></dd>
+                    </dl>
+                </li>
+                <li class="nav-item-4"><a href="#">消息</a></li>
+            </ul>
+        </div>
+        <div class="nav-r">
+            <div class="search-box">
+                <ul id="shelper" class="hide">
+                    <li>
+                        <div class="search-item">微单<strong>相机</strong></div>
+                        <div class="search-count">约7484个商品</div>
+                    </li>
+                    <li>
+                        <div class="search-item">微单<strong>相机</strong></div>
+                        <div class="search-count">约7484个商品</div>
+                    </li>
+                    <li>
+                        <div class="search-item">微单<strong>相机</strong></div>
+                        <div class="search-count">约7484个商品</div>
+                    </li>
+                </ul>
+                <div class="form"><input type="text" placeholder="微单">
+                    <button>搜索</button>
+                </div>
+            </div>
+            <div class="myShoppingcart">
+                <div class="cart-icon"><i class="ci-left icon-shopping-cart"></i><i
+                        class="ci-right icon-angle-right"></i><i class="ci-count icon-comment"><span
+                        class="ci-count-num">0</span></i><a target="_blank" href="../page/goshopcar">我的购物车</a></div>
+                <div class="cart-dropdown">
+                    <div class="nogoods hide"><i class="icon-shopping-cart"></i><span class="veralign-top">购物车中还没有商品，赶紧选购吧！</span>
+                    </div>
+                    <div class="hasgoods">
+                        <div class="dropdown-title clear"><h4 class="floatL">最新加入的商品</h4></div>
+                        <div class="dropdown-content">
+                            <ul class="goods-item">
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li class="dt clear">
+                                    <div class="floatL"><span class="full-cut">满减</span><span>已购满299元，已减100元</span>
+                                    </div>
+                                    <div class="floatR"><em>小计：￥398.00</em></div>
+                                </li>
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                </li>
+                            </ul>
+                            <ul class="goods-item">
+                                <li class="dt clear">
+                                    <div class="floatL"><span class="full-cut">满减</span><span>已购满299元，已减100元</span>
+                                    </div>
+                                    <div class="floatR"><em>小计：￥398.00</em></div>
+                                </li>
+                                <li>
+                                    <div class="dc-img floatL"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                                    <div class="dc-name floatL overHide"><a href="#">珍享 智利进口车厘子/樱桃 26-28mm J级
+                                        500g(1斤装）自营水果</a></div>
+                                    <div class="dc-detail floatR textRight overHide"><span
+                                            class="dc-price overHide"><strong>￥49.90</strong><span>x1</span></span><br><a
+                                            class="deleteGood">删除</a></div>
+                                    <div class="dc-gift"><a href="#">[赠品] 经典红酒杯时尚大气酒杯立显浪漫情怀180毫升 单只酒杯180ML</a></div>
+                                    <div class="dc-gift"><a href="#">[赠品] 国红酒专用醒酒器 精美无铅醒酒器1个赠品勿拍</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="dropdown-bottom clear textRight">
+                            <div class="cart-totle"><span>共</span><span>6</span><span>件商品</span><strong class="ml10">￥3493.90</strong>
+                            </div>
+                            <a href="../page/goshopcar" title="去购物车">去购物车</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clr"></div>
+    </div>
+</header>
+<div id="container" class="clr">
+    <div class="conWidth">
+        <div id="content">
+            <div id="sub">
+                <div id="menu">
+                    <dl>
+                        <dt>订单中心</dt>
+                        <dd><a class="curr">我的订单</a></dd>
+                        <dd><a>团购订单</a></dd>
+                        <dd class="curr"><a>本地生活订单</a></dd>
+                        <dd><a>我的预售</a></dd>
+                        <dd><a>评价晒单</a></dd>
+                        <dd><a>取消订单记录</a></dd>
+                        <dd><a>我的常购商品</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>关注中心</dt>
+                        <dd><a>关注的商品</a></dd>
+                        <dd><a>关注的店铺</a></dd>
+                        <dd><a>关注的专辑</a></dd>
+                        <dd><a>关注的品牌</a></dd>
+                        <dd><a>关注的活动</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>资产中心</dt>
+                        <dd><a>小金库</a></dd>
+                        <dd><a>雄飞白嫖</a></dd>
+                        <dd><a>雄飞白拿</a></dd>
+                        <dd><a>小白理财</a></dd>
+                        <dd><a>雄飞福卡</a></dd>
+                        <dd><a>余额</a></dd>
+                        <dd><a>优惠券</a></dd>
+                        <dd><a>雄飞卡/E卡</a></dd>
+                        <dd><a>雄飞图书卡</a></dd>
+                        <dd><a>飞豆</a></dd>
+                        <dd><a>雄飞钢镚</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>特色业务</dt>
+                        <dd><a>我的营业厅</a></dd>
+                        <dd><a>雄飞通信</a></dd>
+                        <dd><a>定期送</a></dd>
+                        <dd><a>雄飞代下单</a></dd>
+                        <dd><a>我的回收单</a></dd>
+                        <dd><a>节能补贴</a></dd>
+                        <dd><a>医药服务</a></dd>
+                        <dd><a>流浪加油站</a></dd>
+                        <dd><a>黄金托管</a></dd>
+                        <dd><a>视频教育订单</a></dd>
+                        <dd><a>海外房产预约</a></dd>
+                    </dl>
+                </div>
+                <div id="menu-ads"><a href="#"><img src="img/ad.png" alt=""></a><a href="#"><img src="img/ad.png"
+                                                                                                 alt=""></a></div>
+            </div>
+            <div id="main">
+                <div class="main-title">
+                    <div class="mt-txt clear"><h3>我的订单</h3></div>
+                </div>
+                <div class="main-con">
+                    <div class="mc-head clear">
+                        <ul class="floatL">
+                            <li><a href="../page/forder" id="allOrders">全部订单</a></li>
+                            <li><a href="../page/forder?pay" id="pay">待付款</a></li>
+                            <li><a href="../page/forder?take" id="take">待收货</a></li>
+                            <li><a href="../page/mycomment" target="_blank" rel="noopener" id="evaluate">待评价</a><b
+                                    class="sup">1</b></li>
+                            <li class="fore2"><a href="../page/forder?often" id="often"><strong>我的常购商品</strong></a></li>
+                            <li class="fore2"><a href="../page/finddingdan"><strong>特价清仓</strong></a></li>
+                            <li class="fore2"><a href="../page/forder?recycle" id="recycle">订单回收站</a></li>
+                        </ul>
+                        <div class="floatR">
+                            <div class="mc-search"><input type="text" placeholder="商品名称/商品编号/订单号"><a class="search-btn"><i
+                                    class="icon-search"></i></a><a id="highSearch" class="high-search">高级<i
+                                    class="icon-angle-down"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="mc-order">
+                        <div class="buffer"><i class="icon-spin icon-spinner"></i></div>
+                        <div class="top-search hide">
+                            <div class="dl clr"><span class="label">订单类型：</span>
+                                <div id="orderType" class="dd"><a class="curr">全部类型</a><a>实物商品</a><a>机票</a><a>酒店</a><a>租车</a><a>度假</a><a>门票</a><a>火车</a><a>游戏</a><a>手机充值</a><a>电影票</a><a>演出票</a><a>数字音乐</a><a>应用商店</a><a>彩票</a><a>团购</a><a>保险</a><a>夺宝岛</a><a>加油卡</a><a>一元夺宝</a><a>电子书</a>
+                                </div>
+                            </div>
+                            <div class="dl"><a class="returnBtn closeTopSearch">返回</a></div>
+                            <a class="icon-remove closeTopSearch"></a></div>
+                        <table>
+                            <div id="paind" class="mb10 hide"><p>说明：1. 只有已取消和已完成的订单可以删除；</p>
+                                <p>2. 被删除的订单将无法进行评价、晒单和申请返修/退换货等操作；如果想继续这些操作，可以先将被删除的订单还原；</p>
+                                <p>3. 订单被永久删除后无法还原。</p></div>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="ordertime-con">
+                                        <div class="time-txt"><span id="time-txt">近三个月订单</span><i
+                                                class="icon-angle-down"></i><span class="blank"></span></div>
+                                        <div class="time-list">
+                                            <ul>
+                                                <li><a class="curr"><span>近三个月订单</span></a></li>
+                                                <li><a><span>今年内订单</span></a></li>
+                                                <li><a><span>2016年订单</span></a></li>
+                                                <li><a><span>2015年订单</span></a></li>
+                                                <li><a><span>2014年订单</span></a></li>
+                                                <li><a><span>2014年以前订单</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="order-detail-txt textCenter">订单详情</div>
+                                </th>
+                                <th>收货人</th>
+                                <th>金额</th>
+                                <th>
+                                    <div class="deal-state-con">
+                                        <div class="state-txt"><span id="state-txt">全部状态</span><i
+                                                class="icon-angle-down"></i><span class="blank"></span></div>
+                                        <div class="state-list">
+                                            <ul>
+                                                <li><a class="curr"><span>全部状态</span></a></li>
+                                                <li><a><span>等待付款</span></a></li>
+                                                <li><a><span>等待收货</span></a></li>
+                                                <li><a><span>已完成</span></a></li>
+                                                <li><a><span>已取消</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="huoAll"></tbody>
+                        <style>.often-buy {
+                            width: 100%;
+                            padding-bottom: 20px;
+                            background-color: #fff;
+                        }
+
+                        .often-list {
+                            display: block;
+                            width: 1068px;
+                        }
+
+                        .often-item {
+                            position: relative;
+                            float: left;
+                            height: 206px;
+                            width: 334px;
+                            border: 1px solid #ddd;
+                            margin: 0 20px 20px 0;
+                        }
+
+                        .often-item:hover .often-del {
+                            display: block
+                        }
+
+                        .often-goods {
+                            position: relative;
+                            height: 130px;
+                            line-height: 20px;
+                            padding: 20px 5px 20px 10px;
+                        }
+
+                        .g-img {
+                            float: left;
+                            width: 130px;
+                            height: 130px;
+                            text-align: center;
+                            padding: 0;
+                            margin-right: 20px;
+                        }
+
+                        .g-img img {
+                            max-height: 130px;
+                            max-width: 130px;
+                        }
+
+                        .g-msg {
+                            width: 169px;
+                            float: left;
+                            margin: 7px 0 0;
+                        }
+
+                        .g-name {
+                            float: left;
+                            width: 100%;
+                            height: 36px;
+                            line-height: 18px;
+                            overflow: hidden;
+                            margin-bottom: 6px;
+                        }
+
+                        .g-name a:hover {
+                            color: #ea3845;
+                        }
+
+                        .price-box {
+                            float: left;
+                            width: 100%;
+                            font-size: 0;
+                        }
+
+                        .price-box .p-price {
+                            display: inline-block;
+                            vertical-align: top;
+                            line-height: 18px;
+                            margin-bottom: 5px;
+                            font-size: 1.4rem;
+                            font-family: verdana;
+                            color: #ea3845;
+                        }
+
+                        .p-reduce {
+                            float: left;
+                            width: 100%;
+                            margin-bottom: 4px;
+                        }
+
+                        .reduce-btn {
+                            display: inline-block;
+                            height: 18px;
+                            line-height: 18px;
+                            padding: 0 8px;
+                            border: 1px solid #7bbc52;
+                            color: #7bbc52;
+                            background-color: #fff;
+                        }
+
+                        .often-num {
+                            float: left;
+                            width: 100%;
+                            height: 18px;
+                            line-height: 18px;
+                            color: #999;
+                        }
+
+                        .often-opbtns {
+                            position: relative;
+                            width: 336px;
+                            height: 36px;
+                            top: 1px;
+                            margin: 0 -1px;
+                            background-color: #f5f5f5;
+                        }
+
+                        .often-opbtns a {
+                            width: 168px;
+                            position: relative;
+                            float: left;
+                            height: 18px;
+                            line-height: 18px;
+                            background-color: #f5f5f5;
+                            border: 1px solid #ddd;
+                            padding: 8px 0;
+                            text-align: center;
+                        }
+
+                        .often-opbtns a:hover {
+                            border-color: #ea3845;
+                            background-color: #fff;
+                            color: #ea3845;
+                        }
+
+                        .often-opbtns i {
+                            font-size: 1.5rem;
+                            margin-right: 10px;
+                        }
+
+                        .often-opbtns .buy-btn {
+                            border-right: 0;
+                            text-align: left;
+                            color: #ea3845;
+                            width: 115px;
+                            padding-left: 50px;
+                        }
+
+                        .often-opbtns .buy-btn:hover {
+                            width: 114px;
+                            border-right: 1px solid #ea3845;
+                        }
+
+                        .often-del {
+                            display: none;
+                            position: absolute;
+                            top: 5px;
+                            right: 10px;
+                            overflow: hidden;
+                            cursor: pointer;
+                            z-index: 2;
+                            font-size: 1.5rem;
+                        }
+
+                        .often-del:hover {
+                            color: #ea3845;
+                        }
+
+                        .often-promo {
+                            position: relative;
+                            float: left;
+                            width: 334px;
+                            height: 206px;
+                            margin: 0 20px 20px 0;
+                            border: 1px solid #f48719;
+                        }
+
+                        .often-promo:hover {
+                            border-color: #ea3845;
+                        }
+
+                        .goods-wrap {
+                            position: relative;
+                            width: 100%;
+                            height: 150px;
+                        }
+
+                        .often-promo .often-goods {
+                            padding: 20px 5px 20px 10px;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            height: 130px;
+                            line-height: 20px;
+                        }
+
+                        .p-btnbox {
+                            float: left;
+                            width: 100%;
+                            height: 27px;
+                            padding-top: 15px;
+                        }
+
+                        .p-btnbox a {
+                            display: inline-block;
+                            width: auto;
+                            height: 25px;
+                            line-height: 25px;
+                            padding: 0 8px;
+                            border: 1px solid #ddd;
+                            text-align: center;
+                            background-color: #f5f5f5;
+                            color: #555;
+                        }
+
+                        .p-btnbox .btn-buy {
+                            color: #ea3845;
+                            margin-right: 5px;
+                        }
+
+                        .goods-slide-trigger {
+                            position: absolute;
+                            left: 0;
+                            bottom: 10px;
+                            height: 8px;
+                            width: 100%;
+                            overflow: hidden;
+                            text-align: center;
+                        }
+
+                        .goods-slide-trigger li {
+                            display: inline-block;
+                            width: 8px;
+                            height: 8px;
+                            margin-right: 10px;
+                            overflow: hidden;
+                            vertical-align: top;
+                            cursor: pointer;
+                        }
+
+                        .goods-slide-trigger li b {
+                            display: inline-block;
+                            width: 8px;
+                            height: 8px;
+                            overflow: hidden;
+                            vertical-align: top;
+                            background-color: #bbb;
+                            -webkit-border-radius: 4px;
+                            -moz-border-radius: 4px;
+                            border-radius: 4px;
+                        }
+
+                        .goods-slide-trigger li.curr {
+                            width: 26px;
+                        }
+
+                        .goods-slide-trigger li.curr b {
+                            width: 26px;
+                            background-color: #ea3845;
+                        }</style>
+
+                        <script>$('.often-del').on('click', function () {
+                            $(this).parents('.often-item').remove();
+                        });
+                        $('.goods-slide-trigger li').hover(function () {
+                            $(this).addClass('curr').siblings('li')
+                                .removeClass('curr');
+                            var index = $(this).index();
+                            $($('.goods-wrap').children()[index]).removeClass('hide')
+                                .siblings('.often-goods').addClass('hide');
+                        })</script>
+                        <div class="empty-box hide"><i class="icon-meh-o"></i>
+                            <div class="e-con"><h5 id="emptyOrderTip">最近没有下过订单哦~</h5>
+                                <div class="op-btns mt10"><a href="myOrder.html" class="btnDefualt-m mr15">查看全部订单</a><a
+                                        href="../page/findshouye" class="btnRed-m">去首页看看</a></div>
+                            </div>
+
+        </div>
+
+                <div class="adPic-con">
+                    <div class="mb10"><a href="#"><img src="img/ad.png" alt=""></a></div>
+                    <div><a href="#"><img src="img/ad.png" alt=""></a></div>
+                </div>
+
+
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="../css/common/footer.css" th:src="@{../css/common/footer.css}">
+<footer>
+    <div class="footer-service">
+        <ul class="footer-s-list">
+            <li class="footer-s-item">
+                <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">描述语，描述语</span></div>
+            </li>
+            <li class="footer-s-item">
+                <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">描述语，描述语</span></div>
+            </li>
+            <li class="footer-s-item">
+                <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">描述语，描述语</span></div>
+            </li>
+            <li class="footer-s-item">
+                <div class="footer-s-unit"><i class="icon-trophy"></i><span class="footer-s-txt">描述语，描述语</span></div>
+            </li>
+        </ul>
+    </div>
+    <div class="footer-help">
+        <div class="footer-h-list">
+            <div class="footer-h-nav"><h5 class="footer-h-nav-tit">购物指南</h5>
+                <ul class="footer-h-nav-con">
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                </ul>
+            </div>
+            <div class="footer-h-nav"><h5 class="footer-h-nav-tit">购物指南</h5>
+                <ul class="footer-h-nav-con">
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                </ul>
+            </div>
+            <div class="footer-h-nav"><h5 class="footer-h-nav-tit">购物指南</h5>
+                <ul class="footer-h-nav-con">
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                </ul>
+            </div>
+            <div class="footer-h-nav"><h5 class="footer-h-nav-tit">购物指南</h5>
+                <ul class="footer-h-nav-con">
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">购物流程</a></li>
+                </ul>
+            </div>
+            <div class="footer-h-nav"><h5 class="footer-h-nav-tit">购物指南</h5>
+                <ul class="footer-h-nav-con">
+                    <li><a href="#">购物流程</a></li>
+                </ul>
+            </div>
+            <div class="footer-h-other"><h5 class="footer-h-other-tit">其他内容</h5>
+                <div class="footer-h-other-con"><p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                    <p class="footer-h-other-more"><a href="#">查看详情</a><i class="icon-angle-right ml5"></i></p></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright"><p><a href="#">关于我们</a><span class="spacer"></span><a href="#">联系我们</a><span
+            class="spacer"></span><a href="#">联系客服</a><span class="spacer"></span><a href="#">商家入驻</a><span
+            class="spacer"></span><a href="#">营销中心</a><span class="spacer"></span><a href="#">手机xx</a><span
+            class="spacer"></span><a href="#">友情链接</a><span class="spacer"></span><a href="#">销售联盟</a><span
+            class="spacer"></span><a href="#">xx社区</a><span class="spacer"></span><a href="#">风险监测</a><span
+            class="spacer"></span><a href="#">xx公益</a><span class="spacer"></span><a href="#">English Site</a><span
+            class="spacer"></span><a href="#">Contact Us</a></p>
+        <div class="footer-c-info"><p><a href="#">京公网安备 11000002000088号</a><span class="spacer"></span><a href="#">京ICP证070359号</a><span
+                class="spacer"></span><a href="#">互联网药品信息服务资格证编号(京)-经营性-2014-0008</a><span class="spacer"></span><a
+                href="#">新出发京零字第大120007号</a></p>
+            <p><span>互联网出版许可证编号新出网证(京)字150号</span><span class="spacer"></span><a>出版物经营许可证</a><span
+                    class="spacer"></span><a>网络文化经营许可证京网文[2014]2148-348号</a><span class="spacer"></span><span>违法和不良信息举报电话：4006561155</span>
+            </p>
+            <p><span>Copyright © 2004 - 2016  雄飞XF.com 版权所有</span><span
+                    class="spacer"></span><span>消费者维权热线：4006067733</span></p>
+            <p><span>雄飞旗下网站：</span><a href="#">雄飞钱包</a><span class="spacer"></span><a href="#">雄飞云</a></p></div>
+        <p><a href="#">经营性网站备案信息</a><span class="spacer"></span><a href="#">可信网站信用评价</a><span class="spacer"></span><a
+                href="#">网络警察提醒您</a><span class="spacer"></span><a href="#">诚信网站</a><span class="spacer"></span><a
+                href="#">中国互联网举报中心</a></p></div>
+</footer>
+</body>
+<script type="text/javascript">$(function () {
+    // 返回顶部
+    $('.footToTop').on('click', function () {
+        $("#footToTop")[0].scrollIntoView();
+    });
+    $(window).scroll(function (event) {
+        if ($(this).scrollTop() > 0) {
+            $('#toTop').removeClass('hidden');
+        } else {
+            $('#toTop').addClass('hidden');
+        }
+    });
+    //猜你喜欢切换
+    $('#switch-item a').hover(function () {
+        var $this = $(this);
+        $this.addClass('curr').siblings('a').removeClass('curr');
+        var index = $this.index();
+        $($('.goods-list ul')[index]).removeClass('hide').siblings('ul')
+            .addClass('hide');
+    });
+    //我的购物车商品删除
+    $('.dc-detail').on('click', function () {
+        var goodsList = $(this).parents('.dropdown-content');
+        $(this).parents('.goods-item').remove();
+        if (!goodsList.children().length) {
+            $('.nogoods').removeClass('hide');
+            $('.hasgoods').addClass('hide');
+        }
+    });
+    $(function () {
+        querAllHuo();
+    })
+    //循环表格
+    function querAllHuo() {
+        var strAllss = "";
+        $.ajax({
+            url: "../order/findOrderListAll",
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    strAllss += '<tbody class="orders">'+
+                        '<tr class="empty-row">'+
+                        '   <td colspan="5"></td>'+
+                        ' </tr>'+
+                        '   <tr class="orders-title">'+
+                        '  <td colspan="5"><span class="dealtime">'+data[i].order_settlement_time+'</span><span class="orderNum">订单号:<a>'+data[i].order_no+'</a></span>'+
+                        '  <div class="operateInfo"><span class="order-shop"><div class="shoptxt">雄飞</div><a href="#" title="联系客服" class="contactShop ml5"><i class="icon-bell"></i></a></span>'+
+                        '<a title="删除"><i class="icon-trash"></i></a></div>'+
+                        '</td>'+
+                        ' </tr>'+
+                        '   <tr class="orders-con">'+
+                        '  <td class="clr">'+
+                        '  <div class="good-info clr"  style="width: 550px">'+
+                        '  <div class="g-img"><a href="#"><img src="img/ad.png" alt=""></a></div>'+
+                        '  <div class="g-msg">'+
+                        '  <div class="g-name"><a href="#">'+data[i].shop_name+'</a>'+
+                        '  </div>'+
+                        '   </div>'+
+                        '  </div>'+
+                        '  <div class="good-num">x1</div>'+
+                        '  <div class="good-repair"><a href="#">返修/退换货</a></div>'+
+                        ' </td>'+
+                        '  <td rowspan="1">'+
+                        '  <div class="consignee"><span class="mr5">苏北天龙人<div class="cons-prompt">'+
+                        '<div  class="cp-con"><strong>苏北天龙人</strong><p>江苏省徐州市远子沟远子屯11号</p><p>139****7413</p></div></div></span>'+
+                        '	<i class="icon-user-o"></i></div>'+
+                        '</td>'+
+                        ' <td rowspan="1">'+
+                        ' <div class="amount"><span>总额 ¥:'+data[i].order_amount_total+'</span><br><span class="payOnline">在线支付</span>'+
+                        ' </div>'+
+                        '</td>'+
+                        ' <td rowspan="1">'+
+                        ' <div class="status" style="width: 100px"><span class="order-status">已完成</span><br><a href="#"  class="posR cashAdd"> '+
+                        '<i class="icon-cubes"></i><span class="highlight">+8</span>'+
+                        '  <div class="cashBack hide"><span>已返</span><span class="highlight">8</span><span>飞豆</span>'+
+                        '   </div>'+
+                        '  </a><br><a href="orderDetail.html">订单详情</a></div>'+
+                        ' </td>'+
+                        ' <td rowspan="1">'+
+                        ' <div class="operate"><a>评价</a><span class="ml5 mr5">|</span><a>晒单</a><br><a href="#" class="buyNow">'+
+                        '<i class="icon-bolt mr5"></i><span>立即购买</span></a></div>'+
+                        ' </td>'+
+                        '</tr>'+
+                        '</tbody>';
+                }
+                $("#huoAll").html(strAllss);
+            }
+        })
+
+
+    }
+})</script>
+<script type="text/javascript" src="../js/common/pagination.min.js" th:src="@{../js/common/pagination.min.js}"></script>
+<script type="text/javascript" src="../js/yemian/myOrder.min.js"  th:src="@{../js/yemian/myOrder.min.js}"></script>
+</html>

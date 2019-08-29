@@ -116,7 +116,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = \"../picture/xm8-80.png\"\n" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = "+data[i].goodsImg+"\n"+
                         "alt = \"\">"+data[i].goodsName+"</a></li>";
                 }
 
@@ -140,7 +140,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/mi8\"><img src = \"../picture/xm8-80.png\"\n" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = "+data[i].goodsImg+"\n" +
                         "alt = \"\">"+data[i].goodsName+"</a></li>";
                 }
 
@@ -162,7 +162,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/mi8\"><img src = \"../picture/xm8-80.png\"\n" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = "+data[i].goodsImg+"\n" +
                         "alt = \"\">"+data[i].goodsName+"</a></li>";
                 }
 
@@ -185,7 +185,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
             /*        alert(data[i].televId)*/
-                    aa += "<li><a href = \"../front/txiangQing?tid="+data[i].televId+"\"><img src = \"../picture/t1.jpg\"\n" +
+                    aa += "<li><a href = \"../front/txiangQing?tid="+data[i].televId+"\"><img src = \"../picture/ds1.png\"\n" +
                         "alt = \"\">"+data[i].televName+"</a></li>";
                 }
 
@@ -207,7 +207,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/txiangQing\"><img src = \"../picture/t2.jpg\"\n" +
+                    aa += "<li><a href = \"../front/txiangQing\"><img src = \"../picture/ds1.png\"\n" +
                         "alt = \"\">"+data[i].televName+"</a></li>";
                 }
 
@@ -229,7 +229,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/txiangQing\"><img src = \"../picture/t3.jpg\"\n" +
+                    aa += "<li><a href = \"../front/txiangQing\"><img src = \"../picture/ds1.png\"\n" +
                         "alt = \"\">"+data[i].televName+"</a></li>";
                 }
 
@@ -251,7 +251,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src=\"../picture/h1.png\"></a>" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src="+data[i].goodsImg+"></a>" +
                     "      <div class='item-tit'>\n" +
                     "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
                     "        <p>"+data[i].goodsPrice+"起</p>\n" +
@@ -277,7 +277,7 @@
                 var aa = "";
                 for (var i = 0; i < data.length; i++) {
 
-                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src=\"../picture/h2.png\"></a>" +
+                    aa += "<li><a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src="+data[i].goodsImg+"></a>" +
                         "      <div class='item-tit'>\n" +
                         "        <a href=\"#\">"+data[i].goodsName+"</a>\n" +
                         "        <p>"+data[i].goodsPrice+"起</p>\n" +
@@ -436,7 +436,7 @@
                 for (var i = 0; i < data.length; i++) {
 
                     aa += "<li> <div>\n" +
-                        "        <a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = \"../images/product-1.jpg\" alt = \"\"></a>\n" +
+                        "        <a href = \"../front/pxiangQing?id="+data[i].goodsId+"\"><img src = "+data[i].goodsImg+" alt = \"\"></a>\n" +
                         "            </div><h3><a href = \"#\">"+data[i].goodsName+"</a></h3>\n" +
                         "                    <p class = 'p1'>"+data[i].goodsInfo+"</p>\n" +
                         "                    <p class = 'p2'>"+data[i].goodsPrice+"</p></li>";
@@ -545,7 +545,7 @@
             </span>
 
                <span class = 'sep'>|</span>
-               <a href = "#">注册</a>
+               <a href = "../front/register">注册</a>
                <span class = 'sep'>|</span>
                <a href = "#">消息通知</a>
            </div>

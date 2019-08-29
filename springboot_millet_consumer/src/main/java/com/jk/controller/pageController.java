@@ -260,4 +260,42 @@ public class pageController {
         return "html/wh/highcharts";
     }
 
+
+ //购物车页面
+    @RequestMapping("shoppingCart")
+    public String shoppingCart() {
+        return "html/shoppingCart";
+    }
+
+    //购物车页面
+    @RequestMapping("shoppingCart2")
+    public String shoppingCart2() {
+        return "html/lih/shoppingCart";
+    }
+
+
+    //前往订单
+    @RequestMapping("forder")
+    public String forder(){
+        return "html/hgj/toOrderPay";
+    }
+
+    //购物车页面
+    @RequestMapping("cart")
+    public String cart() {
+        return "html/shoppingCart";
+    }
+
+    //购物车页面
+    @RequestMapping("cart2")
+    public String cart2() {
+        return "html/lih/cart";
+    }
+
+
+    //订单页面
+    @RequestMapping("myOrder")
+    public String myOrder() {
+        return "html/lih/myOrder";
+    }
 }

@@ -11,6 +11,8 @@
 package com.jk.service;
 
 import com.jk.model.Comment;
+import com.jk.model.GoShop;
+import com.jk.model.Order;
 import com.jk.model.Refund;
 import com.jk.util.PageUtil;
 import com.jk.util.ParameUtil;
@@ -63,4 +65,9 @@ public interface DealService {
     Comment findCommentByid(Integer id);
 
     void addComment(Comment comment);
+
+
+ /*   List<GoShop> findOrderListAll(Integer id);*/
+ List<GoShop> findOrderListAll(Integer userId);
+    void deleteGood(Integer id,Integer userId);
 }

@@ -1,5 +1,4 @@
-
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
     <title>标题</title>
@@ -201,7 +200,7 @@
         <a href="#">注册小米账号</a>
         <span>|</span>
         <a href="../front/queryforget">忘记密码?</a></span>
-
+<input hidden th:value="${id}" id="vid">
     </div>
 </div>
 
@@ -221,6 +220,7 @@
             var userAccount = $("#userAccount").val();
             var userPassword = $("#userPassword").val();
             var form = $("#userForm").serialize();
+           var  vid=$("#vid").val();
 
             $.ajax({
                 url:"../front/loginLuser",
@@ -231,14 +231,22 @@
                     /*if(data=="codeError"){
                         alert("验证码错误");
                     }*/
-                    if(data=="userError"){
-                        alert("请输入正确账号");
-                    }
-                    if(data=="pwError"){
-                        alert("密码错误");
-                    }
-                    if(data=="success"){
-                        location.href="../page/main";
+                    if(data!=null&&data!=''){
+                        if(data=="userError"){
+                            alert("请输入正确账号");
+                        }
+                        if(data=="pwError"){
+                            alert("密码错误");
+                        }
+                        if(data=="success"){
+                            if(vid==null || vid==''){
+                                location.href="../page/main";
+                            }else{
+                                location.href="../front/pxiangQing?id="+vid;
+                            }
+
+                        }
+
                     }
 
                 },error:function(){
@@ -255,7 +263,7 @@
     $("#zhu").click(
 
         function(){
-            alert(22222)
+
            location.href="../page/main";
 
 
